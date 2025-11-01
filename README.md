@@ -15,7 +15,7 @@ Link: https://github.com/Fahd-Har/CW2025.git
 ### 7.1) GuiController.java
 i)
 <p>
-Changes: Under the method 'bindScore', added a line of code to bine the score label to score property
+Changes: Under the method bindScore, added a line of code to bine the score label to score property
 </p>
 <p>
 Reason: This improvement is to display the player's score and live updates throughout the game.
@@ -26,6 +26,13 @@ Changes: Converting the access modifier for the newGame method from public to me
 </p>
 <p>
 Reason: To restrict access to the method within the class, preventing unintended external calls and improving encapsulation.
+</p>
+iii)
+<p>
+Changes: Added a new method called showNextBrickPanel to show the next brick shape in a panel below the scores.
+</p>
+<p>
+Reason: To provide players with a visual preview of the upcoming brick, enhancing gameplay awareness and user experience.
 </p>
 
 

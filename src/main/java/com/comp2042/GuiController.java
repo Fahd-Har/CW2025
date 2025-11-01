@@ -43,6 +43,9 @@ public class GuiController implements Initializable {
     @FXML
     private Text scoreValue;
 
+    @FXML
+    private GridPane nextBrick;
+
     private Rectangle[][] displayMatrix;
 
     private InputEventListener eventListener;
@@ -117,6 +120,7 @@ public class GuiController implements Initializable {
         brickPanel.setLayoutX(gamePanel.getLayoutX() + brick.getxPosition() * brickPanel.getVgap() + brick.getxPosition() * BRICK_SIZE);
         brickPanel.setLayoutY(-42 + gamePanel.getLayoutY() + brick.getyPosition() * brickPanel.getHgap() + brick.getyPosition() * BRICK_SIZE);
 
+        showNextBrickPanel(brick.getNextBrickData());
 
         timeLine = new Timeline(new KeyFrame(
                 Duration.millis(400),
@@ -160,6 +164,18 @@ public class GuiController implements Initializable {
         return returnPaint;
     }
 
+    private void showNextBrickPanel(int[][] nextBrickData) {
+        nextBrick.getChildren().clear();
+        for (int i = 0; i < nextBrickData.length; i++) {
+            for (int j = 0; j < nextBrickData[i].length; j++) {
+                Rectangle rectangle = new Rectangle(BRICK_SIZE, BRICK_SIZE);
+                setRectangleData(nextBrickData[i][j], rectangle);
+                if (nextBrickData[i][j] != 0) {
+                    nextBrick.add(rectangle, j, i);
+                }
+            }
+        }
+    }
 
     private void refreshBrick(ViewData brick) {
         if (isPause.getValue() == Boolean.FALSE) {
@@ -170,6 +186,7 @@ public class GuiController implements Initializable {
                     setRectangleData(brick.getBrickData()[i][j], rectangles[i][j]);
                 }
             }
+            showNextBrickPanel(brick.getNextBrickData());
         }
     }
 

@@ -6,6 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Text?>
 <?import java.net.URL?>
+
 <Pane fx:controller="com.comp2042.GuiController"
       xmlns:fx="http://javafx.com/fxml">
     <GridPane fx:id="brickPanel" vgap="1" hgap="1"/>
@@ -18,6 +19,15 @@
     <VBox alignment="CENTER" layoutX="285" layoutY="20">
         <Label styleClass="scoreClass" text="Score:" />
         <Text fx:id="scoreValue" styleClass="scoreClass" text="Text" />
+
+       <VBox alignment="CENTER">
+           <Label styleClass="nextBrickLabel" text="Next brick" />
+           <BorderPane maxWidth="100" prefHeight="70" prefWidth="100" styleClass="nextBrick">
+               <center>
+                   <GridPane fx:id="nextBrick" alignment="CENTER" hgap="1" vgap="1" />
+               </center>
+           </BorderPane>
+       </VBox>
     </VBox>
 
     <Group fx:id="groupNotification" layoutX="14" layoutY="203">
@@ -26,6 +36,6 @@
         </VBox>
     </Group>
     <stylesheets>
-        <URL value="@window_style.css"/>
+        <URL value="@window_style.css" />
     </stylesheets>
 </Pane>
