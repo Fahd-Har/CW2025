@@ -33,6 +33,14 @@ new int[height][width] instead of new int[width][height].
 <p>
 Reason: To avoid logical error by ensuring the matrix correctly maps rows to height and columns to width.
 
+### 7.3) MatrixOperations.java
+<p>
+Changes: Updated the intersect and merge method to correctly align i and j with the x and y coordinates when checking
+brick collisions.
+<p>
+Reason: To improve code logic and clarity by ensuring coordinate calculations accurately reflect the intended matrix
+structure.
+
 # 8. Unexpected Problems:
 
 
