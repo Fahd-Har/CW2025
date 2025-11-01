@@ -82,7 +82,7 @@ public class GuiController implements Initializable {
                     }
                 }
                 if (keyEvent.getCode() == KeyCode.N) {
-                    newGame(null);
+                    newGame();
                 }
             }
         });
@@ -214,7 +214,7 @@ public class GuiController implements Initializable {
         isGameOver.setValue(Boolean.TRUE);
     }
 
-    public void newGame(ActionEvent actionEvent) {
+    private void newGame() {
         timeLine.stop();
         gameOverPanel.setVisible(false);
         eventListener.createNewGame();
