@@ -15,7 +15,7 @@
         </center>
     </BorderPane>
 
-    <VBox alignment="CENTER" layoutX="280" layoutY="20" >
+    <VBox alignment="CENTER" layoutX="285" layoutY="20">
         <Label styleClass="scoreClass" text="Score:" />
         <Text fx:id="scoreValue" styleClass="scoreClass" text="Text" />
     </VBox>
