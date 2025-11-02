@@ -34,6 +34,13 @@ Changes: Added a new method called showNextBrickPanel to show the next brick sha
 <p>
 Reason: To provide players with a visual preview of the upcoming brick, enhancing gameplay awareness and user experience.
 </p>
+iv)
+<p>
+Changes: Created an if else statement in pauseGame method and call it the initialize handle method.
+</p>
+<p>
+Reason: When player press on the 'ESCAPE' key, the game pauses.
+</p>
 
 
 ### 7.2) SimpleBoard.java
