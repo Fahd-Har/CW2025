@@ -41,6 +41,13 @@ Changes: Created an if else statement in pauseGame method and call it the initia
 <p>
 Reason: When player press on the 'ESCAPE' key, the game pauses.
 </p>
+v)
+<p>
+Changes: Created a new method called nextLevelSpeed to speed up the falling bricks after a specific amount of score is reached.
+</p>
+<p>
+Reason: Implements as new level and increase difficulty once player achieves a specific score.
+</p>
 
 
 ### 7.2) SimpleBoard.java

@@ -126,12 +126,10 @@ public class GuiController implements Initializable {
 
         showNextBrickPanel(brick.getNextBrickData());
 
-        timeLine = new Timeline(new KeyFrame(
-                Duration.millis(400),
-                ae -> moveDown(new MoveEvent(EventType.DOWN, EventSource.THREAD))
-        ));
-        timeLine.setCycleCount(Timeline.INDEFINITE);
-        timeLine.play();
+        scoreValue.textProperty().addListener((obs, oldScore, newScore) -> {
+            int score = Integer.parseInt(newScore);
+            nextLevelSpeed(score);
+        });
     }
 
     private Paint getFillColor(int i) {
@@ -227,6 +225,31 @@ public class GuiController implements Initializable {
 
     public void bindScore(IntegerProperty integerProperty) {
         scoreValue.textProperty().bind(integerProperty.asString());
+    }
+
+    private void nextLevelSpeed(int score) {
+        int newSpeed;
+
+        if (score < 1000) {
+            newSpeed = 400;
+        }
+        else if (score < 2500) {
+            newSpeed = 250;
+        }
+        else {
+            newSpeed = 150;
+        }
+
+        if (timeLine != null) {
+            timeLine.stop();
+        }
+
+        timeLine = new Timeline(new KeyFrame(
+                Duration.millis(newSpeed),
+                ae -> moveDown(new MoveEvent(EventType.DOWN, EventSource.THREAD))
+        ));
+        timeLine.setCycleCount(Timeline.INDEFINITE);
+        timeLine.play();
     }
 
     public void gameOver() {
