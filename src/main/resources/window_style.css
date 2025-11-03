@@ -70,3 +70,10 @@
     -fx-fill: yellow;
     -fx-text-fill: yellow;
 }
+
+.nextLevel {
+    -fx-font-family: "Let's go Digital";
+    -fx-padding: 20px 0 0 0;
+    -fx-font-size: 24px;
+    -fx-text-fill: yellow;
+}

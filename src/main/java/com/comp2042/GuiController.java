@@ -10,6 +10,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
+import javafx.scene.control.Label;
 import javafx.scene.effect.Reflection;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -45,6 +46,9 @@ public class GuiController implements Initializable {
 
     @FXML
     private GridPane nextBrick;
+
+    @FXML
+    private Label currentLevel;
 
     private Rectangle[][] displayMatrix;
 
@@ -232,12 +236,15 @@ public class GuiController implements Initializable {
 
         if (score < 1000) {
             newSpeed = 400;
+            currentLevel.setText("1");
         }
         else if (score < 2500) {
-            newSpeed = 250;
+            newSpeed = 300;
+            currentLevel.setText("2");
         }
         else {
-            newSpeed = 150;
+            newSpeed = 200;
+            currentLevel.setText("3");
         }
 
         if (timeLine != null) {
