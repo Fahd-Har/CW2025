@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<VBox alignment="CENTER" spacing="20" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.comp2042.WelcomeScreen">
+    <Text text="🎮 Welcome to TetrisJFX!" style="-fx-font-size: 24;" />
+    <Text text="Press the button below to start application." style="-fx-font-size: 20;" />
+    <Text text="👇" style="-fx-font-size: 24;" />
+    <Button fx:id="startButton" text="Start Game" />
+</VBox>

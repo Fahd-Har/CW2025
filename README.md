@@ -10,6 +10,13 @@ Link: https://github.com/Fahd-Har/CW2025.git
 # 5. Features Not Implemented:
 
 # 6. New Java Classes:
+### 6.1) WelcomeScreen.java
+Location:
+<p>
+This class manages the start screen of the application. It handles user interaction with the Start Game button and
+transitions smoothly into the main game screen using a fade animation.
+</p>
+
 
 # 7. Modified Java Classes:
 ### 7.1) GuiController.java
