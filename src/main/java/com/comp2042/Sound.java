@@ -11,6 +11,14 @@ public class Sound {
 
     public Sound() {
         soundURL[0] = getClass().getResource("/background.wav");
+        soundURL[1] = getClass().getResource("/rotation.wav");
+        soundURL[2] = getClass().getResource("/delete line.wav");
+        soundURL[3] = getClass().getResource("/gameover.wav");
+    }
+
+    public void soundEffects(int i) {
+        setSound(i);
+        play();
     }
 
     public void bgMusic() {

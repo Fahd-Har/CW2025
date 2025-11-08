@@ -17,6 +17,13 @@ This class manages the start screen of the application. It handles user interact
 transitions smoothly into the main game screen using a fade animation.
 </p>
 
+### 6.2) Sound.java
+Location:
+<p>
+The Sound class manages all game audio, including background music and sound effects. It loads, plays, loops, and stops
+sounds, allowing different tracks to be triggered during gameplay.
+</p>
+
 
 # 7. Modified Java Classes:
 ### 7.1) GuiController.java
@@ -54,6 +61,15 @@ Changes: Created a new method called nextLevelSpeed to speed up the falling bric
 </p>
 <p>
 Reason: Implements as new level and increase difficulty once player achieves a specific score.
+</p>
+vi)
+<p>
+Changes: Called methods from Sound class into some methods of the GuiController class to implement both background music
+and sound effects for gameplay events such as piece rotation, line clears, and game over.
+</p>
+<p>
+Reason: To enhance the player’s experience by providing audio feedback and immersive background music, making the game
+more engaging and responsive.
 </p>
 
 
