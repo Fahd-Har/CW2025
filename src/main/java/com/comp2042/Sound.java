@@ -13,6 +13,12 @@ public class Sound {
         soundURL[0] = getClass().getResource("/background.wav");
     }
 
+    public void bgMusic() {
+        setSound(0);
+        play();
+        loop();
+    }
+
     public void setSound(int i) {
         try {
             if (clip != null && clip.isRunning()) {
@@ -30,14 +36,14 @@ public class Sound {
         }
     }
 
-    public void play() {
+    private void play() {
         if (clip != null) {
             clip.setFramePosition(0);
             clip.start();
         }
     }
 
-    public void loop() {
+    private void loop() {
         if (clip != null) {
             clip.setFramePosition(0);
             clip.loop(Clip.LOOP_CONTINUOUSLY);

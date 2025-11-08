@@ -62,7 +62,7 @@ public class GuiController implements Initializable {
 
     private final BooleanProperty isGameOver = new SimpleBooleanProperty();
 
-    private final Sound bgMusic = new Sound();
+    private final Sound bgm = new Sound();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -101,8 +101,7 @@ public class GuiController implements Initializable {
         });
         gameOverPanel.setVisible(false);
 
-        bgMusic.setSound(0);
-        bgMusic.loop();
+        bgm.bgMusic();
 
         final Reflection reflection = new Reflection();
         reflection.setFraction(0.8);
@@ -278,15 +277,17 @@ public class GuiController implements Initializable {
         timeLine.play();
         isPause.setValue(Boolean.FALSE);
         isGameOver.setValue(Boolean.FALSE);
+
+        bgm.bgMusic();
     }
 
     private void pauseGame() {
         if(isPause.get()) {
             timeLine.play();
-            bgMusic.resume();
+            bgm.resume();
         } else {
             timeLine.stop();
-            bgMusic.pause();
+            bgm.pause();
         }
         isPause.set(!isPause.get());
         gamePanel.requestFocus();
