@@ -6,15 +6,31 @@ import javax.sound.sampled.Clip;
 import java.net.URL;
 
 public class Sound {
+    private final Clip[] clips = new Clip[30];
     private Clip clip;
-    private final URL soundURL[] = new URL[30];
 
     public Sound() {
-        soundURL[0] = getClass().getResource("/background.wav");
-        soundURL[1] = getClass().getResource("/rotation.wav");
-        soundURL[2] = getClass().getResource("/delete line.wav");
-        soundURL[3] = getClass().getResource("/gameover.wav");
+        try {
+            // Load all sound resources
+            URL[] soundURL = new URL[30];
+            soundURL[0] = getClass().getResource("/background.wav");
+            soundURL[1] = getClass().getResource("/rotation.wav");
+            soundURL[2] = getClass().getResource("/delete line.wav");
+            soundURL[3] = getClass().getResource("/gameover.wav");
+
+            // Preload clips into memory
+            for (int i = 0; i < soundURL.length; i++) {
+                if (soundURL[i] != null) {
+                    AudioInputStream ais = AudioSystem.getAudioInputStream(soundURL[i]);
+                    clips[i] = AudioSystem.getClip();
+                    clips[i].open(ais);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
+
 
     public void soundEffects(int i) {
         setSound(i);
@@ -28,21 +44,11 @@ public class Sound {
     }
 
     public void setSound(int i) {
-        try {
-            if (clip != null && clip.isRunning()) {
-                clip.stop();
-            }
-            if (clip != null) {
-                clip.close();
-            }
-
-            AudioInputStream ais = AudioSystem.getAudioInputStream(soundURL[i]);
-            clip = AudioSystem.getClip();
-            clip.open(ais);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+        if (i >= 0 && i < clips.length) {
+            clip = clips[i];
         }
     }
+
 
     private void play() {
         if (clip != null) {
