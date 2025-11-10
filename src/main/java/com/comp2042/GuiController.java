@@ -272,8 +272,8 @@ public class GuiController implements Initializable {
         gameOverPanel.setVisible(true);
         isGameOver.setValue(Boolean.TRUE);
 
-        sfx.stop();
-        sfx.setSound(3);
+        bgm.stop();
+        sfx.soundEffects(3);
     }
 
     private void newGame() {
