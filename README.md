@@ -27,42 +27,43 @@ sounds, allowing different tracks to be triggered during gameplay.
 
 # 7. Modified Java Classes:
 ### 7.1) GuiController.java
-i)
+i
+a)
 <p>
 Changes: Under the method bindScore, added a line of code to bine the score label to score property
 </p>
 <p>
 Reason: This improvement is to display the player's score and live updates throughout the game.
 </p>
-ii)
+b)
 <p>
 Changes: Converting the access modifier for the newGame method from public to method.
 </p>
 <p>
 Reason: To restrict access to the method within the class, preventing unintended external calls and improving encapsulation.
 </p>
-iii)
+c)
 <p>
 Changes: Added a new method called showNextBrickPanel to show the next brick shape in a panel below the scores.
 </p>
 <p>
 Reason: To provide players with a visual preview of the upcoming brick, enhancing gameplay awareness and user experience.
 </p>
-iv)
+d)
 <p>
 Changes: Created an if else statement in pauseGame method and call it the initialize handle method.
 </p>
 <p>
 Reason: When player press on the 'ESCAPE' key, the game pauses.
 </p>
-v)
+e)
 <p>
 Changes: Created a new method called nextLevelSpeed to speed up the falling bricks after a specific amount of score is reached.
 </p>
 <p>
 Reason: Implements as new level and increase difficulty once player achieves a specific score.
 </p>
-vi)
+f)
 <p>
 Changes: Called methods from Sound class into some methods of the GuiController class to implement both background music
 and sound effects for gameplay events such as piece rotation, line clears, and game over.
@@ -70,6 +71,13 @@ and sound effects for gameplay events such as piece rotation, line clears, and g
 <p>
 Reason: To enhance the player’s experience by providing audio feedback and immersive background music, making the game
 more engaging and responsive.
+</p>
+g)
+<p>
+Changes: Added a mew method called slamDown for brick to instantly drop into placement after player press the specific key.
+</p>
+<p>
+Reason: To enhance player's experience in playing tetris gameplay.
 </p>
 
 

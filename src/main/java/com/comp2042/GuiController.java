@@ -92,6 +92,10 @@ public class GuiController implements Initializable {
                         moveDown(new MoveEvent(EventType.DOWN, EventSource.USER));
                         keyEvent.consume();
                     }
+                    if (keyEvent.getCode() == KeyCode.SPACE) {
+                        slamDown(new MoveEvent(EventType.SLAM, EventSource.USER));
+                        keyEvent.consume();
+                    }
                 }
                 if (keyEvent.getCode() == KeyCode.N) {
                     newGame();
@@ -297,6 +301,29 @@ public class GuiController implements Initializable {
             bgm.pause();
         }
         isPause.set(!isPause.get());
+        gamePanel.requestFocus();
+    }
+
+    private void slamDown(MoveEvent event) {
+        if (isPause.getValue() == Boolean.FALSE) {
+            DownData downData;
+            ViewData previousState;
+            ViewData currentState = null;
+
+            do {
+                previousState = currentState;
+                downData = eventListener.onDownEvent(event);
+                currentState = downData.getViewData();
+            } while (previousState == null || currentState.getyPosition() > previousState.getyPosition());
+
+            if (downData.getClearRow() != null && downData.getClearRow().getLinesRemoved() > 0) {
+                sfx.soundEffects(2);
+                NotificationPanel notificationPanel = new NotificationPanel("+" + downData.getClearRow().getScoreBonus());
+                groupNotification.getChildren().add(notificationPanel);
+                notificationPanel.showScore(groupNotification.getChildren());
+            }
+            refreshBrick(downData.getViewData());
+        }
         gamePanel.requestFocus();
     }
 }
