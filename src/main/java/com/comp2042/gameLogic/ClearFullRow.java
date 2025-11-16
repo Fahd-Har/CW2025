@@ -1,12 +1,12 @@
 package com.comp2042.gameLogic;
 
-public final class ClearRow {
+public final class ClearFullRow {
 
     private final int linesRemoved;
     private final int[][] newMatrix;
     private final int scoreBonus;
 
-    public ClearRow(int linesRemoved, int[][] newMatrix, int scoreBonus) {
+    public ClearFullRow(int linesRemoved, int[][] newMatrix, int scoreBonus) {
         this.linesRemoved = linesRemoved;
         this.newMatrix = newMatrix;
         this.scoreBonus = scoreBonus;

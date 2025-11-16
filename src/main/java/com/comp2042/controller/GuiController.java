@@ -4,7 +4,7 @@ import com.comp2042.events.EventSource;
 import com.comp2042.events.EventType;
 import com.comp2042.events.InputEventListener;
 import com.comp2042.events.MoveEvent;
-import com.comp2042.gameLogic.DownData;
+import com.comp2042.gameLogic.MovingDownData;
 import com.comp2042.gameLogic.ViewData;
 import com.comp2042.panelScenes.GameOverPanel;
 import com.comp2042.panelScenes.NotificationPanel;
@@ -193,13 +193,13 @@ public class GuiController implements Initializable {
 
     private void moveDown(MoveEvent event) {
         if (isPause.getValue() == Boolean.FALSE) {
-            DownData downData = eventListener.onDownEvent(event);
-            if (downData.getClearRow() != null && downData.getClearRow().getLinesRemoved() > 0) {
-                NotificationPanel notificationPanel = new NotificationPanel("+" + downData.getClearRow().getScoreBonus());
+            MovingDownData movingDownData = eventListener.onDownEvent(event);
+            if (movingDownData.getClearRow() != null && movingDownData.getClearRow().getLinesRemoved() > 0) {
+                NotificationPanel notificationPanel = new NotificationPanel("+" + movingDownData.getClearRow().getScoreBonus());
                 groupNotification.getChildren().add(notificationPanel);
                 notificationPanel.showScore(groupNotification.getChildren());
             }
-            refreshBrick(downData.getViewData());
+            refreshBrick(movingDownData.getViewData());
         }
         gamePanel.requestFocus();
     }

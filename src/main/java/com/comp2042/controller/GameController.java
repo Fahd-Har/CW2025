@@ -5,8 +5,8 @@ import com.comp2042.events.InputEventListener;
 import com.comp2042.events.MoveEvent;
 import com.comp2042.gameBoard.Board;
 import com.comp2042.gameBoard.SimpleBoard;
-import com.comp2042.gameLogic.ClearRow;
-import com.comp2042.gameLogic.DownData;
+import com.comp2042.gameLogic.ClearFullRow;
+import com.comp2042.gameLogic.MovingDownData;
 import com.comp2042.gameLogic.ViewData;
 
 public class GameController implements InputEventListener {
@@ -24,14 +24,14 @@ public class GameController implements InputEventListener {
     }
 
     @Override
-    public DownData onDownEvent(MoveEvent event) {
+    public MovingDownData onDownEvent(MoveEvent event) {
         boolean canMove = board.moveBrickDown();
-        ClearRow clearRow = null;
+        ClearFullRow clearFullRow = null;
         if (!canMove) {
             board.mergeBrickToBackground();
-            clearRow = board.clearRows();
-            if (clearRow.getLinesRemoved() > 0) {
-                board.getScore().add(clearRow.getScoreBonus());
+            clearFullRow = board.clearRows();
+            if (clearFullRow.getLinesRemoved() > 0) {
+                board.getScore().add(clearFullRow.getScoreBonus());
             }
             if (board.createNewBrick()) {
                 viewGuiController.gameOver();
@@ -44,7 +44,7 @@ public class GameController implements InputEventListener {
                 board.getScore().add(1);
             }
         }
-        return new DownData(clearRow, board.getViewData());
+        return new MovingDownData(clearFullRow, board.getViewData());
     }
 
     @Override
