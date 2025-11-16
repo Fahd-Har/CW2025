@@ -1,4 +1,8 @@
-package com.comp2042;
+package com.comp2042.gameBoard;
+
+import com.comp2042.gameLogic.ClearRow;
+import com.comp2042.gameLogic.Score;
+import com.comp2042.gameLogic.ViewData;
 
 public interface Board {
 
