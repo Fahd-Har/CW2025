@@ -11,6 +11,14 @@
 # 6. New Java Classes:
 
 # 7. Modified Java Classes:
+### 7.1) GuiController.java
+a)
+<p>
+Changes: Created an if else statement in pauseGame method and call it the initialize handle method.
+</p>
+<p>
+Reason: When player press on the 'ESCAPE' key, the game pauses.
+</p>
 
 # 8. Unexpected Problems:
 
