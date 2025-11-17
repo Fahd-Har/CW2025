@@ -88,6 +88,9 @@ public class GuiController implements Initializable {
                 if (keyEvent.getCode() == KeyCode.N) {
                     newGame(null);
                 }
+                if (keyEvent.getCode() == KeyCode.ESCAPE) {
+                    pauseGame(null);
+                }
             }
         });
         gameOverPanel.setVisible(false);
@@ -228,6 +231,12 @@ public class GuiController implements Initializable {
     }
 
     public void pauseGame(ActionEvent actionEvent) {
+        if(isPause.get()) {
+            timeLine.play();
+        } else {
+            timeLine.stop();
+        }
+        isPause.set(!isPause.get());
         gamePanel.requestFocus();
     }
 }
