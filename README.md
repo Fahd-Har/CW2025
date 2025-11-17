@@ -19,6 +19,14 @@ Changes: Created an if else statement in pauseGame method and call it the initia
 <p>
 Reason: When player press on the 'ESCAPE' key, the game pauses.
 </p>
+b)
+<p>
+Changes: Under the method bindScore, added a line of code to bine the score label to score property
+</p>
+<p>
+Reason: Score class exists but was not shown during gameplay. This improvement is therefore to display the player's score
+and live updates throughout the game.
+</p>
 
 # 8. Unexpected Problems:
 
