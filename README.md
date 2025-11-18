@@ -27,6 +27,13 @@ Changes: Under the method bindScore, added a line of code to bine the score labe
 Reason: Score class exists but was not shown during gameplay. This improvement is therefore to display the player's score
 and live updates throughout the game.
 </p>
+c)
+<p>
+Changes: Replaced the long switch statement in 'getFillColor()' method with a static Map.
+</p>
+<p>
+Reason: To ensure the function follows the open closed principle.
+</p>
 
 ### 7.2) SimpleBoard.java
 i)

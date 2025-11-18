@@ -30,6 +30,7 @@ import javafx.scene.text.Text;
 import javafx.util.Duration;
 
 import java.net.URL;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 public class GuiController implements Initializable {
@@ -137,38 +138,20 @@ public class GuiController implements Initializable {
         timeLine.play();
     }
 
+    private static final Map<Integer, Paint> COLOR_MAP = Map.of(
+            0, Color.TRANSPARENT,
+            1, Color.AQUA,
+            2, Color.BLUEVIOLET,
+            3, Color.DARKGREEN,
+            4, Color.YELLOW,
+            5, Color.RED,
+            6, Color.BEIGE,
+            7, Color.BURLYWOOD
+    );
+
     private Paint getFillColor(int i) {
-        Paint returnPaint;
-        switch (i) {
-            case 0:
-                returnPaint = Color.TRANSPARENT;
-                break;
-            case 1:
-                returnPaint = Color.AQUA;
-                break;
-            case 2:
-                returnPaint = Color.BLUEVIOLET;
-                break;
-            case 3:
-                returnPaint = Color.DARKGREEN;
-                break;
-            case 4:
-                returnPaint = Color.YELLOW;
-                break;
-            case 5:
-                returnPaint = Color.RED;
-                break;
-            case 6:
-                returnPaint = Color.BEIGE;
-                break;
-            case 7:
-                returnPaint = Color.BURLYWOOD;
-                break;
-            default:
-                returnPaint = Color.WHITE;
-                break;
-        }
-        return returnPaint;
+        // Uses map lookup, defaulting to Color.WHITE if key 'i' is not found
+        return COLOR_MAP.getOrDefault(i, Color.WHITE);
     }
 
 
