@@ -34,16 +34,23 @@ Changes: Replaced the long switch statement in 'getFillColor()' method with a st
 <p>
 Reason: To ensure the function follows the open closed principle.
 </p>
+d)
+<p>
+Changes: Replaced the anonymous inner class in the 'initialize()' method with a new method called gameCommand that handles KeyEvents.
+</p>
+<p>
+Reason: Improves code clarity and making the `initialize()` method cleaner and the event handler logic easier to locate and read.
+</p>
 
 ### 7.2) SimpleBoard.java
-i)
+a)
 <p>
 Changes: Under the method 'createNewBrick()', change coordinate of new off set point from (4,10) to (4,0).
 </p>
 <p>
 Reason: New created bricks will now drop from the top of game board rather than in the middle.
 </p>
-ii)
+b)
 <p>
 Changes: Updated the SimpleBoard constructor and 'newGame()' method to initialize the game matrix using
 new int[height][width] instead of new int[width][height].
