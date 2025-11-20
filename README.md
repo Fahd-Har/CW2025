@@ -50,6 +50,13 @@ initialization and brick initialization into two new dedicated private methods, 
 Reason: Improves code organization and readability by following the Single Responsibility Principle (SRP),
 making the code easier to maintain and debug by isolating distinct initialization tasks.
 </p>
+f)
+<p>
+Changes: Define −42 as an initialization magic number constant within the GuiController class.
+</p>
+<p>
+Reason: Improves code readability by clarifying the value's intent and ensures easy maintainability
+</p>
 
 
 ### 7.2) SimpleBoard.java
