@@ -41,6 +41,16 @@ Changes: Replaced the anonymous inner class in the 'initialize()' method with a 
 <p>
 Reason: Improves code clarity and making the `initialize()` method cleaner and the event handler logic easier to locate and read.
 </p>
+e)
+<p>
+Changes: The body of the original 'initGameView()' method was refactored by extracting the separate tasks of board
+initialization and brick initialization into two new dedicated private methods, 'initBoard()' and 'initBrick()'.
+</p>
+<p>
+Reason: Improves code organization and readability by following the Single Responsibility Principle (SRP),
+making the code easier to maintain and debug by isolating distinct initialization tasks.
+</p>
+
 
 ### 7.2) SimpleBoard.java
 a)
