@@ -14,7 +14,6 @@ import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
@@ -22,22 +21,15 @@ import javafx.scene.effect.Reflection;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 
 import java.net.URL;
-import java.util.Map;
 import java.util.ResourceBundle;
 
 public class GuiController implements Initializable {
-
-    private static final int BRICK_SIZE = 20;
-
-    private static final int MAGIC_NUM = -42;
 
     @FXML
     private GridPane gamePanel;
@@ -58,9 +50,9 @@ public class GuiController implements Initializable {
 
     private InputEventListener eventListener;
 
-    private Rectangle[][] rectangles;
-
     private Timeline timeLine;
+
+    private GameView gameView;
 
     private final BooleanProperty isPause = new SimpleBooleanProperty();
 
@@ -74,6 +66,8 @@ public class GuiController implements Initializable {
         gamePanel.setOnKeyPressed(this::gameCommand);
         gameOverPanel.setVisible(false);
 
+        gameView = new GameView(gamePanel, brickPanel);
+
         final Reflection reflection = new Reflection();
         reflection.setFraction(0.8);
         reflection.setTopOpacity(0.9);
@@ -83,15 +77,15 @@ public class GuiController implements Initializable {
     private void gameCommand(KeyEvent keyEvent) {
         if (isPause.getValue() == Boolean.FALSE && isGameOver.getValue() == Boolean.FALSE) {
             if (keyEvent.getCode() == KeyCode.LEFT || keyEvent.getCode() == KeyCode.A) {
-                refreshBrick(eventListener.onLeftEvent(new MoveEvent(EventType.LEFT, EventSource.USER)));
+                gameView.refreshBrick(eventListener.onLeftEvent(new MoveEvent(EventType.LEFT, EventSource.USER)));
                 keyEvent.consume();
             }
             if (keyEvent.getCode() == KeyCode.RIGHT || keyEvent.getCode() == KeyCode.D) {
-                refreshBrick(eventListener.onRightEvent(new MoveEvent(EventType.RIGHT, EventSource.USER)));
+                gameView.refreshBrick(eventListener.onRightEvent(new MoveEvent(EventType.RIGHT, EventSource.USER)));
                 keyEvent.consume();
             }
             if (keyEvent.getCode() == KeyCode.UP || keyEvent.getCode() == KeyCode.W) {
-                refreshBrick(eventListener.onRotateEvent(new MoveEvent(EventType.ROTATE, EventSource.USER)));
+                gameView.refreshBrick(eventListener.onRotateEvent(new MoveEvent(EventType.ROTATE, EventSource.USER)));
                 keyEvent.consume();
             }
             if (keyEvent.getCode() == KeyCode.DOWN || keyEvent.getCode() == KeyCode.S) {
@@ -108,8 +102,8 @@ public class GuiController implements Initializable {
     }
 
     public void initGameView(int[][] boardMatrix, ViewData brick) {
-        initBoard(boardMatrix);
-        initBrick(brick);
+        gameView.initBoard(boardMatrix);
+        gameView.initBrick(brick);
 
         timeLine = new Timeline(new KeyFrame(
                 Duration.millis(400),
@@ -117,75 +111,6 @@ public class GuiController implements Initializable {
         ));
         timeLine.setCycleCount(Timeline.INDEFINITE);
         timeLine.play();
-    }
-
-    private void initBrick(ViewData brick) {
-        rectangles = new Rectangle[brick.getBrickData().length][brick.getBrickData()[0].length];
-        for (int i = 0; i < brick.getBrickData().length; i++) {
-            for (int j = 0; j < brick.getBrickData()[i].length; j++) {
-                Rectangle rectangle = new Rectangle(BRICK_SIZE, BRICK_SIZE);
-                rectangle.setFill(getFillColor(brick.getBrickData()[i][j]));
-                rectangles[i][j] = rectangle;
-                brickPanel.add(rectangle, j, i);
-            }
-        }
-        brickPanel.setLayoutX(gamePanel.getLayoutX() + brick.getxPosition() * brickPanel.getVgap() + brick.getxPosition() * BRICK_SIZE);
-        brickPanel.setLayoutY(MAGIC_NUM + gamePanel.getLayoutY() + brick.getyPosition() * brickPanel.getHgap() + brick.getyPosition() * BRICK_SIZE);
-    }
-
-    private void initBoard(int[][] boardMatrix) {
-        displayMatrix = new Rectangle[boardMatrix.length][boardMatrix[0].length];
-        for (int i = 2; i < boardMatrix.length; i++) {
-            for (int j = 0; j < boardMatrix[i].length; j++) {
-                Rectangle rectangle = new Rectangle(BRICK_SIZE, BRICK_SIZE);
-                rectangle.setFill(Color.TRANSPARENT);
-                displayMatrix[i][j] = rectangle;
-                gamePanel.add(rectangle, j, i - 2);
-            }
-        }
-    }
-
-    private static final Map<Integer, Paint> COLOR_MAP = Map.of(
-            0, Color.TRANSPARENT,
-            1, Color.AQUA,
-            2, Color.BLUEVIOLET,
-            3, Color.DARKGREEN,
-            4, Color.YELLOW,
-            5, Color.RED,
-            6, Color.BEIGE,
-            7, Color.BURLYWOOD
-    );
-
-    private Paint getFillColor(int i) {
-        // Uses map lookup, defaulting to Color.WHITE if key 'i' is not found
-        return COLOR_MAP.getOrDefault(i, Color.WHITE);
-    }
-
-
-    private void refreshBrick(ViewData brick) {
-        if (isPause.getValue() == Boolean.FALSE) {
-            brickPanel.setLayoutX(gamePanel.getLayoutX() + brick.getxPosition() * brickPanel.getVgap() + brick.getxPosition() * BRICK_SIZE);
-            brickPanel.setLayoutY(MAGIC_NUM + gamePanel.getLayoutY() + brick.getyPosition() * brickPanel.getHgap() + brick.getyPosition() * BRICK_SIZE);
-            for (int i = 0; i < brick.getBrickData().length; i++) {
-                for (int j = 0; j < brick.getBrickData()[i].length; j++) {
-                    setRectangleData(brick.getBrickData()[i][j], rectangles[i][j]);
-                }
-            }
-        }
-    }
-
-    public void refreshGameBackground(int[][] board) {
-        for (int i = 2; i < board.length; i++) {
-            for (int j = 0; j < board[i].length; j++) {
-                setRectangleData(board[i][j], displayMatrix[i][j]);
-            }
-        }
-    }
-
-    private void setRectangleData(int color, Rectangle rectangle) {
-        rectangle.setFill(getFillColor(color));
-        rectangle.setArcHeight(9);
-        rectangle.setArcWidth(9);
     }
 
     private void moveDown(MoveEvent event) {
@@ -196,7 +121,7 @@ public class GuiController implements Initializable {
                 groupNotification.getChildren().add(notificationPanel);
                 notificationPanel.showScore(groupNotification.getChildren());
             }
-            refreshBrick(movingDownData.getViewData());
+            gameView.refreshBrick(movingDownData.getViewData());
         }
         gamePanel.requestFocus();
     }
@@ -233,5 +158,10 @@ public class GuiController implements Initializable {
         }
         isPause.set(!isPause.get());
         gamePanel.requestFocus();
+    }
+
+    public void refreshBoard(int[][] board) {
+        // Delegate board refresh to the view
+        gameView.refreshGameBackground(board);
     }
 }

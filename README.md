@@ -9,6 +9,8 @@
 # 5. Features Not Implemented:
 
 # 6. New Java Classes:
+### 6.1) GameView.java
+
 
 # 7. Modified Java Classes:
 ### 7.1) GuiController.java
@@ -55,7 +57,16 @@ f)
 Changes: Define −42 as an initialization magic number constant within the GuiController class.
 </p>
 <p>
-Reason: Improves code readability by clarifying the value's intent and ensures easy maintainability
+Reason: Improves code readability by clarifying the value's intent and ensures easy maintainability.
+</p>
+g)
+<p>
+Changes: Transferred all methods relating to display-related fields and the JavaFX visual elements from the GuiController
+class to the new GameView class.
+</p>
+<p>
+Reason: This separation enforces the Model-View-Controller (MVC) design pattern, making the GuiController class responsible
+only for handling input and logic flow, while the GameView class is solely responsible for game visualization.
 </p>
 
 
