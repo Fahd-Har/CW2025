@@ -57,6 +57,8 @@ public class GuiController implements Initializable {
 
     private GameView gameView;
 
+    private KeyMovementEventHandler keyMovementEventHandler;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         Font.loadFont(getClass().getClassLoader().getResource("digital.ttf").toExternalForm(), 38);
@@ -66,6 +68,13 @@ public class GuiController implements Initializable {
         gameOverPanel.setVisible(false);
 
         gameView = new GameView(gamePanel, brickPanel, scoreValue);
+
+        keyMovementEventHandler = new KeyMovementEventHandler(
+                this, // Pass itself (the GuiController)
+                gameView,
+                isPause,
+                isGameOver
+        );
 
         final Reflection reflection = new Reflection();
         reflection.setFraction(0.8);
@@ -77,7 +86,8 @@ public class GuiController implements Initializable {
         gamePanel.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent keyEvent) {
-                setupBrickMovementEventHandler(keyEvent);
+                keyMovementEventHandler.setupKeyBrickMovements(keyEvent);
+
                 if (keyEvent.getCode() == KeyCode.N) {
                     newGame(null);
                 }
@@ -86,27 +96,6 @@ public class GuiController implements Initializable {
                 }
             }
         });
-    }
-
-    private void setupBrickMovementEventHandler(KeyEvent keyEvent) {
-        if (isPause.getValue() == Boolean.FALSE && isGameOver.getValue() == Boolean.FALSE) {
-            if (keyEvent.getCode() == KeyCode.LEFT || keyEvent.getCode() == KeyCode.A) {
-                gameView.refreshBrick(eventListener.onLeftEvent(new MoveEvent(EventType.LEFT, EventSource.USER)));
-                keyEvent.consume();
-            }
-            if (keyEvent.getCode() == KeyCode.RIGHT || keyEvent.getCode() == KeyCode.D) {
-                gameView.refreshBrick(eventListener.onRightEvent(new MoveEvent(EventType.RIGHT, EventSource.USER)));
-                keyEvent.consume();
-            }
-            if (keyEvent.getCode() == KeyCode.UP || keyEvent.getCode() == KeyCode.W) {
-                gameView.refreshBrick(eventListener.onRotateEvent(new MoveEvent(EventType.ROTATE, EventSource.USER)));
-                keyEvent.consume();
-            }
-            if (keyEvent.getCode() == KeyCode.DOWN || keyEvent.getCode() == KeyCode.S) {
-                moveDown(new MoveEvent(EventType.DOWN, EventSource.USER));
-                keyEvent.consume();
-            }
-        }
     }
 
     public void initGameView(int[][] boardMatrix, ViewData brick) {
@@ -124,7 +113,7 @@ public class GuiController implements Initializable {
         timeLine.play();
     }
 
-    private void moveDown(MoveEvent event) {
+    public void moveDown(MoveEvent event) {
         if (isPause.getValue() == Boolean.FALSE) {
             MovingDownData movingDownData = eventListener.onDownEvent(event);
             if (movingDownData.getClearRow() != null && movingDownData.getClearRow().getLinesRemoved() > 0) {
@@ -170,5 +159,10 @@ public class GuiController implements Initializable {
     // getter for GameController to access GameView
     public GameView getGameView() {
         return gameView;
+    }
+
+    // getter for KeyMovementEventHandler
+    public InputEventListener getEventListener() {
+        return eventListener;
     }
 }

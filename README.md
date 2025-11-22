@@ -75,6 +75,16 @@ Changes: Added a getter called getGameView()
 <p>
 Reason: So that the class GameController can access the methods from GameView class.
 </p>
+g)
+<p>
+Changes: Transferred all methods relating to keyboard keys that controls movement of brick into a new class called
+KeyMovementEventHandler.
+</p>
+<p>
+Reason: This was a code smell known as large class. 
+This separation was needed to enforce the Model-View-Controller (MVC) design pattern, now the new class handles all keys
+representing for brick movement.
+</p>
 
 ### 7.2) SimpleBoard.java
 i)
