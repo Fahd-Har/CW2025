@@ -8,14 +8,14 @@ import javafx.beans.property.BooleanProperty;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
-public class KeyMovementEventHandler {
+public class KeyEventHandler {
 
     private final GuiController guiController;
     private final GameView gameView;
     private final BooleanProperty isPause;
     private final BooleanProperty isGameOver;
 
-    public KeyMovementEventHandler(
+    public KeyEventHandler(
             GuiController guiController,
             GameView gameView,
             BooleanProperty isPause,
@@ -52,6 +52,15 @@ public class KeyMovementEventHandler {
                 guiController.moveDown(new MoveEvent(EventType.DOWN, EventSource.USER));
                 keyEvent.consume();
             }
+        }
+    }
+
+    public void setupKeyGameState(KeyEvent keyEvent) {
+        if (keyEvent.getCode() == KeyCode.N) {
+            guiController.newGame(null);
+        }
+        if (keyEvent.getCode() == KeyCode.ESCAPE) {
+            guiController.pauseGame(null);
         }
     }
 }

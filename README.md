@@ -9,13 +9,20 @@
 # 5. Features Not Implemented:
 
 # 6. New Java Classes:
-### 6.1) GameView.jaba
+### 6.1) GameView.java
 Location: CW2025/src/main/java/com/comp2042/controller/GameView.java
 
 Purpose:
 <br>
 This class is responsible for building the game board and keeping the visual representation of both fixed and moving
 bricks synchronized with the game's data.
+
+### 6.1) KeyMovementEventHandler.java
+Location: CW2025/src/main/java/com/comp2042/controller/KeyEventHandler.java
+
+Purpose:
+<br>
+This class is responsible for input keys where the keys press handles game logic, whether movement or game state.
 
 # 7. Modified Java Classes:
 ### 7.1) GuiController.java
@@ -77,13 +84,13 @@ Reason: So that the class GameController can access the methods from GameView cl
 </p>
 g)
 <p>
-Changes: Transferred all methods relating to keyboard keys that controls movement of brick into a new class called
-KeyMovementEventHandler.
+Changes: Transferred all methods relating to keyboard keys that controls movement of brick and game state into a new class
+called KeyEventHandler.
 </p>
 <p>
 Reason: This was a code smell known as large class. 
 This separation was needed to enforce the Model-View-Controller (MVC) design pattern, now the new class handles all keys
-representing for brick movement.
+representing for brick movement and game state.
 </p>
 
 ### 7.2) SimpleBoard.java

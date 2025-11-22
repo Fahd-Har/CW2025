@@ -18,7 +18,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
 import javafx.scene.effect.Reflection;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
@@ -55,7 +54,7 @@ public class GuiController implements Initializable {
 
     private GameView gameView;
 
-    private KeyMovementEventHandler keyMovementEventHandler;
+    private KeyEventHandler keyEventHandler;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -67,7 +66,7 @@ public class GuiController implements Initializable {
 
         gameView = new GameView(gamePanel, brickPanel, scoreValue);
 
-        keyMovementEventHandler = new KeyMovementEventHandler(
+        keyEventHandler = new KeyEventHandler(
                 this, // Pass itself (the GuiController)
                 gameView,
                 isPause,
@@ -85,14 +84,8 @@ public class GuiController implements Initializable {
         gamePanel.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent keyEvent) {
-                keyMovementEventHandler.setupKeyBrickMovements(keyEvent);
-
-                if (keyEvent.getCode() == KeyCode.N) {
-                    newGame(null);
-                }
-                if (keyEvent.getCode() == KeyCode.ESCAPE) {
-                    pauseGame(null);
-                }
+                keyEventHandler.setupKeyBrickMovements(keyEvent);
+                keyEventHandler.setupKeyGameState(keyEvent);
             }
         });
     }
