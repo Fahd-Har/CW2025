@@ -9,6 +9,13 @@
 # 5. Features Not Implemented:
 
 # 6. New Java Classes:
+### 6.1) GameView.jaba
+Location: CW2025/src/main/java/com/comp2042/controller/GameView.java
+
+Purpose:
+<br>
+This class is responsible for building the game board and keeping the visual representation of both fixed and moving
+bricks synchronized with the game's data.
 
 # 7. Modified Java Classes:
 ### 7.1) GuiController.java
@@ -49,6 +56,24 @@ Reason: This was a code smell known as long method.
 This change was needed for easier modification when needed,
 easier to test individual pieces of logic and
 improve code readability and comprehension.
+</p>
+e)
+<p>
+Changes: Transferred all methods relating to display-related fields and the JavaFX visual elements from the GuiController
+class to the new GameView class. 
+</p>
+<p>
+Reason: This was a code smell known as large class. 
+This separation was needed to enforce the Model-View-Controller (MVC) design pattern, making the GuiController class responsible
+only for handling input and logic flow, while the GameView class is solely responsible for game visualization.
+Which supports Single Responsibility Principle.
+</p>
+f)
+<p>
+Changes: Added a getter called getGameView()
+</p>
+<p>
+Reason: So that the class GameController can access the methods from GameView class.
 </p>
 
 ### 7.2) SimpleBoard.java

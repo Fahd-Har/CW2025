@@ -20,7 +20,7 @@ public class GameController implements InputEventListener {
         board.createNewBrick();
         viewGuiController.setEventListener(this);
         viewGuiController.initGameView(board.getBoardMatrix(), board.getViewData());
-        viewGuiController.bindScore(board.getScore().scoreProperty());
+        viewGuiController.getGameView().bindScore(board.getScore().scoreProperty());
     }
 
     @Override
@@ -37,7 +37,7 @@ public class GameController implements InputEventListener {
                 viewGuiController.gameOver();
             }
 
-            viewGuiController.refreshGameBackground(board.getBoardMatrix());
+            viewGuiController.getGameView().refreshGameBackground(board.getBoardMatrix());
 
         } else {
             if (event.getEventSource() == EventSource.USER) {
@@ -69,6 +69,6 @@ public class GameController implements InputEventListener {
     @Override
     public void createNewGame() {
         board.newGame();
-        viewGuiController.refreshGameBackground(board.getBoardMatrix());
+        viewGuiController.getGameView().refreshGameBackground(board.getBoardMatrix());
     }
 }
