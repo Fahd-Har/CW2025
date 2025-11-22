@@ -30,8 +30,6 @@ import java.util.ResourceBundle;
 
 public class GuiController implements Initializable {
 
-    private static final int BRICK_SIZE = 20;
-
     @FXML
     private GridPane gamePanel;
 
@@ -76,6 +74,7 @@ public class GuiController implements Initializable {
                 isGameOver
         );
 
+        // temporary
         final Reflection reflection = new Reflection();
         reflection.setFraction(0.8);
         reflection.setTopOpacity(0.9);
@@ -99,11 +98,7 @@ public class GuiController implements Initializable {
     }
 
     public void initGameView(int[][] boardMatrix, ViewData brick) {
-        gameView.initializeBoard(boardMatrix);
-        gameView.initializeBrick(brick);
-        brickPanel.setLayoutX(gamePanel.getLayoutX() + brick.getxPosition() * brickPanel.getVgap() + brick.getxPosition() * BRICK_SIZE);
-        brickPanel.setLayoutY(-42 + gamePanel.getLayoutY() + brick.getyPosition() * brickPanel.getHgap() + brick.getyPosition() * BRICK_SIZE);
-
+        gameView.initializeGameView(boardMatrix, brick);
 
         timeLine = new Timeline(new KeyFrame(
                 Duration.millis(400),

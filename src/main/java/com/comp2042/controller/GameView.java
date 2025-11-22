@@ -32,6 +32,12 @@ public class GameView {
         this.scoreValue = scoreValue;
     }
 
+    public void initializeGameView(int[][] boardMatrix, ViewData brick) {
+        initializeBoard(boardMatrix);
+        initializeBrick(brick);
+        brickDropPosition(brick);
+    }
+
     public void initializeBrick(ViewData brick) {
         rectangles = new Rectangle[brick.getBrickData().length][brick.getBrickData()[0].length];
         for (int i = 0; i < brick.getBrickData().length; i++) {
@@ -93,8 +99,7 @@ public class GameView {
 
     public void refreshBrick(ViewData brick) {
         if (isPause.getValue() == Boolean.FALSE) {
-            brickPanel.setLayoutX(gamePanel.getLayoutX() + brick.getxPosition() * brickPanel.getVgap() + brick.getxPosition() * BRICK_SIZE);
-            brickPanel.setLayoutY(-42 + gamePanel.getLayoutY() + brick.getyPosition() * brickPanel.getHgap() + brick.getyPosition() * BRICK_SIZE);
+            brickDropPosition(brick);
             for (int i = 0; i < brick.getBrickData().length; i++) {
                 for (int j = 0; j < brick.getBrickData()[i].length; j++) {
                     setRectangleData(brick.getBrickData()[i][j], rectangles[i][j]);
@@ -119,5 +124,10 @@ public class GameView {
 
     public void bindScore(IntegerProperty integerProperty) {
         scoreValue.textProperty().bind(integerProperty.asString());
+    }
+
+    private void brickDropPosition(ViewData brick) {
+        brickPanel.setLayoutX(gamePanel.getLayoutX() + brick.getxPosition() * brickPanel.getVgap() + brick.getxPosition() * BRICK_SIZE);
+        brickPanel.setLayoutY(-42 + gamePanel.getLayoutY() + brick.getyPosition() * brickPanel.getHgap() + brick.getyPosition() * BRICK_SIZE);
     }
 }
