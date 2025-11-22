@@ -27,6 +27,29 @@ Changes: Under the method bindScore, added a line of code to bine the score labe
 Reason: Score class exists but was not shown during gameplay. This improvement is therefore to display the player's score
 and live updates throughout the game.
 </p>
+c)
+<p>
+Changes: The method 'initialize()' was broken down, delegating the responsibility of setting up key events to the new method
+'setupKeyEventHandler()'. This method delegated responsibility further to another method, 'setupBrickMovementEventHandler()'
+which handles key events relating to the movement of the bricks.
+</p>
+<p>
+Reason: This was a code smell known as long method.
+This change was needed for easier modification when needed,
+easier to test individual pieces of logic and
+improve code readability and comprehension.
+</p>
+d)
+<p>
+Changes: The method 'initGameView()' was broken down, delegating the responsibility of initializing the board and
+initializing the brick into new methods, 'initializeBoard()' and 'initializeBrick()' respectively.
+</p>
+<p>
+Reason: This was a code smell known as long method.
+This change was needed for easier modification when needed,
+easier to test individual pieces of logic and
+improve code readability and comprehension.
+</p>
 
 ### 7.2) SimpleBoard.java
 i)
