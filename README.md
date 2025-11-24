@@ -31,14 +31,14 @@ and live updates throughout the game.
 ### 7.2) SimpleBoard.java
 a)
 <p>
-Changes: Under the method 'createNewBrick()', change coordinate of new off set point from (4,10) to (4,0).
+Changes: Under the method 'createNewBrick', change coordinate of new off set point from (4,10) to (4,0).
 </p>
 <p>
 Reason: New created bricks will now drop from the top of game board rather than in the middle.
 </p>
 b)
 <p>
-Changes: Updated the SimpleBoard constructor and 'newGame()' method to initialize the game matrix using
+Changes: Updated the SimpleBoard constructor and 'newGame' method to initialize the game matrix using
 new int[height][width] instead of new int[width][height].
 </p>
 <p>
@@ -51,10 +51,19 @@ Changes: Renamed variable p to newOffset.
 <p>
 Reason: To understand what this variable does/takes and not get confused later on when it's called again.
 </p>
+d)
+<p>
+Changes: Introduced new methods 'offsetMovement' and 'checkConflict' to check the movement of brick follows their respective
+order and if it would collide with another brick respectively.
+</p>
+<p>
+Reason: The same codes were repeated few times in multiple different methods with the only difference being where it moves.
+This is a code smell known as duplicate code. So we create new methods and call them in the other methods to reduce duplication.
+</p>
 
 ### 7.3) MatrixOperations.java
 <p>
-Changes: Updated the 'intersect()' and 'merge()' method to correctly align i and j with the x and y coordinates when checking
+Changes: Updated the 'intersect' and 'merge' method to correctly align i and j with the x and y coordinates when checking
 brick collisions.
 <p>
 Reason: To improve code logic and clarity by ensuring coordinate calculations accurately reflect the intended matrix

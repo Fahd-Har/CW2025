@@ -28,54 +28,42 @@ public class SimpleBoard implements Board {
 
     @Override
     public boolean moveBrickDown() {
-        // create a copy of the current game matrix so that the original matrix will not be modified
-        int[][] currentMatrix = MatrixOperations.copy(currentGameMatrix);
-        // create a new point/offset based on the current brick position
-        Point newOffset = new Point(currentOffset);
-        // moves the brick position one unit downwards
-        newOffset.translate(0, 1);
-        // check if moving brick to new position will cause a collision
-        boolean conflict = MatrixOperations.intersect(currentMatrix, brickRotator.getCurrentShape(), (int) newOffset.getX(), (int) newOffset.getY());
-        if (conflict) {
-            // returns a false if there is a collision
-            return false;
-        } else {
-            // updates the new position of brick to the new point if no collision occurs
-            currentOffset = newOffset;
-            return true;
-        }
+        return offsetMovement(0, 1);
     }
 
 
     @Override
     public boolean moveBrickLeft() {
-        // create a copy of the current game matrix so that the original matrix will not be modified
-        int[][] currentMatrix = MatrixOperations.copy(currentGameMatrix);
-        // create a new point/offset based on the current brick position
-        Point newOffset = new Point(currentOffset);
-        // moves the brick position one unit to the left
-        newOffset.translate(-1, 0);
-        // check if moving brick to new position will cause a collision
-        boolean conflict = MatrixOperations.intersect(currentMatrix, brickRotator.getCurrentShape(), (int) newOffset.getX(), (int) newOffset.getY());
-        if (conflict) {
-            // returns a false if there is a collision
-            return false;
-        } else {
-            // updates the new position of brick to the new point if no collision occurs
-            currentOffset = newOffset;
-            return true;
-        }
+        return offsetMovement(-1, 0);
     }
 
     @Override
     public boolean moveBrickRight() {
-        // create a copy of the current game matrix so that the original matrix will not be modified
-        int[][] currentMatrix = MatrixOperations.copy(currentGameMatrix);
+        return offsetMovement(1, 0);
+    }
+
+    @Override
+    public boolean rotateLeftBrick() {
+        NextShapeInfo nextShape = brickRotator.getNextShape();
+        boolean canRotate = checkConflict(nextShape.getShape(), currentOffset, false);
+        if (canRotate) {
+            // update the shape by applying rotation, if can rotate
+            brickRotator.setCurrentShape(nextShape.getPosition());
+        }
+        return canRotate;
+    }
+
+    private boolean offsetMovement(int dx, int dy) {
         // create a new point/offset based on the current brick position
         Point newOffset = new Point(currentOffset);
-        // moves the brick position one unit to the right
-        newOffset.translate(1, 0);
-        // check if moving brick to new position will cause a collision
+        newOffset.translate(dx, dy);
+        // return check if moving brick to new position will cause a collision
+        return checkConflict(brickRotator.getCurrentShape(), newOffset, true);
+    }
+
+    private boolean checkConflict(int[][] shape, Point newOffset, boolean updatePosition) {
+        // create a copy of the current game matrix so that the original matrix will not be modified
+        int[][] currentMatrix = MatrixOperations.copy(currentGameMatrix);
         boolean conflict = MatrixOperations.intersect(currentMatrix, brickRotator.getCurrentShape(), (int) newOffset.getX(), (int) newOffset.getY());
         if (conflict) {
             // returns a false if there is a collision
@@ -83,23 +71,6 @@ public class SimpleBoard implements Board {
         } else {
             // updates the new position of brick to the new point if no collision occurs
             currentOffset = newOffset;
-            return true;
-        }
-    }
-
-    @Override
-    public boolean rotateLeftBrick() {
-        // create a copy of the current game matrix so that the original matrix will not be modified
-        int[][] currentMatrix = MatrixOperations.copy(currentGameMatrix);
-        NextShapeInfo nextShape = brickRotator.getNextShape();
-        // check if the rotated shape would collide at the current brick position
-        boolean conflict = MatrixOperations.intersect(currentMatrix, nextShape.getShape(), (int) currentOffset.getX(), (int) currentOffset.getY());
-        if (conflict) {
-            // returns a false if there is a collision
-            return false;
-        } else {
-            // update the shape by applying rotation if no collision occurs
-            brickRotator.setCurrentShape(nextShape.getPosition());
             return true;
         }
     }
