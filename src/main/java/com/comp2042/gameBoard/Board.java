@@ -12,7 +12,7 @@ public interface Board {
 
     boolean moveBrickRight();
 
-    boolean rotateLeftBrick();
+    boolean rotateBrickLeft();
 
     boolean createNewBrick();
 

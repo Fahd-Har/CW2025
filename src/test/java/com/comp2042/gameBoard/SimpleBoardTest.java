@@ -5,8 +5,6 @@ import com.comp2042.gameLogic.ViewData;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.awt.*;
-
 import static java.util.Arrays.deepEquals;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -154,7 +152,7 @@ class SimpleBoardTest {
             }
         }
         board.createNewBrick();
-        boolean rotated = board.rotateLeftBrick();
+        boolean rotated = board.rotateBrickLeft();
         assertFalse(rotated);
     }
 

@@ -61,7 +61,7 @@ public class GameController implements InputEventListener {
 
     @Override
     public ViewData onRotateEvent(MoveEvent event) {
-        board.rotateLeftBrick();
+        board.rotateBrickLeft();
         return board.getViewData();
     }
 

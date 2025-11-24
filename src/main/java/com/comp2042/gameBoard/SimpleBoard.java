@@ -43,7 +43,7 @@ public class SimpleBoard implements Board {
     }
 
     @Override
-    public boolean rotateLeftBrick() {
+    public boolean rotateBrickLeft() {
         NextShapeInfo nextShape = brickRotator.getNextShape();
         boolean canRotate = checkConflict(nextShape.getShape(), currentOffset, false);
         if (canRotate) {
