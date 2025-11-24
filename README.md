@@ -29,20 +29,27 @@ and live updates throughout the game.
 </p>
 
 ### 7.2) SimpleBoard.java
-i)
+a)
 <p>
 Changes: Under the method 'createNewBrick()', change coordinate of new off set point from (4,10) to (4,0).
 </p>
 <p>
 Reason: New created bricks will now drop from the top of game board rather than in the middle.
 </p>
-ii)
+b)
 <p>
 Changes: Updated the SimpleBoard constructor and 'newGame()' method to initialize the game matrix using
 new int[height][width] instead of new int[width][height].
 </p>
 <p>
 Reason: To avoid logical error by ensuring the matrix correctly maps rows to height and columns to width.
+</p>
+c)
+<p>
+Changes: Renamed variable p to newOffset.
+</p>
+<p>
+Reason: To understand what this variable does/takes and not get confused later on when it's called again.
 </p>
 
 ### 7.3) MatrixOperations.java
