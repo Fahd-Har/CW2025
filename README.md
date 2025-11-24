@@ -60,6 +60,15 @@ order and if it would collide with another brick respectively.
 Reason: The same codes were repeated few times in multiple different methods with the only difference being where it moves.
 This is a code smell known as duplicate code. So we create new methods and call them in the other methods to reduce duplication.
 </p>
+e)
+<p>
+Changes: Extracted brick position, movement, and rotation logic from SimpleBoard into a new CurrentBrickController class.
+</p>
+<p>
+Reason: Supports SRP by separating brick control from board management, reducing complexity and reducing multiple
+responsibilities in the SimpleBoard class.
+</p>
+
 
 ### 7.3) MatrixOperations.java
 <p>
