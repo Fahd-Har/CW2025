@@ -57,22 +57,21 @@ public class SimpleBoard implements Board {
         // create a new point/offset based on the current brick position
         Point newOffset = new Point(currentOffset);
         newOffset.translate(dx, dy);
+        boolean noConflict = checkConflict(brickRotator.getCurrentShape(), newOffset, true);
         // return check if moving brick to new position will cause a collision
-        return checkConflict(brickRotator.getCurrentShape(), newOffset, true);
+        if (noConflict) {
+            currentOffset = newOffset;
+            return true;
+        } else {
+            return false;
+        }
     }
 
     private boolean checkConflict(int[][] shape, Point newOffset, boolean updatePosition) {
         // create a copy of the current game matrix so that the original matrix will not be modified
         int[][] currentMatrix = MatrixOperations.copy(currentGameMatrix);
         boolean conflict = MatrixOperations.intersect(currentMatrix, brickRotator.getCurrentShape(), (int) newOffset.getX(), (int) newOffset.getY());
-        if (conflict) {
-            // returns a false if there is a collision
-            return false;
-        } else {
-            // updates the new position of brick to the new point if no collision occurs
-            currentOffset = newOffset;
-            return true;
-        }
+        return !conflict;
     }
 
     @Override
