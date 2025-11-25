@@ -37,4 +37,10 @@
        when the _**'ESCAPE'**_ key is pressed.
     2. Under `bindScore()`, added a line of code to bind the score label to the score property to display the player's score and live updates.
 
+
+- **GameController.java**
+    1. Delegate post landing tasks into a new method called `handleBrickLandingTasks()` making the original method,
+    `onDownEvent()` clearer and focused only on the move flow.
+  
+
 ## Unexpected Problems

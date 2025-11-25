@@ -27,17 +27,11 @@ public class GameController implements InputEventListener {
     public MovingDownData onDownEvent(MoveEvent event) {
         boolean canMove = board.moveBrickDown();
         ClearFullRow clearFullRow = null;
-        if (!canMove) {
-            board.mergeBrickToBackground();
-            clearFullRow = board.clearRows();
-            if (clearFullRow.getLinesRemoved() > 0) {
-                board.getScore().add(clearFullRow.getScoreBonus());
-            }
-            if (board.createNewBrick()) {
-                viewGuiController.gameOver();
-            }
 
-            viewGuiController.refreshGameBackground(board.getBoardMatrix());
+        if (!canMove) {
+            // if brick cannot move further down, call the handleBrickCannotMove method to determine if brick placement
+            // fills row hence deletion or game over
+            clearFullRow = handleBrickLandingTasks();
 
         } else {
             if (event.getEventSource() == EventSource.USER) {
@@ -45,6 +39,22 @@ public class GameController implements InputEventListener {
             }
         }
         return new MovingDownData(clearFullRow, board.getViewData());
+    }
+
+    private ClearFullRow handleBrickLandingTasks() {
+        ClearFullRow clearFullRow = board.clearRows();
+        board.mergeBrickToBackground();
+        // if there exists lines that were removed, update the score
+        if (clearFullRow.getLinesRemoved() > 0) {
+            board.getScore().add(clearFullRow.getScoreBonus());
+        }
+        // if there exists a clash with initial spawn of brick, implement game over
+        if (board.createNewBrick()) {
+            viewGuiController.gameOver();
+        }
+
+        viewGuiController.refreshGameBackground(board.getBoardMatrix());
+        return clearFullRow;
     }
 
     @Override
@@ -64,7 +74,6 @@ public class GameController implements InputEventListener {
         board.rotateBrickLeft();
         return board.getViewData();
     }
-
 
     @Override
     public void createNewGame() {
