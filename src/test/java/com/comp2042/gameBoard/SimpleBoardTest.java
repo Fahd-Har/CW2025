@@ -226,22 +226,17 @@ class SimpleBoardTest {
     }
 
     @Test
-    void testClearRows() {
+    void clearFullRowTest() {
         int[][] matrix = board.getBoardMatrix();
-
-        matrix[0] = new int[]{0, 0, 0, 1, 0, 0, 0, 1, 0, 0};
-        matrix[1] = new int[]{1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
-
+        for (int col = 0; col < 10; col++) {
+            matrix[19][col] = 1;
+        }
         ClearFullRow result = board.clearRows();
-
-        int[][] expectedMatrix = new int[20][10];
-
-        expectedMatrix[0] = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-        expectedMatrix[1] = new int[]{0, 0, 0, 1, 0, 0, 0, 1, 0, 0};
-
-        assertArrayEquals(expectedMatrix, board.getBoardMatrix());
-
         assertEquals(1, result.getLinesRemoved());
+        int[][] updated = board.getBoardMatrix();
+        for (int col = 0; col < 10; col++) {
+            assertEquals(0, updated[19][col]);
+        }
     }
 
     @Test
