@@ -5,6 +5,8 @@ import com.comp2042.gameLogic.ViewData;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 import static java.util.Arrays.deepEquals;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -16,6 +18,13 @@ class SimpleBoardTest {
     void setUp() {
         board = new SimpleBoard(10,20);
         board.createNewBrick();
+    }
+
+    private void clearBoard() {
+        int[][] matrix = board.getBoardMatrix();
+        for (int[] row : matrix) {
+            Arrays.fill(row, 0);
+        }
     }
 
     @Test
@@ -142,7 +151,21 @@ class SimpleBoardTest {
     }
 
     @Test
-    void testRotateLeftCollision() {
+    void testRotateLeftSuccessWhenNoCollision() {
+        clearBoard();
+
+        // Create a new brick in free space
+        board.createNewBrick();
+
+        // Act
+        boolean rotated = board.rotateBrickLeft();
+
+        // Assert: rotation should succeed
+        assertTrue(rotated, "Brick should be able to rotate when there isn't collision");
+    }
+
+    @Test
+    void testRotateLeftNotPossibleWhenCollision() {
         int[][] matrix = board.getBoardMatrix();
         for(int y = 0;  y < 4; y++) {
             for (int x = 0; x < 10; x++) {
@@ -153,7 +176,7 @@ class SimpleBoardTest {
         }
         board.createNewBrick();
         boolean rotated = board.rotateBrickLeft();
-        assertFalse(rotated);
+        assertFalse(rotated, "Brick shouldn't rotate if there is collision");
     }
 
     @Test
@@ -170,13 +193,7 @@ class SimpleBoardTest {
 
     @Test
     void testCreateNewBrickShouldNotCollide() {
-        int[][] matrix = board.getBoardMatrix();
-
-        for (int y = 0; y < matrix.length; y++) {
-            for (int x = 0; x < matrix[0].length; x++) {
-                matrix[y][x] = 0;
-            }
-        }
+        clearBoard();
 
         boolean collided = board.createNewBrick();
 
@@ -226,7 +243,7 @@ class SimpleBoardTest {
     }
 
     @Test
-    void clearFullRowTest() {
+    void testClearFullRow() {
         int[][] matrix = board.getBoardMatrix();
         for (int col = 0; col < 10; col++) {
             matrix[19][col] = 1;
@@ -240,7 +257,7 @@ class SimpleBoardTest {
     }
 
     @Test
-    void testResetsBrickPositionAndCreatesNewBrick() {
+    void testNewGameResetsGameBoard() {
         // Simulate non-empty board
         board.getBoardMatrix()[0][0] = 5;
 
@@ -250,12 +267,20 @@ class SimpleBoardTest {
         // Verify matrix is reset
         for (int[] row : board.getBoardMatrix()) {
             for (int cell : row) {
-                assertEquals(0, cell);
+                assertEquals(0, cell, "A new game should reset to an empty game board");
             }
         }
+    }
 
-        // Verify score is reset via public getter
-        assertEquals(0, board.getScore().scoreProperty().get());
+    @Test
+    void testScoreResetsInNewGame() {
+        board.getScore().add(50);
+
+        // Act: start a new game
+        board.newGame();
+
+        // Assert: score is reset
+        assertEquals(0, board.getScore().scoreProperty().get(), "Score should reset when a new game happens");
     }
 
 }
