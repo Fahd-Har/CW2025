@@ -42,8 +42,8 @@ public class GameController implements InputEventListener {
     }
 
     private ClearFullRow handleBrickLandingTasks() {
-        ClearFullRow clearFullRow = board.clearRows();
         board.mergeBrickToBackground();
+        ClearFullRow clearFullRow = board.clearRows();
         // if there exists lines that were removed, update the score
         if (clearFullRow.getLinesRemoved() > 0) {
             board.getScore().add(clearFullRow.getScoreBonus());
