@@ -9,6 +9,11 @@
 # 5. Features Not Implemented:
 
 # 6. New Java Classes:
+### 6.1) CurrentBrickController
+Location: CW2025/src/main/java/com/comp2042/gameBoard/CurrentBrickController.java
+<br>
+Purpose: Takes up brick position, movement, and rotation logic from SimpleBoard.
+This helps support SRP by separating responsibilities.
 
 # 7. Modified Java Classes:
 ### 7.1) GuiController.java
