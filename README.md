@@ -39,7 +39,8 @@
     1. Created an **if-else** statement in `pauseGame()` and called it in `initialize()` handle method to pause the game
        when the _**'ESCAPE'**_ key is pressed.
     2. Under `bindScore()`, added a line of code to bind the score label to the score property to display the player's score and live updates.
-    3. Extracted game timeline logic into a new `GameTimeline` class
+    3. Extracted game timeline logic into a new `GameTimeline` class.
+    4. Extracted the original long `initialize()` method into smaller methods focusing on key controls.
 
 
 - **GameController.java**
