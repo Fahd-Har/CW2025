@@ -12,7 +12,7 @@ import javafx.util.Duration;
 
 public class GameFlowManager {
 
-    private Timeline timeline; // Now managed directly
+    public Timeline timeline; // Now managed directly
     private final GridPane gamePanel;
     private final GameOverPanel gameOverPanel;
     private final InputEventListener eventListener;
