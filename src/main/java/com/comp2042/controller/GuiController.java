@@ -40,8 +40,8 @@ public class GuiController implements Initializable {
     private Rectangle[][] displayMatrix;
     private InputEventListener eventListener;
     private Rectangle[][] rectangles;
-    private GameTimeline gameTimeline;
 
+    private final GameFlowManager gameFlow = new GameFlowManager(gamePanel, gameOverPanel, null);
     private final BooleanProperty isPause = new SimpleBooleanProperty();
     private final BooleanProperty isGameOver = new SimpleBooleanProperty();
 
@@ -111,10 +111,8 @@ public class GuiController implements Initializable {
         brickPanel.setLayoutY(-42 + gamePanel.getLayoutY() + brick.getyPosition() * brickPanel.getHgap() + brick.getyPosition() * BRICK_SIZE);
 
 
-        gameTimeline = new GameTimeline(() ->
-                moveDown(new MoveEvent(EventType.DOWN, EventSource.THREAD))
-        );
-        gameTimeline.start();
+        gameFlow.createTimeline(() -> moveDown(new MoveEvent(EventType.DOWN, EventSource.THREAD)));
+        gameFlow.start();
     }
 
     private Paint getFillColor(int i) {
@@ -179,28 +177,14 @@ public class GuiController implements Initializable {
     }
 
     public void gameOver() {
-        gameTimeline.stop();
-        gameOverPanel.setVisible(true);
-        isGameOver.setValue(Boolean.TRUE);
+        gameFlow.gameOver();
     }
 
     public void newGame(ActionEvent actionEvent) {
-        gameTimeline.stop();
-        gameOverPanel.setVisible(false);
-        eventListener.createNewGame();
-        gamePanel.requestFocus();
-        gameTimeline.start();
-        isPause.setValue(Boolean.FALSE);
-        isGameOver.setValue(Boolean.FALSE);
+        gameFlow.newGame(null);
     }
 
     public void pauseGame(ActionEvent actionEvent) {
-        if(isPause.get()) {
-            gameTimeline.start();
-        } else {
-            gameTimeline.stop();
-        }
-        isPause.set(!isPause.get());
-        gamePanel.requestFocus();
+        gameFlow.pauseGame(null);
     }
 }
