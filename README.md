@@ -18,6 +18,10 @@
 - **GameFlowManager** Path: src/main/java/com/comp2042/controller/GameTimeline.java
     - Takes up the game timeline logic from GuiController
     - This helps support Single Responsibility Principle (SRP) by separating responsibilities.
+
+- **GameRenderer** Path: src/main/java/com/comp2042/gameBoard/GameRenderer.java
+    - Takes up initialization of game board and bricks logics from GuiController
+    - This helps support Single Responsibility Principle (SRP) by separating responsibilities.
 ## Modified Java Classes
 ### File Refactoring
 
@@ -41,11 +45,8 @@
     2. Under `bindScore()`, added a line of code to bind the score label to the score property to display the player's score and live updates.
     3. Extracted game timeline/game flow logic (such as `newGame`, `pauseGame` and `gameOver`) into a new `GameFlowManager` class.
     4. Extracted the original long `initialize()` method into smaller methods focusing on key controls.
-    5. Renamed the method `initGameView()` to `initializeGameView()`
-    6. Extracted the code of creating game board and creating brick from `initializeGameView()` into two new methods,
-      `initializeGameBoard()` and `initializeBrick()`
-    7. Extract lines of code that sets the new created brick position as it was repeated a few times, new method `updateBrickPosition()`.
-    8. Turns the -42 value to a constant.
+    5. Renamed the method `initGameView()` to `initializeGameView()`.
+    6. Extracted rendering logic of game board and brick into a new class, `GameRenderer()`.
 
 
 - **GameController.java**
