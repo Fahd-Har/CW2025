@@ -7,7 +7,6 @@ import com.comp2042.events.MoveEvent;
 import com.comp2042.gameLogic.MovingDownData;
 import com.comp2042.gameLogic.ViewData;
 import com.comp2042.panelScenes.GameOverPanel;
-import com.comp2042.panelScenes.NotificationPanel;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -35,6 +34,7 @@ public class GuiController implements Initializable {
     private InputEventListener eventListener;
     private GameRenderer gameRenderer;
     private GameFlowManager gameFlow;
+    private Notifications notification;
 
     private final BooleanProperty isPause = new SimpleBooleanProperty();
     private final BooleanProperty isGameOver = new SimpleBooleanProperty();
@@ -42,8 +42,11 @@ public class GuiController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         Font.loadFont(getClass().getClassLoader().getResource("digital.ttf").toExternalForm(), 38);
+
         gameRenderer = new GameRenderer(brickPanel, gamePanel);
         gameFlow = new GameFlowManager(gamePanel, gameOverPanel, null);
+        notification = new Notifications(groupNotification);
+
         initializeKeyControls();
         gameOverPanel.setVisible(false);
 
@@ -106,9 +109,7 @@ public class GuiController implements Initializable {
         if (isPause.getValue() == Boolean.FALSE) {
             MovingDownData movingDownData = eventListener.onDownEvent(event);
             if (movingDownData.getClearRow() != null && movingDownData.getClearRow().getLinesRemoved() > 0) {
-                NotificationPanel notificationPanel = new NotificationPanel("+" + movingDownData.getClearRow().getScoreBonus());
-                groupNotification.getChildren().add(notificationPanel);
-                notificationPanel.showScore(groupNotification.getChildren());
+                notification.showScore(movingDownData.getClearRow().getScoreBonus());
             }
             refreshBrick(movingDownData.getViewData());
         }

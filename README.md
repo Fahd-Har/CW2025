@@ -22,6 +22,10 @@
 - **GameRenderer** Path: src/main/java/com/comp2042/gameBoard/GameRenderer.java
     - Takes up initialization of game board and bricks logics from GuiController
     - This helps support Single Responsibility Principle (SRP) by separating responsibilities.
+
+- **Notifications** Path: src/main/java/com/comp2042/gameBoard/GameRenderer.java
+    - Takes up the logic for all pop-up notifications (+scores, future level ups) from GuiController.
+    - This helps support Single Responsibility Principle (SRP) by separating responsibilities.
 ## Modified Java Classes
 ### File Refactoring
 
@@ -47,6 +51,7 @@
     4. Extracted the original long `initialize()` method into smaller methods focusing on key controls.
     5. Renamed the method `initGameView()` to `initializeGameView()`.
     6. Extracted rendering logic of game board and brick into a new class, `GameRenderer()`.
+    7. Extracted notification logics into a new class, `Notifications()`.
 
 
 - **GameController.java**
