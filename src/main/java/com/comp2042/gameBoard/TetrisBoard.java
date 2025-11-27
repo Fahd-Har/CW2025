@@ -5,9 +5,7 @@ import com.comp2042.brickGen.BrickGenerator;
 import com.comp2042.brickGen.RandomBrickGenerator;
 import com.comp2042.gameLogic.*;
 
-import java.awt.*;
-
-public class SimpleBoard implements Board {
+public class TetrisBoard implements Board {
 
     private final int width;
     private final int height;
@@ -17,7 +15,7 @@ public class SimpleBoard implements Board {
     private final Score score;
     private final CurrentBrickController brickController;
 
-    public SimpleBoard(int width, int height) {
+    public TetrisBoard(int width, int height) {
         this.width = width;
         this.height = height;
         currentGameMatrix = new int[height][width];

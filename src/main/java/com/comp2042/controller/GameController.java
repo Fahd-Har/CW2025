@@ -4,14 +4,14 @@ import com.comp2042.events.EventSource;
 import com.comp2042.events.InputEventListener;
 import com.comp2042.events.MoveEvent;
 import com.comp2042.gameBoard.Board;
-import com.comp2042.gameBoard.SimpleBoard;
+import com.comp2042.gameBoard.TetrisBoard;
 import com.comp2042.gameLogic.ClearFullRow;
 import com.comp2042.gameLogic.MovingDownData;
 import com.comp2042.gameLogic.ViewData;
 
 public class GameController implements InputEventListener {
 
-    private Board board = new SimpleBoard(10, 25);
+    private Board board = new TetrisBoard(10, 25);
 
     private final GuiController viewGuiController;
 

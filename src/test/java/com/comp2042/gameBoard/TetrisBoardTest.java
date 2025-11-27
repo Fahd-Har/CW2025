@@ -10,13 +10,13 @@ import java.util.Arrays;
 import static java.util.Arrays.deepEquals;
 import static org.junit.jupiter.api.Assertions.*;
 
-class SimpleBoardTest {
+class TetrisBoardTest {
 
-    private SimpleBoard board;
+    private TetrisBoard board;
 
     @BeforeEach
     void setUp() {
-        board = new SimpleBoard(10,20);
+        board = new TetrisBoard(10,20);
         board.createNewBrick();
     }
 

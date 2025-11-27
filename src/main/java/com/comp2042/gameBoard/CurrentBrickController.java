@@ -10,9 +10,9 @@ public class CurrentBrickController {
 
     private Point currentOffset;
     private final BrickRotator brickRotator;
-    private final SimpleBoard board;
+    private final TetrisBoard board;
 
-    public CurrentBrickController(BrickRotator brickRotator, SimpleBoard board) {
+    public CurrentBrickController(BrickRotator brickRotator, TetrisBoard board) {
         this.brickRotator = brickRotator;
         this.board = board;
         this.currentOffset = new Point(0, 0);
