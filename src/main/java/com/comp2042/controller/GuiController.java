@@ -33,15 +33,17 @@ public class GuiController implements Initializable {
     @FXML private Text scoreValue;
 
     private InputEventListener eventListener;
+    private GameRenderer gameRenderer;
+    private GameFlowManager gameFlow;
 
-    private final GameFlowManager gameFlow = new GameFlowManager(gamePanel, gameOverPanel, null);
-    private final GameRenderer gameRenderer = new GameRenderer(brickPanel, gamePanel);
     private final BooleanProperty isPause = new SimpleBooleanProperty();
     private final BooleanProperty isGameOver = new SimpleBooleanProperty();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         Font.loadFont(getClass().getClassLoader().getResource("digital.ttf").toExternalForm(), 38);
+        gameRenderer = new GameRenderer(brickPanel, gamePanel);
+        gameFlow = new GameFlowManager(gamePanel, gameOverPanel, null);
         initializeKeyControls();
         gameOverPanel.setVisible(false);
 
