@@ -35,6 +35,7 @@ public class GuiController implements Initializable {
     private GameRenderer gameRenderer;
     private GameFlowManager gameFlow;
     private Notifications notification;
+    private KeyInputHandler keyHandler;
 
     private final BooleanProperty isPause = new SimpleBooleanProperty();
     private final BooleanProperty isGameOver = new SimpleBooleanProperty();
@@ -64,27 +65,11 @@ public class GuiController implements Initializable {
 
     private void handleAllKeys(KeyEvent keyEvent) {
         if (isPause.getValue() == Boolean.FALSE && isGameOver.getValue() == Boolean.FALSE) {
-            initializeMovementKeys(keyEvent);
+            keyHandler.handleMovementKeys(keyEvent, this::moveDown, this::refreshBrick);
         }
-        handleGlobalKeys(keyEvent);
+        keyHandler.handleGlobalKeys(keyEvent);
     }
 
-    private void handleGlobalKeys(KeyEvent keyEvent) {
-        switch (keyEvent.getCode()) {
-            case N -> newGame(null);
-            case ESCAPE -> pauseGame(null);
-        }
-    }
-
-    private void initializeMovementKeys(KeyEvent keyEvent) {
-        switch (keyEvent.getCode()) {
-            case LEFT, A -> refreshBrick(eventListener.onLeftEvent(new MoveEvent(EventType.LEFT, EventSource.USER)));
-            case RIGHT, D -> refreshBrick(eventListener.onRightEvent(new MoveEvent(EventType.RIGHT, EventSource.USER)));
-            case UP, W -> refreshBrick(eventListener.onRotateEvent(new MoveEvent(EventType.ROTATE, EventSource.USER)));
-            case DOWN, S -> moveDown(new MoveEvent(EventType.DOWN, EventSource.USER));
-        }
-        keyEvent.consume();
-    }
 
     public void initializeGameView(int[][] boardMatrix, ViewData brick) {
         gameRenderer.initializeGameBoard(boardMatrix);
@@ -118,6 +103,7 @@ public class GuiController implements Initializable {
 
     public void setEventListener(InputEventListener eventListener) {
         this.eventListener = eventListener;
+        this.keyHandler = new KeyInputHandler(eventListener, () -> newGame(null), () -> pauseGame(null));
     }
 
     public void bindScore(IntegerProperty integerProperty) {

@@ -19,12 +19,16 @@
     - Takes up the game timeline logic from GuiController
     - This helps support Single Responsibility Principle (SRP) by separating responsibilities.
 
-- **GameRenderer** Path: src/main/java/com/comp2042/gameBoard/GameRenderer.java
+- **GameRenderer** Path: src/main/java/com/comp2042/controller/GameRenderer.java
     - Takes up initialization of game board and bricks logics from GuiController
     - This helps support Single Responsibility Principle (SRP) by separating responsibilities.
 
-- **Notifications** Path: src/main/java/com/comp2042/gameBoard/GameRenderer.java
+- **Notifications** Path: src/main/java/com/comp2042/controller/Notifications.java
     - Takes up the logic for all pop-up notifications (+scores, future level ups) from GuiController.
+    - This helps support Single Responsibility Principle (SRP) by separating responsibilities.
+
+- **KeyInputHandler** Path: src/main/java/com/comp2042/controller/KeyInputHandler.java
+    - Takes up the logic for key inputs and their respective actions from GuiController.
     - This helps support Single Responsibility Principle (SRP) by separating responsibilities.
 ## Modified Java Classes
 ### File Refactoring
@@ -52,6 +56,7 @@
     5. Renamed the method `initGameView()` to `initializeGameView()`.
     6. Extracted rendering logic of game board and brick into a new class, `GameRenderer()`.
     7. Extracted notification logics into a new class, `Notifications()`.
+    8. Extracted key input logic into a new class, `KeyInputHandler()`.
 
 
 - **GameController.java**
