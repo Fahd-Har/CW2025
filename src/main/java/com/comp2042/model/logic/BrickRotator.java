@@ -1,6 +1,6 @@
-package com.comp2042.gameLogic;
+package com.comp2042.model.logic;
 
-import com.comp2042.brickGen.Brick;
+import com.comp2042.model.brickShapeGenerator.Brick;
 
 public class BrickRotator {
 

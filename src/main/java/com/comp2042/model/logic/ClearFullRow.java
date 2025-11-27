@@ -1,4 +1,4 @@
-package com.comp2042.gameLogic;
+package com.comp2042.model.logic;
 
 public final class ClearFullRow {
 

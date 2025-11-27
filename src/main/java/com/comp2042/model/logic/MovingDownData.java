@@ -1,4 +1,6 @@
-package com.comp2042.gameLogic;
+package com.comp2042.model.logic;
+
+import com.comp2042.view.data.ViewData;
 
 public final class MovingDownData {
     private final ClearFullRow clearFullRow;

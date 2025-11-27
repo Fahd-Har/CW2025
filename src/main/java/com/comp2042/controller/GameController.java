@@ -3,11 +3,11 @@ package com.comp2042.controller;
 import com.comp2042.events.EventSource;
 import com.comp2042.events.InputEventListener;
 import com.comp2042.events.MoveEvent;
-import com.comp2042.gameBoard.Board;
-import com.comp2042.gameBoard.TetrisBoard;
-import com.comp2042.gameLogic.ClearFullRow;
-import com.comp2042.gameLogic.MovingDownData;
-import com.comp2042.gameLogic.ViewData;
+import com.comp2042.model.gameBoard.Board;
+import com.comp2042.model.gameBoard.TetrisBoard;
+import com.comp2042.model.logic.ClearFullRow;
+import com.comp2042.model.logic.MovingDownData;
+import com.comp2042.view.data.ViewData;
 
 public class GameController implements InputEventListener {
 

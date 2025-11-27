@@ -1,7 +1,7 @@
 package com.comp2042.controller;
 
 import com.comp2042.events.InputEventListener;
-import com.comp2042.panelScenes.GameOverPanel;
+import com.comp2042.view.scenes.GameOverPanel;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.property.BooleanProperty;

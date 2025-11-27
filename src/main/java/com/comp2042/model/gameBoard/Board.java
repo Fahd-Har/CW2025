@@ -1,8 +1,8 @@
-package com.comp2042.gameBoard;
+package com.comp2042.model.gameBoard;
 
-import com.comp2042.gameLogic.ClearFullRow;
-import com.comp2042.gameLogic.Score;
-import com.comp2042.gameLogic.ViewData;
+import com.comp2042.model.logic.ClearFullRow;
+import com.comp2042.model.logic.Score;
+import com.comp2042.view.data.ViewData;
 
 public interface Board {
 

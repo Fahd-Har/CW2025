@@ -2,9 +2,9 @@ package com.comp2042.controller;
 
 import com.comp2042.events.InputEventListener;
 import com.comp2042.events.MoveEvent;
-import com.comp2042.gameLogic.MovingDownData;
-import com.comp2042.gameLogic.ViewData;
-import com.comp2042.panelScenes.GameOverPanel;
+import com.comp2042.model.logic.MovingDownData;
+import com.comp2042.view.data.ViewData;
+import com.comp2042.view.scenes.GameOverPanel;
 import javafx.application.Platform;
 import javafx.scene.layout.GridPane;
 import org.junit.jupiter.api.BeforeAll;

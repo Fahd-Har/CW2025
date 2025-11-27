@@ -1,10 +1,10 @@
-package com.comp2042.controller;
+package com.comp2042.controller.keyInput;
 
 import com.comp2042.events.EventSource;
 import com.comp2042.events.EventType;
 import com.comp2042.events.InputEventListener;
 import com.comp2042.events.MoveEvent;
-import com.comp2042.gameLogic.ViewData;
+import com.comp2042.view.data.ViewData;
 import javafx.scene.input.KeyEvent;
 
 import java.util.function.Consumer;

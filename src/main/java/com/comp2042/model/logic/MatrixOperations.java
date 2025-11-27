@@ -1,4 +1,4 @@
-package com.comp2042.gameLogic;
+package com.comp2042.model.logic;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;

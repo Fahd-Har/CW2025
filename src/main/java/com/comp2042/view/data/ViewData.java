@@ -1,4 +1,6 @@
-package com.comp2042.gameLogic;
+package com.comp2042.view.data;
+
+import com.comp2042.model.logic.MatrixOperations;
 
 public final class ViewData {
 

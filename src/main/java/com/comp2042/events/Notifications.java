@@ -1,6 +1,6 @@
-package com.comp2042.controller;
+package com.comp2042.events;
 
-import com.comp2042.panelScenes.NotificationPanel;
+import com.comp2042.view.scenes.NotificationPanel;
 import javafx.scene.Group;
 
 public class Notifications {

@@ -1,6 +1,6 @@
-package com.comp2042.brickGen;
+package com.comp2042.model.brickShapeGenerator;
 
-import com.comp2042.gameLogic.MatrixOperations;
+import com.comp2042.model.logic.MatrixOperations;
 
 import java.util.ArrayList;
 import java.util.List;

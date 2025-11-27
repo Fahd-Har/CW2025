@@ -1,4 +1,4 @@
-package com.comp2042.brickGen;
+package com.comp2042.model.brickShapeGenerator;
 
 import java.util.List;
 

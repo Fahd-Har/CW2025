@@ -1,9 +1,13 @@
-package com.comp2042.gameBoard;
+package com.comp2042.model.gameBoard;
 
-import com.comp2042.brickGen.Brick;
-import com.comp2042.brickGen.BrickGenerator;
-import com.comp2042.brickGen.RandomBrickGenerator;
-import com.comp2042.gameLogic.*;
+import com.comp2042.model.brickShapeGenerator.Brick;
+import com.comp2042.model.brickShapeGenerator.BrickGenerator;
+import com.comp2042.model.brickShapeGenerator.RandomBrickGenerator;
+import com.comp2042.model.logic.BrickRotator;
+import com.comp2042.model.logic.ClearFullRow;
+import com.comp2042.model.logic.MatrixOperations;
+import com.comp2042.model.logic.Score;
+import com.comp2042.view.data.ViewData;
 
 public class TetrisBoard implements Board {
 

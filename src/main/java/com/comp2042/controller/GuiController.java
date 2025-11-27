@@ -1,12 +1,10 @@
 package com.comp2042.controller;
 
-import com.comp2042.events.EventSource;
-import com.comp2042.events.EventType;
-import com.comp2042.events.InputEventListener;
-import com.comp2042.events.MoveEvent;
-import com.comp2042.gameLogic.MovingDownData;
-import com.comp2042.gameLogic.ViewData;
-import com.comp2042.panelScenes.GameOverPanel;
+import com.comp2042.controller.keyInput.KeyInputHandler;
+import com.comp2042.events.*;
+import com.comp2042.model.logic.MovingDownData;
+import com.comp2042.view.data.ViewData;
+import com.comp2042.view.scenes.GameOverPanel;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleBooleanProperty;

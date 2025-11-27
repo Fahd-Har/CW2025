@@ -1,8 +1,8 @@
-package com.comp2042.gameBoard;
+package com.comp2042.model.gameBoard;
 
-import com.comp2042.gameLogic.BrickRotator;
-import com.comp2042.gameLogic.MatrixOperations;
-import com.comp2042.gameLogic.NextShapeInfo;
+import com.comp2042.model.logic.BrickRotator;
+import com.comp2042.model.logic.MatrixOperations;
+import com.comp2042.model.logic.NextShapeInfo;
 
 import java.awt.*;
 

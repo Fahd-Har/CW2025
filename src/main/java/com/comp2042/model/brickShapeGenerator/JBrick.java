@@ -1,37 +1,37 @@
-package com.comp2042.brickGen;
+package com.comp2042.model.brickShapeGenerator;
 
-import com.comp2042.gameLogic.MatrixOperations;
+import com.comp2042.model.logic.MatrixOperations;
 
 import java.util.ArrayList;
 import java.util.List;
 
-final class TBrick implements Brick {
+final class JBrick implements Brick {
 
     private final List<int[][]> brickMatrix = new ArrayList<>();
 
-    public TBrick() {
+    public JBrick() {
         brickMatrix.add(new int[][]{
                 {0, 0, 0, 0},
-                {6, 6, 6, 0},
-                {0, 6, 0, 0},
+                {2, 2, 2, 0},
+                {0, 0, 2, 0},
                 {0, 0, 0, 0}
         });
         brickMatrix.add(new int[][]{
-                {0, 6, 0, 0},
-                {0, 6, 6, 0},
-                {0, 6, 0, 0},
-                {0, 0, 0, 0}
-        });
-        brickMatrix.add(new int[][]{
-                {0, 6, 0, 0},
-                {6, 6, 6, 0},
                 {0, 0, 0, 0},
+                {0, 2, 2, 0},
+                {0, 2, 0, 0},
+                {0, 2, 0, 0}
+        });
+        brickMatrix.add(new int[][]{
+                {0, 0, 0, 0},
+                {0, 2, 0, 0},
+                {0, 2, 2, 2},
                 {0, 0, 0, 0}
         });
         brickMatrix.add(new int[][]{
-                {0, 6, 0, 0},
-                {6, 6, 0, 0},
-                {0, 6, 0, 0},
+                {0, 0, 2, 0},
+                {0, 0, 2, 0},
+                {0, 2, 2, 0},
                 {0, 0, 0, 0}
         });
     }

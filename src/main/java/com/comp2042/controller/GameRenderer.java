@@ -1,6 +1,6 @@
 package com.comp2042.controller;
 
-import com.comp2042.gameLogic.ViewData;
+import com.comp2042.view.data.ViewData;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;

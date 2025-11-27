@@ -1,7 +1,7 @@
 package com.comp2042.events;
 
-import com.comp2042.gameLogic.ViewData;
-import com.comp2042.gameLogic.MovingDownData;
+import com.comp2042.view.data.ViewData;
+import com.comp2042.model.logic.MovingDownData;
 
 public interface InputEventListener {
 

@@ -1,7 +1,8 @@
 package com.comp2042.gameBoard;
 
-import com.comp2042.gameLogic.ClearFullRow;
-import com.comp2042.gameLogic.ViewData;
+import com.comp2042.model.gameBoard.TetrisBoard;
+import com.comp2042.model.logic.ClearFullRow;
+import com.comp2042.view.data.ViewData;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
