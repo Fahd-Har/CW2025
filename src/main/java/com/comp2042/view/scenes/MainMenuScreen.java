@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class mainMenuScreen {
+public class MainMenuScreen {
     @FXML
     private Button startButton;
 

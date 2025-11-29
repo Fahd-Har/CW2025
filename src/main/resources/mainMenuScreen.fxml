@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -7,18 +8,16 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0"
-            xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.comp2042.view.scenes.mainMenuScreen">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.comp2042.view.scenes.MainMenuScreen">
    <children>
-       <Text layoutX="490.0" layoutY="120.0" style="-fx-font-size: 32;" text="🎮 MyTetrisJFK 🎮" textAlignment="CENTER" wrappingWidth="300.0">
+       <Text layoutY="120.0" styleClass="title" text="🎮 MyTetrisJFK 🎮" textAlignment="CENTER" wrappingWidth="1280.0">
          <font>
             <Font size="16.0" />
          </font>
       </Text>
       <VBox alignment="CENTER" fillWidth="false" layoutY="99.0" prefHeight="700.0" prefWidth="1280.0">
          <children>
-             <Button fx:id="startButton" layoutX="10.0" layoutY="10.0" lineSpacing="1.0" prefHeight="102.0" prefWidth="401.0" text="Start Game" textAlignment="CENTER">
+             <Button fx:id="startButton" layoutX="10.0" layoutY="10.0" prefHeight="102.0" prefWidth="401.0" styleClass="buttonShape" text="Start Game">
                <font>
                   <Font size="24.0" />
                </font>
@@ -26,7 +25,7 @@
                   <Insets bottom="20.0" />
                </VBox.margin>
             </Button>
-            <Button fx:id="rulesButon" layoutX="10.0" layoutY="10.0" prefHeight="102.0" prefWidth="401.0" text="Rules">
+            <Button fx:id="rulesButton" layoutX="10.0" layoutY="10.0" prefHeight="102.0" prefWidth="401.0" styleClass="buttonShape" text="Rules">
                <font>
                   <Font size="24.0" />
                </font>
@@ -34,7 +33,7 @@
                   <Insets bottom="20.0" />
                </VBox.margin>
             </Button>
-            <Button fx:id="keyControlsButton" layoutX="10.0" layoutY="10.0" prefHeight="102.0" prefWidth="401.0" text="Key Controls">
+            <Button fx:id="keyControlsButton" layoutX="10.0" layoutY="10.0" prefHeight="102.0" prefWidth="401.0" styleClass="buttonShape" text="Key Controls">
                <font>
                   <Font size="24.0" />
                </font>
@@ -42,7 +41,7 @@
                   <Insets bottom="20.0" />
                </VBox.margin>
             </Button>
-            <Button fx:id="optionsButton" layoutX="10.0" layoutY="112.0" prefHeight="102.0" prefWidth="401.0" text="Options">
+            <Button fx:id="optionsButton" layoutX="10.0" layoutY="112.0" prefHeight="102.0" prefWidth="401.0" styleClass="buttonShape" text="Options">
                <font>
                   <Font size="24.0" />
                </font>
@@ -56,4 +55,8 @@
          </opaqueInsets>
       </VBox>
    </children>
+
+    <stylesheets>
+        <URL value="@mainMenu_style.css" />
+    </stylesheets>
 </AnchorPane>

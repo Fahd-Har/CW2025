@@ -1,0 +1,13 @@
+.title {
+    -fx-font-family: Arial;
+    -fx-font-size: 48px;
+    -fx-font-weight: bold;
+}
+
+.buttonShape {
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-font-family: "Arial Narrow";
+    -fx-font-size: 36px;
+    -fx-font-weight: bold;
+}
