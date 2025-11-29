@@ -11,7 +11,7 @@
 ## Features Not Implemented
 
 ## New Java Classes
-- **CurrentBrickController** Path: src/main/java/com/comp2042/gameBoard/CurrentBrickController.java
+- **CurrentBrickController** Path: src/main/java/com/comp2042/model/gameBoard/CurrentBrickController.java
     - Takes up brick position, movement, and rotation logic from TetrisBoard.
     - This helps support Single Responsibility Principle (SRP) by separating responsibilities.
 
@@ -23,13 +23,19 @@
     - Takes up initialization of game board and bricks logics from GuiController
     - This helps support Single Responsibility Principle (SRP) by separating responsibilities.
 
-- **Notifications** Path: src/main/java/com/comp2042/controller/Notifications.java
+- **Notifications** Path: src/main/java/com/comp2042/events/Notifications.java
     - Takes up the logic for all pop-up notifications (+scores, future level ups) from GuiController.
     - This helps support Single Responsibility Principle (SRP) by separating responsibilities.
 
-- **KeyInputHandler** Path: src/main/java/com/comp2042/controller/KeyInputHandler.java
+- **KeyInputHandler** Path: src/main/java/com/comp2042/controller/keyInput/KeyInputHandler.java
     - Takes up the logic for key inputs and their respective actions from GuiController.
     - This helps support Single Responsibility Principle (SRP) by separating responsibilities.
+
+- **mainMenuScreen** Path: src/main/java/com/comp2042/view/scenes/mainMenuScreen.java
+    - Links the game's UI and logic by retrieving the GuiController from the FXML and using it to initialize the GameController before displaying the game scene.
+    - Maintains a clear separation between the welcome screen and the game itself.
+
+
 ## Modified Java Classes
 ### File Refactoring
 
@@ -63,6 +69,10 @@
 - **GameController.java**
     1. Delegate post landing tasks into a new method called `handleBrickLandingTasks()` making the original method,
     `onDownEvent()` clearer and focused only on the move flow.
+
+- **Main.java**
+    1. Class now loads a different scene, a main menu screen. This scene does not involve any Gui or game control logic,
+    hence the lines involve with this logic was removed. Window screen has now increased to 1280x800 pixels size.
   
 
 ## Unexpected Problems
