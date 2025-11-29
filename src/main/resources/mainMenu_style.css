@@ -1,7 +1,14 @@
+.root {
+    -fx-background-image: url("mainMenu_Background.jpg");
+    -fx-background-size: 100% 100%;
+    -fx-focus-color: #FF0000;
+}
+
 .title {
     -fx-font-family: Arial;
     -fx-font-size: 48px;
     -fx-font-weight: bold;
+    -fx-fill: yellow;
 }
 
 .buttonShape {
