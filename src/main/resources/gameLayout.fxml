@@ -15,12 +15,12 @@
         </center>
     </BorderPane>
 
-    <VBox alignment="CENTER" layoutX="285" layoutY="20">
+    <VBox alignment="CENTER" layoutX="810" layoutY="167">
         <Label styleClass="scoreClass" text="Score:" />
         <Text fx:id="scoreValue" styleClass="scoreClass" text="Text" />
     </VBox>
 
-    <Group fx:id="groupNotification" layoutX="14" layoutY="203">
+    <Group fx:id="groupNotification" layoutX="539" layoutY="350">
         <VBox alignment="CENTER">
             <GameOverPanel fx:id="gameOverPanel"/>
         </VBox>
