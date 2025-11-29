@@ -21,6 +21,7 @@
 
 - **GameRenderer** Path: src/main/java/com/comp2042/controller/GameRenderer.java
     - Takes up initialization of game board and bricks logics from GuiController
+    - Ensure bricks fall in the middle by adding constants of the LayoutX and LayoutY of gamePanel.
     - This helps support Single Responsibility Principle (SRP) by separating responsibilities.
 
 - **Notifications** Path: src/main/java/com/comp2042/events/Notifications.java

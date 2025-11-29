@@ -10,6 +10,8 @@ public class GameRenderer {
 
     private static final int BRICK_SIZE = 20;
     private static final int MAGIC_NUM = -42;
+    public static final int SET_GAMEPANEL_LAYOUT_X = 525;
+    public static final int SET_GAMEPANEL_LAYOUT_Y = 147;
 
     private Rectangle[][] displayMatrix;
     private Rectangle[][] rectangles;
@@ -69,8 +71,8 @@ public class GameRenderer {
     }
 
     public void updateBrickPosition(ViewData brick) {
-        brickPanel.setLayoutX(gamePanel.getLayoutX() + brick.getxPosition() * brickPanel.getVgap() + brick.getxPosition() * BRICK_SIZE);
-        brickPanel.setLayoutY(MAGIC_NUM + gamePanel.getLayoutY() + brick.getyPosition() * brickPanel.getHgap() + brick.getyPosition() * BRICK_SIZE);
+        brickPanel.setLayoutX(gamePanel.getLayoutX() + SET_GAMEPANEL_LAYOUT_X + brick.getxPosition() * brickPanel.getVgap() + brick.getxPosition() * BRICK_SIZE);
+        brickPanel.setLayoutY(MAGIC_NUM + gamePanel.getLayoutY() + SET_GAMEPANEL_LAYOUT_Y + brick.getyPosition() * brickPanel.getHgap() + brick.getyPosition() * BRICK_SIZE);
     }
 
     private Paint getFillColor(int i) {
