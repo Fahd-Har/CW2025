@@ -112,11 +112,11 @@ public class GuiController implements Initializable {
         gameFlow.gameOver();
     }
 
-    public void newGame(ActionEvent actionEvent) {
+    private void newGame(ActionEvent actionEvent) {
         gameFlow.newGame(null);
     }
 
-    public void pauseGame(ActionEvent actionEvent) {
+    private void pauseGame(ActionEvent actionEvent) {
         gameFlow.pauseGame(null);
     }
 }
