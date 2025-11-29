@@ -5,9 +5,7 @@ import com.comp2042.events.*;
 import com.comp2042.model.logic.MovingDownData;
 import com.comp2042.view.data.ViewData;
 import com.comp2042.view.scenes.GameOverPanel;
-import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -35,9 +33,6 @@ public class GuiController implements Initializable {
     private Notifications notification;
     private KeyInputHandler keyHandler;
 
-    private final BooleanProperty isPause = new SimpleBooleanProperty();
-    private final BooleanProperty isGameOver = new SimpleBooleanProperty();
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         Font.loadFont(getClass().getClassLoader().getResource("digital.ttf").toExternalForm(), 38);
@@ -62,7 +57,7 @@ public class GuiController implements Initializable {
     }
 
     private void handleAllKeys(KeyEvent keyEvent) {
-        if (isPause.getValue() == Boolean.FALSE && isGameOver.getValue() == Boolean.FALSE) {
+        if (gameFlow.isPause().getValue() == Boolean.FALSE && gameFlow.isGameOver().getValue() == Boolean.FALSE) {
             keyHandler.handleMovementKeys(keyEvent, this::moveDown, this::refreshBrick, this::hardDrop);
         }
         keyHandler.handleGlobalKeys(keyEvent);
@@ -79,7 +74,7 @@ public class GuiController implements Initializable {
     }
 
     private void refreshBrick(ViewData brick) {
-        if (isPause.getValue() == Boolean.FALSE) {
+        if (gameFlow.isPause().getValue() == Boolean.FALSE) {
             gameRenderer.refreshBrick(brick);
         }
     }
@@ -89,7 +84,7 @@ public class GuiController implements Initializable {
     }
 
     private void moveDown(MoveEvent event) {
-        if (isPause.getValue() == Boolean.FALSE) {
+        if (gameFlow.isPause().getValue() == Boolean.FALSE) {
             MovingDownData movingDownData = eventListener.onDownEvent(event);
             if (movingDownData.getClearRow() != null && movingDownData.getClearRow().getLinesRemoved() > 0) {
                 notification.showScore(movingDownData.getClearRow().getScoreBonus());
@@ -101,7 +96,8 @@ public class GuiController implements Initializable {
 
     public void setEventListener(InputEventListener eventListener) {
         this.eventListener = eventListener;
-        this.keyHandler = new KeyInputHandler(eventListener, () -> newGame(null), () -> pauseGame(null));
+        this.keyHandler = new KeyInputHandler(eventListener, this::newGame, this::pauseGame);
+        gameFlow.setEventListener(eventListener);
     }
 
     public void bindScore(IntegerProperty integerProperty) {
@@ -121,7 +117,7 @@ public class GuiController implements Initializable {
     }
 
     public void hardDrop(MoveEvent event) {
-        if (isPause.getValue() == Boolean.FALSE) {
+        if (gameFlow.isPause().getValue() == Boolean.FALSE) {
             MovingDownData movingDownData;
             ViewData previousState;
             ViewData currentState = null;

@@ -29,10 +29,10 @@
     - This helps support Single Responsibility Principle (SRP) by separating responsibilities.
 
 - **KeyInputHandler** Path: src/main/java/com/comp2042/controller/keyInput/KeyInputHandler.java
-    - Takes up the logic for key inputs and their respective actions from GuiController.
+    - Takes up the logic for key inputs and their respective actions from GuiController using consumer.
     - This helps support Single Responsibility Principle (SRP) by separating responsibilities.
 
-- **mainMenuScreen** Path: src/main/java/com/comp2042/view/scenes/mainMenuScreen.java
+- **MainMenuScreen** Path: src/main/java/com/comp2042/view/scenes/mainMenuScreen.java
     - Links the game's UI and logic by retrieving the GuiController from the FXML and using it to initialize the GameController before displaying the game scene.
     - Maintains a clear separation between the welcome screen and the game itself.
 

@@ -7,19 +7,20 @@ import com.comp2042.events.MoveEvent;
 import com.comp2042.view.data.ViewData;
 import javafx.scene.input.KeyEvent;
 
+import javafx.event.ActionEvent;
 import java.util.function.Consumer;
 
 public class KeyInputHandler {
 
     private final InputEventListener eventListener;
 
-    private final Runnable newGameAction;
-    private final Runnable pauseGameAction;
+    private final Consumer<ActionEvent> newGameAction;
+    private final Consumer<ActionEvent> pauseGameAction;
 
     public KeyInputHandler(
             InputEventListener eventListener,
-            Runnable newGameAction,
-            Runnable pauseGameAction
+            Consumer<ActionEvent> newGameAction,
+            Consumer<ActionEvent> pauseGameAction
     ) {
         this.eventListener = eventListener;
         this.newGameAction = newGameAction;
@@ -28,8 +29,8 @@ public class KeyInputHandler {
 
     public void handleGlobalKeys(KeyEvent keyEvent) {
         switch (keyEvent.getCode()) {
-            case N -> newGameAction.run();
-            case ESCAPE -> pauseGameAction.run();
+            case N -> newGameAction.accept(null);
+            case ESCAPE -> pauseGameAction.accept(null);
         }
     }
 

@@ -15,7 +15,7 @@ public class GameFlowManager {
     public Timeline timeline; // Now managed directly
     private final GridPane gamePanel;
     private final GameOverPanel gameOverPanel;
-    private final InputEventListener eventListener;
+    private InputEventListener eventListener;
 
     private final BooleanProperty isPause = new SimpleBooleanProperty();
     private final BooleanProperty isGameOver = new SimpleBooleanProperty();
@@ -23,6 +23,10 @@ public class GameFlowManager {
     public GameFlowManager(GridPane gamePanel, GameOverPanel gameOverPanel, InputEventListener eventListener) {
         this.gamePanel = gamePanel;
         this.gameOverPanel = gameOverPanel;
+        this.eventListener = eventListener;
+    }
+
+    public void setEventListener(InputEventListener eventListener) {
         this.eventListener = eventListener;
     }
 
@@ -65,5 +69,14 @@ public class GameFlowManager {
         }
         isPause.set(!isPause.get());
         gamePanel.requestFocus();
+    }
+
+    // ADD these public getters
+    public BooleanProperty isPause() {
+        return isPause;
+    }
+
+    public BooleanProperty isGameOver() {
+        return isGameOver;
     }
 }
