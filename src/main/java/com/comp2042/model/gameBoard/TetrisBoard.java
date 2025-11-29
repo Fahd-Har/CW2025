@@ -57,7 +57,7 @@ public class TetrisBoard implements Board {
         // set the newly generated brick as the active brick for rotation and movement
         brickRotator.setBrick(currentBrick);
         // manually set the starting position of the new brick
-        brickController.setInitialPosition(4, 0);
+        brickController.setInitialPosition(4, 1);
         // Check if the new brick immediately conflicts with existing blocks in the game matrix
         // If this returns true, means the game is over
         return MatrixOperations.intersect(currentGameMatrix, brickController.getCurrentShape(), brickController.getX(), brickController.getY());
