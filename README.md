@@ -65,6 +65,7 @@
     6. Extracted rendering logic of game board and brick into a new class, `GameRenderer()`.
     7. Extracted notification logics into a new class, `Notifications()`.
     8. Extracted key input logic into a new class, `KeyInputHandler()`.
+    9. Created a new method called `hardDrop()`, to drop the brick instantly.
 
 
 - **GameController.java**

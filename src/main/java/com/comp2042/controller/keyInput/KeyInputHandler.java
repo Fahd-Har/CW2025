@@ -33,7 +33,8 @@ public class KeyInputHandler {
         }
     }
 
-    public void handleMovementKeys(KeyEvent keyEvent, Consumer<MoveEvent> moveDownHandler, Consumer<ViewData> refreshHandler) {
+    public void handleMovementKeys(KeyEvent keyEvent, Consumer<MoveEvent> moveDownHandler, Consumer<ViewData> refreshHandler,
+                                   Consumer<MoveEvent> hardDropHandler) {
 
         switch (keyEvent.getCode()) {
             case LEFT, A ->
@@ -52,6 +53,7 @@ public class KeyInputHandler {
                     moveDownHandler.accept(
                             new MoveEvent(EventType.DOWN, EventSource.USER)
                     );
+            case SPACE -> hardDropHandler.accept(new MoveEvent(EventType.SLAM, EventSource.USER));
         }
     }
 }

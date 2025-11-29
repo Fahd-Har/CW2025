@@ -63,7 +63,7 @@ public class GuiController implements Initializable {
 
     private void handleAllKeys(KeyEvent keyEvent) {
         if (isPause.getValue() == Boolean.FALSE && isGameOver.getValue() == Boolean.FALSE) {
-            keyHandler.handleMovementKeys(keyEvent, this::moveDown, this::refreshBrick);
+            keyHandler.handleMovementKeys(keyEvent, this::moveDown, this::refreshBrick, this::hardDrop);
         }
         keyHandler.handleGlobalKeys(keyEvent);
     }
@@ -118,5 +118,25 @@ public class GuiController implements Initializable {
 
     private void pauseGame(ActionEvent actionEvent) {
         gameFlow.pauseGame(null);
+    }
+
+    public void hardDrop(MoveEvent event) {
+        if (isPause.getValue() == Boolean.FALSE) {
+            MovingDownData movingDownData;
+            ViewData previousState;
+            ViewData currentState = null;
+
+            do {
+                previousState = currentState;
+                movingDownData = eventListener.onDownEvent(event);
+                currentState = movingDownData.getViewData();
+            } while (previousState == null || currentState.getyPosition() > previousState.getyPosition());
+
+            if (movingDownData.getClearRow() != null && movingDownData.getClearRow().getLinesRemoved() > 0) {
+                notification.showScore(movingDownData.getClearRow().getScoreBonus());
+            }
+            refreshBrick(movingDownData.getViewData());
+        }
+        gamePanel.requestFocus();
     }
 }

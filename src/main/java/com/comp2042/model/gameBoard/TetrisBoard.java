@@ -34,7 +34,6 @@ public class TetrisBoard implements Board {
         return brickController.moveDown();
     }
 
-
     @Override
     public boolean moveBrickLeft() {
         return brickController.moveLeft();
