@@ -67,15 +67,22 @@
     8. Extracted key input logic into a new class, `KeyInputHandler()`.
     9. Created a new method called `hardDrop()`, to drop the brick instantly.
     10. Calls method from `GameRenderer` class to generate next brick (the brick after the current falling brick) into the next brick panel.
+    11. Added a shadow panel code into the FXML.
 
 
 - **GameController.java**
     1. Delegate post landing tasks into a new method called `handleBrickLandingTasks()` making the original method,
     `onDownEvent()` clearer and focused only on the move flow.
 
+
 - **Main.java**
     1. Class now loads a different scene, a main menu screen. This scene does not involve any Gui or game control logic,
     hence the lines involve with this logic was removed. Window screen has now increased to 1280x800 pixels size.
+
+
+- **ViewData.java**
+    1. Create new getters for shadow position of the brick so that alterations to these getters are independent and does
+    not affect the positions for actual brick.
   
 
 ## Unexpected Problems

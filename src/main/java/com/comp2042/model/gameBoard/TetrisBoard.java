@@ -75,7 +75,12 @@ public class TetrisBoard implements Board {
         // current brick X position
         // current brick Y position
         // next brick preview shape
-        return new ViewData(brickController.getCurrentShape(), brickController.getX(), brickController.getY(), brickGenerator.getNextBrick().getShapeMatrix().get(0));
+        return new ViewData(brickController.getCurrentShape(),
+                brickController.getX(),
+                brickController.getY(),
+                brickGenerator.getNextBrick().getShapeMatrix().get(0),
+                brickController.getShadowPosition().x,
+                brickController.getShadowPosition().y);
     }
 
     @Override

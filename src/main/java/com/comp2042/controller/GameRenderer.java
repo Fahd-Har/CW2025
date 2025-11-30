@@ -15,13 +15,15 @@ public class GameRenderer {
 
     private Rectangle[][] displayMatrix;
     private Rectangle[][] rectangles;
+    private Rectangle[][] shadowRectangles;
 
-    private final GridPane brickPanel, gamePanel, nextBrick;
+    private final GridPane brickPanel, gamePanel, nextBrick, shadowPanel;
 
-    public GameRenderer(GridPane brickPanel, GridPane gamePanel, GridPane nextBrick) {
+    public GameRenderer(GridPane brickPanel, GridPane gamePanel, GridPane nextBrick, GridPane shadowPanel) {
         this.brickPanel = brickPanel;
         this.gamePanel = gamePanel;
         this.nextBrick = nextBrick;
+        this.shadowPanel = shadowPanel;
     }
 
     public void initializeGameBoard(int[][] boardMatrix) {
@@ -48,11 +50,27 @@ public class GameRenderer {
         }
     }
 
+    public void initializeShadowBrick(ViewData brick) {
+        shadowRectangles = new Rectangle[brick.getBrickData().length][brick.getBrickData()[0].length];
+        for (int i = 0; i < brick.getBrickData().length; i++) {
+            for (int j = 0; j < brick.getBrickData()[i].length; j++) {
+                Rectangle rectangle = new Rectangle(BRICK_SIZE, BRICK_SIZE);
+                // Initialize with shadow style
+                rectangle.setFill(getShadowColor(brick.getBrickData()[i][j]));
+                rectangle.setOpacity(0.4); // Set opacity for the ghost effect
+                shadowRectangles[i][j] = rectangle;
+                shadowPanel.add(rectangle, j, i);
+            }
+        }
+    }
+
     public void refreshBrick(ViewData brick) {
         updateBrickPosition(brick);
+        updateShadowBrickPosition(brick);
         for (int i = 0; i < brick.getBrickData().length; i++) {
             for (int j = 0; j < brick.getBrickData()[i].length; j++) {
                 setRectangleData(brick.getBrickData()[i][j], rectangles[i][j]);
+                setShadowRectangleData(brick.getBrickData()[i][j], shadowRectangles[i][j]);
             }
         }
     }
@@ -68,6 +86,11 @@ public class GameRenderer {
     public void updateBrickPosition(ViewData brick) {
         brickPanel.setLayoutX(gamePanel.getLayoutX() + SET_GAMEPANEL_LAYOUT_X + brick.getxPosition() * brickPanel.getVgap() + brick.getxPosition() * BRICK_SIZE);
         brickPanel.setLayoutY(MAGIC_NUM + gamePanel.getLayoutY() + SET_GAMEPANEL_LAYOUT_Y + brick.getyPosition() * brickPanel.getHgap() + brick.getyPosition() * BRICK_SIZE);
+    }
+
+    public void updateShadowBrickPosition(ViewData brick) {
+        shadowPanel.setLayoutX(gamePanel.getLayoutX() + SET_GAMEPANEL_LAYOUT_X + brick.getShadowXPosition() * shadowPanel.getVgap() + brick.getShadowXPosition() * BRICK_SIZE);
+        shadowPanel.setLayoutY(MAGIC_NUM + gamePanel.getLayoutY() + SET_GAMEPANEL_LAYOUT_Y + brick.getShadowYPosition() * shadowPanel.getHgap() + brick.getShadowYPosition() * BRICK_SIZE);
     }
 
     public void generateNextBrickInPreviewPanel(int[][] nextBrickData) {
@@ -89,6 +112,13 @@ public class GameRenderer {
         rectangle.setArcWidth(9);
     }
 
+    private void setShadowRectangleData(int colorIndex, Rectangle rectangle) {
+        rectangle.setFill(getShadowColor(colorIndex));
+        rectangle.setArcHeight(9);
+        rectangle.setArcWidth(9);
+        rectangle.setOpacity(0.4);
+    }
+
     private Paint getFillColor(int i) {
         return switch (i) {
             case 0 -> Color.TRANSPARENT;
@@ -101,5 +131,14 @@ public class GameRenderer {
             case 7 -> Color.BURLYWOOD;
             default -> Color.WHITE;
         };
+    }
+
+    private Paint getShadowColor(int i) {
+        // Case 0 (Empty cell) should still be transparent
+        if (i == 0) {
+            return Color.TRANSPARENT;
+        }
+
+        return new Color(0.4,0.4,0.4,1);
     }
 }

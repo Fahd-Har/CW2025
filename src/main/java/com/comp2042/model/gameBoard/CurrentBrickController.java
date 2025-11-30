@@ -79,4 +79,14 @@ public class CurrentBrickController {
         return brickRotator.getCurrentShape();
     }
 
+    public Point getShadowPosition() {
+        Point shadowOffset = new Point(currentOffset);
+
+        // Simulate falling until moving one step down *further* causes a conflict.
+        while (checkConflict(brickRotator.getCurrentShape(), new Point(shadowOffset.x, shadowOffset.y + 1))) {
+            shadowOffset.translate(0, 1);
+        }
+        return shadowOffset;
+    }
+
 }
