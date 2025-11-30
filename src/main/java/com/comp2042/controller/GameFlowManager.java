@@ -1,6 +1,7 @@
 package com.comp2042.controller;
 
 import com.comp2042.events.InputEventListener;
+import com.comp2042.model.logic.GameTime;
 import com.comp2042.view.scenes.GameOverPanel;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -16,6 +17,7 @@ public class GameFlowManager {
     private final GridPane gamePanel;
     private final GameOverPanel gameOverPanel;
     private InputEventListener eventListener;
+    private GameTime gameTime;
 
     private final BooleanProperty isPause = new SimpleBooleanProperty();
     private final BooleanProperty isGameOver = new SimpleBooleanProperty();
@@ -24,6 +26,10 @@ public class GameFlowManager {
         this.gamePanel = gamePanel;
         this.gameOverPanel = gameOverPanel;
         this.eventListener = eventListener;
+    }
+
+    public void setGameTimer(GameTime gameTime) {
+        this.gameTime = gameTime;
     }
 
     public void setEventListener(InputEventListener eventListener) {
@@ -39,10 +45,16 @@ public class GameFlowManager {
 
     public void start() {
         timeline.play();
+        if (gameTime != null) {
+            gameTime.start();
+        }
     }
 
     private void stop() {
         timeline.stop();
+        if (gameTime != null) {
+            gameTime.stop();
+        }
     }
 
     public void gameOver() {

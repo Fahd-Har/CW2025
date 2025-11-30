@@ -19,8 +19,11 @@ public class GameController implements InputEventListener {
         viewGuiController = c;
         board.createNewBrick();
         viewGuiController.setEventListener(this);
+        viewGuiController.setGameTimer(board.getGameTime());
         viewGuiController.initializeGameView(board.getBoardMatrix(), board.getViewData());
         viewGuiController.bindScore(board.getScore().scoreProperty());
+        viewGuiController.bindTimer(board.getGameTime().timeStringProperty());
+        board.newGame();
     }
 
     @Override
@@ -50,6 +53,7 @@ public class GameController implements InputEventListener {
         }
         // if there exists a clash with initial spawn of brick, implement game over
         if (board.createNewBrick()) {
+            board.getGameTime().stop();
             viewGuiController.gameOver();
         }
 

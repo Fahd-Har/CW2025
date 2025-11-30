@@ -3,10 +3,7 @@ package com.comp2042.model.gameBoard;
 import com.comp2042.model.brickShapeGenerator.Brick;
 import com.comp2042.model.brickShapeGenerator.BrickGenerator;
 import com.comp2042.model.brickShapeGenerator.RandomBrickGenerator;
-import com.comp2042.model.logic.BrickRotator;
-import com.comp2042.model.logic.ClearFullRow;
-import com.comp2042.model.logic.MatrixOperations;
-import com.comp2042.model.logic.Score;
+import com.comp2042.model.logic.*;
 import com.comp2042.view.data.ViewData;
 
 public class TetrisBoard implements Board {
@@ -18,6 +15,7 @@ public class TetrisBoard implements Board {
     private int[][] currentGameMatrix;
     private final Score score;
     private final CurrentBrickController brickController;
+    private final GameTime gameTime;
 
     public TetrisBoard(int width, int height) {
         this.width = width;
@@ -27,6 +25,7 @@ public class TetrisBoard implements Board {
         brickRotator = new BrickRotator();
         score = new Score();
         this.brickController = new CurrentBrickController(brickRotator, this);
+        gameTime = new GameTime();
     }
 
     @Override
@@ -106,11 +105,18 @@ public class TetrisBoard implements Board {
     }
 
     @Override
+    public GameTime getGameTime() {
+        return gameTime;
+    }
+
+    @Override
     public void newGame() {
         // Reset the game board by creating a new empty matrix
         currentGameMatrix = new int[height][width];
         // Reset the player's score
         score.reset();
+        gameTime.reset();
+        gameTime.start();
         // Create and spawn a new brick to start the game
         createNewBrick();
     }

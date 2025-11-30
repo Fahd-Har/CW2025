@@ -10,11 +10,18 @@
       xmlns:fx="http://javafx.com/fxml">
     <GridPane fx:id="shadowPanel" vgap="1" hgap="1"/>
     <GridPane fx:id="brickPanel" vgap="1" hgap="1"/>
-    <BorderPane styleClass="gameBoard" fx:id="gameBoard" layoutX="525" layoutY="147">
+    <BorderPane styleClass="gameBoard" layoutX="525" layoutY="147">
         <center>
             <GridPane fx:id="gamePanel" hgap="1" vgap="1" layoutY="30" layoutX="40"/>
         </center>
     </BorderPane>
+
+    <VBox alignment="CENTER" layoutX="240" layoutY="167">
+        <VBox alignment="CENTER">
+            <Label styleClass="scoreClass" text="Time:" />
+            <Text fx:id="gameTime" styleClass="scoreClass" text="00:00" />
+        </VBox>
+    </VBox>
 
     <VBox alignment="CENTER" layoutX="810" layoutY="167">
         <VBox alignment="CENTER">

@@ -2,10 +2,12 @@ package com.comp2042.controller;
 
 import com.comp2042.controller.keyInput.KeyInputHandler;
 import com.comp2042.events.*;
+import com.comp2042.model.logic.GameTime;
 import com.comp2042.model.logic.MovingDownData;
 import com.comp2042.view.data.ViewData;
 import com.comp2042.view.scenes.GameOverPanel;
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -28,6 +30,7 @@ public class GuiController implements Initializable {
     @FXML private Text scoreValue;
     @FXML private GridPane nextBrick;
     @FXML private GridPane shadowPanel;
+    @FXML private Text gameTime;
 
     private InputEventListener eventListener;
     private GameRenderer gameRenderer;
@@ -101,8 +104,18 @@ public class GuiController implements Initializable {
         gameFlow.setEventListener(eventListener);
     }
 
+    // New setter to pass GameTimer to GameFlowManager
+    public void setGameTimer(GameTime gameTime) {
+        gameFlow.setGameTimer(gameTime);
+    }
+
     public void bindScore(IntegerProperty integerProperty) {
         scoreValue.textProperty().bind(integerProperty.asString());
+    }
+
+    // New method to bind the timer property
+    public void bindTimer(StringProperty stringProperty) {
+        gameTime.textProperty().bind(stringProperty);
     }
 
     public void gameOver() {

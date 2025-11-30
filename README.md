@@ -32,10 +32,13 @@
     - Takes up the logic for key inputs and their respective actions from GuiController using consumer.
     - This helps support Single Responsibility Principle (SRP) by separating responsibilities.
 
-- **MainMenuScreen** Path: src/main/java/com/comp2042/view/scenes/mainMenuScreen.java
+- **MainMenuScreen** Path: src/main/java/com/comp2042/view/scenes/MainMenuScreen.java
     - Links the game's UI and logic by retrieving the GuiController from the FXML and using it to initialize the GameController before displaying the game scene.
     - Maintains a clear separation between the welcome screen and the game itself.
 
+- **GameTime** Path: src/main/java/com/comp2042/model/logic/GameTime.java
+    - Initialize game clock as an enhancement for gaming experience.
+    - Clock timer plays as long the game runs and stops when player pauses or game over.
 
 ## Modified Java Classes
 ### File Refactoring
