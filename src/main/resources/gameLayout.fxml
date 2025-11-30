@@ -16,7 +16,7 @@
         </center>
     </BorderPane>
 
-    <VBox alignment="CENTER" layoutX="240" layoutY="167">
+    <VBox alignment="CENTER" layoutX="380" layoutY="167">
         <VBox alignment="CENTER">
             <Label styleClass="scoreClass" text="Time:" />
             <Text fx:id="gameTime" styleClass="scoreClass" text="00:00" />
