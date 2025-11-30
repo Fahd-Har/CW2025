@@ -67,12 +67,7 @@ public class GuiController implements Initializable {
 
 
     public void initializeGameView(int[][] boardMatrix, ViewData brick) {
-        gameRenderer.initializeGameBoard(boardMatrix);
-        gameRenderer.initializeBrick(brick);
-        gameRenderer.initializeShadowBrick(brick);
-        gameRenderer.updateBrickPosition(brick);
-        gameRenderer.updateShadowBrickPosition(brick);
-        gameRenderer.generateNextBrickInPreviewPanel(brick.getNextBrickData());
+        gameRenderer.initializeRenderingState(boardMatrix, brick);
         
         gameFlow.createTimeline(() -> moveDown(new MoveEvent(EventType.DOWN, EventSource.THREAD)));
         gameFlow.start();

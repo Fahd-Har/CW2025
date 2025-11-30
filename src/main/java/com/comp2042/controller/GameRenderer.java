@@ -26,7 +26,16 @@ public class GameRenderer {
         this.shadowPanel = shadowPanel;
     }
 
-    public void initializeGameBoard(int[][] boardMatrix) {
+    public void initializeRenderingState(int[][] boardMatrix, ViewData brick) {
+        initializeGameBoard(boardMatrix);
+        initializeBrick(brick);
+        initializeShadowBrick(brick);
+        updateBrickPosition(brick);
+        updateShadowBrickPosition(brick);
+        generateNextBrickInPreviewPanel(brick.getNextBrickData());
+    }
+
+    private void initializeGameBoard(int[][] boardMatrix) {
         displayMatrix = new Rectangle[boardMatrix.length][boardMatrix[0].length];
         for (int i = 2; i < boardMatrix.length; i++) {
             for (int j = 0; j < boardMatrix[i].length; j++) {
@@ -38,7 +47,7 @@ public class GameRenderer {
         }
     }
 
-    public void initializeBrick(ViewData brick) {
+    private void initializeBrick(ViewData brick) {
         rectangles = new Rectangle[brick.getBrickData().length][brick.getBrickData()[0].length];
         for (int i = 0; i < brick.getBrickData().length; i++) {
             for (int j = 0; j < brick.getBrickData()[i].length; j++) {
@@ -50,7 +59,7 @@ public class GameRenderer {
         }
     }
 
-    public void initializeShadowBrick(ViewData brick) {
+    private void initializeShadowBrick(ViewData brick) {
         shadowRectangles = new Rectangle[brick.getBrickData().length][brick.getBrickData()[0].length];
         for (int i = 0; i < brick.getBrickData().length; i++) {
             for (int j = 0; j < brick.getBrickData()[i].length; j++) {
@@ -83,12 +92,12 @@ public class GameRenderer {
         }
     }
 
-    public void updateBrickPosition(ViewData brick) {
+    private void updateBrickPosition(ViewData brick) {
         brickPanel.setLayoutX(gamePanel.getLayoutX() + SET_GAMEPANEL_LAYOUT_X + brick.getxPosition() * brickPanel.getVgap() + brick.getxPosition() * BRICK_SIZE);
         brickPanel.setLayoutY(MAGIC_NUM + gamePanel.getLayoutY() + SET_GAMEPANEL_LAYOUT_Y + brick.getyPosition() * brickPanel.getHgap() + brick.getyPosition() * BRICK_SIZE);
     }
 
-    public void updateShadowBrickPosition(ViewData brick) {
+    private void updateShadowBrickPosition(ViewData brick) {
         shadowPanel.setLayoutX(gamePanel.getLayoutX() + SET_GAMEPANEL_LAYOUT_X + brick.getShadowXPosition() * shadowPanel.getVgap() + brick.getShadowXPosition() * BRICK_SIZE);
         shadowPanel.setLayoutY(MAGIC_NUM + gamePanel.getLayoutY() + SET_GAMEPANEL_LAYOUT_Y + brick.getShadowYPosition() * shadowPanel.getHgap() + brick.getShadowYPosition() * BRICK_SIZE);
     }
