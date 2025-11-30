@@ -74,6 +74,8 @@
     9. Created a new method called `hardDrop()`, to drop the brick instantly.
     10. Calls method from `GameRenderer` class to generate next brick (the brick after the current falling brick) into the next brick panel.
     11. Added a shadow panel code into the FXML.
+    12. The method `handleMovementKeys()` was renamed to `handleBrickControlKeys()` in both KeyInputHandler.java and GuiController.java
+    for improved clarity regarding its responsibility over all in-game brick actions.
 
 
 - **GameController.java**

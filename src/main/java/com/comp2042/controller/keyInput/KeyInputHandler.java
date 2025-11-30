@@ -34,8 +34,8 @@ public class KeyInputHandler {
         }
     }
 
-    public void handleMovementKeys(KeyEvent keyEvent, Consumer<MoveEvent> moveDownHandler, Consumer<ViewData> refreshHandler,
-                                   Consumer<MoveEvent> hardDropHandler) {
+    public void handleBrickControlKeys(KeyEvent keyEvent, Consumer<MoveEvent> moveDownHandler, Consumer<ViewData> refreshHandler,
+                                       Consumer<MoveEvent> hardDropHandler) {
 
         switch (keyEvent.getCode()) {
             case LEFT, A ->

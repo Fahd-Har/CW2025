@@ -64,7 +64,7 @@ public class GuiController implements Initializable {
 
     private void handleAllKeys(KeyEvent keyEvent) {
         if (gameFlow.isPause().getValue() == Boolean.FALSE && gameFlow.isGameOver().getValue() == Boolean.FALSE) {
-            keyHandler.handleMovementKeys(keyEvent, this::moveDown, this::refreshBrick, this::hardDrop);
+            keyHandler.handleBrickControlKeys(keyEvent, this::moveDown, this::refreshBrick, this::hardDrop);
         }
         keyHandler.handleGlobalKeys(keyEvent);
     }
