@@ -16,8 +16,18 @@
     </BorderPane>
 
     <VBox alignment="CENTER" layoutX="810" layoutY="167">
-        <Label styleClass="scoreClass" text="Score:" />
-        <Text fx:id="scoreValue" styleClass="scoreClass" text="Text" />
+        <VBox alignment="CENTER">
+            <Label styleClass="scoreClass" text="Score:" />
+            <Text fx:id="scoreValue" styleClass="scoreClass" text="Text" />
+        </VBox>
+        <VBox alignment="CENTER">
+            <Label styleClass="nextBrickLabel" text="Next brick" />
+            <BorderPane maxWidth="100" prefHeight="70" prefWidth="100" styleClass="nextBrick">
+                <center>
+                    <GridPane fx:id="nextBrick" alignment="CENTER" hgap="1" vgap="1" />
+                </center>
+            </BorderPane>
+        </VBox>
     </VBox>
 
     <Group fx:id="groupNotification" layoutX="539" layoutY="350">
