@@ -25,7 +25,7 @@ public class TetrisBoard implements Board {
         brickGenerator = new RandomBrickGenerator();
         brickRotator = new BrickRotator();
         score = new Score();
-        this.brickController = new CurrentBrickController(brickRotator, this);
+        this.brickController = new CurrentBrickController(brickRotator, this, brickGenerator);
         gameTime = new GameTime();
         this.countRows = new CountClearedRows();
     }
@@ -51,9 +51,16 @@ public class TetrisBoard implements Board {
     }
 
     @Override
+    public boolean holdBrick() { // ADDED Implementation
+        return brickController.attemptHold();
+    }
+
+    @Override
     public boolean createNewBrick() {
         // randomly generate one of the 7 brick shapes
         Brick currentBrick = brickGenerator.getBrick();
+        //Reset hold-swap state for the new brick/turn
+        brickController.setHasSwapped(false);
         // set the newly generated brick as the active brick for rotation and movement
         brickRotator.setBrick(currentBrick);
         // manually set the starting position of the new brick
@@ -81,7 +88,8 @@ public class TetrisBoard implements Board {
                 brickController.getY(),
                 brickGenerator.getNextBrick().getShapeMatrix().get(0),
                 brickController.getShadowPosition().x,
-                brickController.getShadowPosition().y);
+                brickController.getShadowPosition().y,
+                brickController.getHeldBrickShape());
     }
 
     @Override
@@ -125,6 +133,7 @@ public class TetrisBoard implements Board {
         score.reset();
         gameTime.reset();
         countRows.reset();
+        brickController.setHasSwapped(false);
         gameTime.start();
         // Create and spawn a new brick to start the game
         createNewBrick();

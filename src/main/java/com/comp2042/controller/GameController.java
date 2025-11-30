@@ -17,14 +17,13 @@ public class GameController implements InputEventListener {
 
     public GameController(GuiController c) {
         viewGuiController = c;
-        board.createNewBrick();
+        board.newGame();
         viewGuiController.setEventListener(this);
         viewGuiController.setGameTimer(board.getGameTime());
         viewGuiController.initializeGameView(board.getBoardMatrix(), board.getViewData());
         viewGuiController.bindScore(board.getScore().scoreProperty());
         viewGuiController.bindTimer(board.getGameTime().timeStringProperty());
         viewGuiController.bindLines(board.getCountRows().countRowsProperty());
-        board.newGame();
     }
 
     @Override
@@ -77,6 +76,12 @@ public class GameController implements InputEventListener {
     @Override
     public ViewData onRotateEvent(MoveEvent event) {
         board.rotateBrickLeft();
+        return board.getViewData();
+    }
+
+    @Override
+    public ViewData onHoldEvent(MoveEvent event) { // ADDED Implementation
+        board.holdBrick();
         return board.getViewData();
     }
 

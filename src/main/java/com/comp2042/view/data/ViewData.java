@@ -10,14 +10,16 @@ public final class ViewData {
     private final int[][] nextBrickData;
     private final int shadowXPosition;
     private final int shadowYPosition;
+    private final int[][] heldBrickData;
 
-    public ViewData(int[][] brickData, int xPosition, int yPosition, int[][] nextBrickData, int shadowXPosition, int shadowYPosition) {
+    public ViewData(int[][] brickData, int xPosition, int yPosition, int[][] nextBrickData, int shadowXPosition, int shadowYPosition, int[][] heldBrickData) {
         this.brickData = brickData;
         this.xPosition = xPosition;
         this.yPosition = yPosition;
         this.nextBrickData = nextBrickData;
         this.shadowXPosition = shadowXPosition;
         this.shadowYPosition = shadowYPosition;
+        this.heldBrickData = heldBrickData;
     }
 
     public int[][] getBrickData() {
@@ -42,5 +44,9 @@ public final class ViewData {
 
     public int getShadowYPosition() {
         return shadowYPosition;
+    }
+
+    public int[][] getHeldBrickData() { // ADDED
+        return heldBrickData != null ? MatrixOperations.copy(heldBrickData) : null;
     }
 }

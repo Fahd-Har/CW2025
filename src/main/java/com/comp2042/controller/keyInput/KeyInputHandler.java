@@ -55,6 +55,10 @@ public class KeyInputHandler {
                             new MoveEvent(EventType.DOWN, EventSource.USER)
                     );
             case SPACE -> hardDropHandler.accept(new MoveEvent(EventType.SLAM, EventSource.USER));
+            case C ->
+                    refreshHandler.accept(
+                            eventListener.onHoldEvent(new MoveEvent(EventType.HOLD, EventSource.USER))
+                    );
         }
     }
 }

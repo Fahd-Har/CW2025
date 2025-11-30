@@ -17,6 +17,10 @@ public class BrickRotator {
         return brick.getShapeMatrix().get(currentShape);
     }
 
+    public Brick getBrick() {
+        return brick;
+    }
+
     public void setCurrentShape(int currentShape) {
         this.currentShape = currentShape;
     }
