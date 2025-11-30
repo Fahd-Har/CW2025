@@ -31,6 +31,7 @@ public class GuiController implements Initializable {
     @FXML private GridPane nextBrick;
     @FXML private GridPane shadowPanel;
     @FXML private Text gameTime;
+    @FXML private Text countRowsValue;
 
     private InputEventListener eventListener;
     private GameRenderer gameRenderer;
@@ -67,7 +68,6 @@ public class GuiController implements Initializable {
         }
         keyHandler.handleGlobalKeys(keyEvent);
     }
-
 
     public void initializeGameView(int[][] boardMatrix, ViewData brick) {
         gameRenderer.initializeRenderingState(boardMatrix, brick);
@@ -116,6 +116,11 @@ public class GuiController implements Initializable {
     // New method to bind the timer property
     public void bindTimer(StringProperty stringProperty) {
         gameTime.textProperty().bind(stringProperty);
+    }
+
+    // New method to bind the counted lines properly
+    public void bindLines(IntegerProperty integerProperty) {
+        countRowsValue.textProperty().bind(integerProperty.asString("%03d"));
     }
 
     public void gameOver() {

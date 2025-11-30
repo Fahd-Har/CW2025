@@ -23,6 +23,7 @@ public class GameController implements InputEventListener {
         viewGuiController.initializeGameView(board.getBoardMatrix(), board.getViewData());
         viewGuiController.bindScore(board.getScore().scoreProperty());
         viewGuiController.bindTimer(board.getGameTime().timeStringProperty());
+        viewGuiController.bindLines(board.getCountRows().countRowsProperty());
         board.newGame();
     }
 

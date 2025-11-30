@@ -16,6 +16,7 @@ public class TetrisBoard implements Board {
     private final Score score;
     private final CurrentBrickController brickController;
     private final GameTime gameTime;
+    private final CountClearedRows countRows;
 
     public TetrisBoard(int width, int height) {
         this.width = width;
@@ -26,6 +27,7 @@ public class TetrisBoard implements Board {
         score = new Score();
         this.brickController = new CurrentBrickController(brickRotator, this);
         gameTime = new GameTime();
+        this.countRows = new CountClearedRows();
     }
 
     @Override
@@ -94,6 +96,7 @@ public class TetrisBoard implements Board {
         ClearFullRow clearFullRow = MatrixOperations.checkRemoving(currentGameMatrix);
         // Update the game matrix with the new matrix after clearing rows
         currentGameMatrix = clearFullRow.getNewMatrix();
+        countRows.add(clearFullRow.getLinesRemoved());
         // Return information about the cleared rows
         return clearFullRow;
     }
@@ -110,12 +113,18 @@ public class TetrisBoard implements Board {
     }
 
     @Override
+    public CountClearedRows getCountRows() {
+        return countRows;
+    }
+
+    @Override
     public void newGame() {
         // Reset the game board by creating a new empty matrix
         currentGameMatrix = new int[height][width];
         // Reset the player's score
         score.reset();
         gameTime.reset();
+        countRows.reset();
         gameTime.start();
         // Create and spawn a new brick to start the game
         createNewBrick();

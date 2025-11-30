@@ -16,6 +16,11 @@
         </center>
     </BorderPane>
 
+    <VBox alignment="CENTER" layoutX="380" layoutY="300">
+        <Label styleClass="scoreClass" text="Lines:~" />
+        <Text fx:id="countRowsValue" styleClass="scoreClass" text="000" />
+    </VBox>
+
     <VBox alignment="CENTER" layoutX="380" layoutY="167">
         <VBox alignment="CENTER">
             <Label styleClass="scoreClass" text="Time:" />

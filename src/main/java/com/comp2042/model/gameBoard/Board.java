@@ -1,6 +1,7 @@
 package com.comp2042.model.gameBoard;
 
 import com.comp2042.model.logic.ClearFullRow;
+import com.comp2042.model.logic.CountClearedRows;
 import com.comp2042.model.logic.GameTime;
 import com.comp2042.model.logic.Score;
 import com.comp2042.view.data.ViewData;
@@ -28,6 +29,8 @@ public interface Board {
     Score getScore();
 
     GameTime getGameTime();
+
+    CountClearedRows getCountRows();
 
     void newGame();
 }

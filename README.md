@@ -40,6 +40,9 @@
     - Initialize game clock as an enhancement for gaming experience.
     - Clock timer plays as long the game runs and stops when player pauses or game over.
 
+- **CountClearedRows** Path: src/main/java/com/comp2042/model/logic/CountClearedRows.java
+    - Count the number of lines removed throughout the game as an enhancement for gaming experience.
+
 ## Modified Java Classes
 ### File Refactoring
 
