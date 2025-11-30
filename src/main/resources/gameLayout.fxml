@@ -6,34 +6,45 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Text?>
 <?import java.net.URL?>
+
 <Pane fx:controller="com.comp2042.controller.GuiController"
       xmlns:fx="http://javafx.com/fxml">
+
     <GridPane fx:id="shadowPanel" vgap="1" hgap="1"/>
     <GridPane fx:id="brickPanel" vgap="1" hgap="1"/>
+
+    <!-- GAME BOARD -->
     <BorderPane styleClass="gameBoard" layoutX="525" layoutY="147">
         <center>
             <GridPane fx:id="gamePanel" hgap="1" vgap="1" layoutY="30" layoutX="40"/>
         </center>
     </BorderPane>
 
-    <VBox alignment="CENTER" layoutX="380" layoutY="300">
-        <Label styleClass="scoreClass" text="Lines:~" />
-        <Text fx:id="countRowsValue" styleClass="scoreClass" text="000" />
-    </VBox>
-
-    <VBox alignment="CENTER" layoutX="380" layoutY="167">
-        <VBox alignment="CENTER">
-            <Label styleClass="scoreClass" text="Time:" />
+    <!-- TIME PANEL -->
+    <VBox alignment="CENTER" layoutX="320" layoutY="150">
+        <VBox alignment="CENTER" prefWidth="150" prefHeight="110" styleClass="timePanel">
+            <Label styleClass="scoreClass" text="Time:~" />
             <Text fx:id="gameTime" styleClass="scoreClass" text="00:00" />
         </VBox>
     </VBox>
 
-    <VBox alignment="CENTER" layoutX="810" layoutY="167">
-        <VBox alignment="CENTER">
-            <Label styleClass="scoreClass" text="Score:" />
-            <Text fx:id="scoreValue" styleClass="scoreClass" text="Text" />
+    <!-- LINES PANEL -->
+    <VBox alignment="CENTER" layoutX="320" layoutY="300">
+        <VBox alignment="CENTER" prefWidth="150" prefHeight="110" styleClass="rowPanel">
+            <Label styleClass="scoreClass" text="Lines:~" />
+            <Text fx:id="countRowsValue" styleClass="scoreClass" text="000" />
         </VBox>
-        <VBox alignment="CENTER">
+    </VBox>
+
+    <!-- SCORE PANEL -->
+    <VBox alignment="CENTER" layoutX="820" layoutY="150">
+        <VBox alignment="CENTER" prefWidth="150" prefHeight="110" styleClass="scorePanel">
+            <Label styleClass="scoreClass" text="Score:" />
+            <Text fx:id="scoreValue" styleClass="scoreClass" text="0" />
+        </VBox>
+
+        <!-- NEXT BRICK PANEL -->
+        <VBox alignment="CENTER" layoutY="20">
             <Label styleClass="nextBrickLabel" text="Next brick" />
             <BorderPane maxWidth="100" prefHeight="70" prefWidth="100" styleClass="nextBrick">
                 <center>
@@ -43,12 +54,15 @@
         </VBox>
     </VBox>
 
+    <!-- GAME OVER PANEL -->
     <Group fx:id="groupNotification" layoutX="539" layoutY="350">
         <VBox alignment="CENTER">
             <GameOverPanel fx:id="gameOverPanel"/>
         </VBox>
     </Group>
+
     <stylesheets>
         <URL value="@window_style.css"/>
     </stylesheets>
+
 </Pane>

@@ -17,7 +17,7 @@
 .nextBrickLabel {
     -fx-font-family: "Let's go Digital";
     -fx-padding: 20px 0 0 0;
-    -fx-font-size: 16px;
+    -fx-font-size: 20px;
     -fx-text-fill: yellow;
 }
 
@@ -69,4 +69,55 @@
     -fx-font-size: 38;
     -fx-fill: yellow;
     -fx-text-fill: yellow;
+}
+
+.timePanel {
+    -fx-padding: 12;
+    -fx-border-color: #00eaff;
+    -fx-border-width: 3;
+    -fx-border-radius: 12;
+    -fx-background-radius: 12;
+    -fx-background-color: rgba(0, 255, 255, 0.08);
+
+    -fx-effect: dropshadow(gaussian, rgba(0,234,255,0.6), 15, 0.5, 0, 0);
+}
+
+.scorePanel {
+    -fx-padding: 12;
+    -fx-border-color: #ffe000;
+    -fx-border-width: 4;
+    -fx-border-radius: 14;
+    -fx-background-radius: 14;
+    -fx-background-color: rgba(255, 224, 0, 0.08);
+
+    -fx-effect: dropshadow(gaussian, rgba(255,224,0,0.7), 18, 0.6, 0, 0);
+}
+
+
+.rowPanel {
+    -fx-padding: 15;
+    -fx-background-color: transparent;
+    -fx-border-insets: 0;
+
+    /* Bigger brighter corners */
+    -fx-background-image:
+        linear-gradient(to right, #00ffea 5px, transparent 5px),
+        linear-gradient(to bottom, #00ffea 5px, transparent 5px),
+        linear-gradient(to left, #00ffea 5px, transparent 5px),
+        linear-gradient(to top, #00ffea 5px, transparent 5px);
+
+    -fx-background-repeat: no-repeat;
+    -fx-background-position:
+        top left,
+        top left,
+        bottom right,
+        bottom right;
+
+    -fx-background-size:
+        30px 30px,
+        30px 30px,
+        30px 30px,
+        30px 30px;
+
+    -fx-effect: dropshadow(gaussian, rgba(0,255,234,0.55), 10, 0.4, 0, 0);
 }
