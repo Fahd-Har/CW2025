@@ -16,11 +16,12 @@ public class GameRenderer {
     private Rectangle[][] displayMatrix;
     private Rectangle[][] rectangles;
 
-    private final GridPane brickPanel, gamePanel;
+    private final GridPane brickPanel, gamePanel, nextBrick;
 
-    public GameRenderer(GridPane brickPanel, GridPane gamePanel) {
+    public GameRenderer(GridPane brickPanel, GridPane gamePanel, GridPane nextBrick) {
         this.brickPanel = brickPanel;
         this.gamePanel = gamePanel;
+        this.nextBrick = nextBrick;
     }
 
     public void initializeGameBoard(int[][] boardMatrix) {
@@ -64,15 +65,28 @@ public class GameRenderer {
         }
     }
 
+    public void updateBrickPosition(ViewData brick) {
+        brickPanel.setLayoutX(gamePanel.getLayoutX() + SET_GAMEPANEL_LAYOUT_X + brick.getxPosition() * brickPanel.getVgap() + brick.getxPosition() * BRICK_SIZE);
+        brickPanel.setLayoutY(MAGIC_NUM + gamePanel.getLayoutY() + SET_GAMEPANEL_LAYOUT_Y + brick.getyPosition() * brickPanel.getHgap() + brick.getyPosition() * BRICK_SIZE);
+    }
+
+    public void generateNextBrickInPreviewPanel(int[][] nextBrickData) {
+        nextBrick.getChildren().clear();
+        for (int i = 0; i < nextBrickData.length; i++) {
+            for (int j = 0; j < nextBrickData[i].length; j++) {
+                Rectangle rectangle = new Rectangle(BRICK_SIZE, BRICK_SIZE);
+                setRectangleData(nextBrickData[i][j], rectangle);
+                if (nextBrickData[i][j] != 0) {
+                    nextBrick.add(rectangle, j, i);
+                }
+            }
+        }
+    }
+
     private void setRectangleData(int color, Rectangle rectangle) {
         rectangle.setFill(getFillColor(color));
         rectangle.setArcHeight(9);
         rectangle.setArcWidth(9);
-    }
-
-    public void updateBrickPosition(ViewData brick) {
-        brickPanel.setLayoutX(gamePanel.getLayoutX() + SET_GAMEPANEL_LAYOUT_X + brick.getxPosition() * brickPanel.getVgap() + brick.getxPosition() * BRICK_SIZE);
-        brickPanel.setLayoutY(MAGIC_NUM + gamePanel.getLayoutY() + SET_GAMEPANEL_LAYOUT_Y + brick.getyPosition() * brickPanel.getHgap() + brick.getyPosition() * BRICK_SIZE);
     }
 
     private Paint getFillColor(int i) {

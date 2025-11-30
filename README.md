@@ -59,13 +59,14 @@
     1. Created an **if-else** statement in `pauseGame()` and called it in `initialize()` handle method to pause the game
        when the _**'ESCAPE'**_ key is pressed.
     2. Under `bindScore()`, added a line of code to bind the score label to the score property to display the player's score and live updates.
-    3. Extracted game timeline/game flow logic (such as `newGame`, `pauseGame` and `gameOver`) into a new `GameFlowManager` class.
+    3. Extracted game timeline/game flow logic (such as `newGame()`, `pauseGame()` and `gameOver()`) into a new `GameFlowManager` class.
     4. Extracted the original long `initialize()` method into smaller methods focusing on key controls.
     5. Renamed the method `initGameView()` to `initializeGameView()`.
-    6. Extracted rendering logic of game board and brick into a new class, `GameRenderer()`.
+    6. Extracted rendering logic of game board and brick into a new class, `GameRenderer`.
     7. Extracted notification logics into a new class, `Notifications()`.
     8. Extracted key input logic into a new class, `KeyInputHandler()`.
     9. Created a new method called `hardDrop()`, to drop the brick instantly.
+    10. Calls method from `GameRenderer` class to generate next brick (the brick after the current falling brick) into the next brick panel.
 
 
 - **GameController.java**
