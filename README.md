@@ -13,6 +13,7 @@
 ## New Java Classes
 - **CurrentBrickController** Path: src/main/java/com/comp2042/model/gameBoard/CurrentBrickController.java
     - Takes up brick position, movement, and rotation logic from TetrisBoard.
+    - Added core Hold Brick logic to manage the heldBrick state and swap the current piece, including a check to prevent multiple swaps per turn.
     - This helps support Single Responsibility Principle (SRP) by separating responsibilities.
 
 - **GameFlowManager** Path: src/main/java/com/comp2042/controller/GameTimeline.java
@@ -20,7 +21,8 @@
     - This helps support Single Responsibility Principle (SRP) by separating responsibilities.
 
 - **GameRenderer** Path: src/main/java/com/comp2042/controller/GameRenderer.java
-    - Takes up initialization of game board and bricks logics from GuiController
+    - Takes up initialization of game board and bricks logics from GuiController.
+    - Generates all related panels for the game layout fxml file.
     - Ensure bricks fall in the middle by adding constants of the LayoutX and LayoutY of gamePanel.
     - This helps support Single Responsibility Principle (SRP) by separating responsibilities.
 
@@ -37,11 +39,14 @@
     - Maintains a clear separation between the welcome screen and the game itself.
 
 - **GameTime** Path: src/main/java/com/comp2042/model/logic/GameTime.java
-    - Initialize game clock as an enhancement for gaming experience.
-    - Clock timer plays as long the game runs and stops when player pauses or game over.
+    - Initialize game clock as an enhancement for gaming experience using JavaFX's `Timeline()`.
+    - Exposes the elapsed time as a bindable `StringProperty` (MM:SS).
+    - Implements pause/resume logic by tracking `pauseDuration` to prevent the timer from including time spent while paused, ensuring accurate time keeping.
+    - This helps support Single Responsibility Principle (SRP) by dedicating a class purely to time tracking.
 
 - **CountClearedRows** Path: src/main/java/com/comp2042/model/logic/CountClearedRows.java
     - Count the number of lines removed throughout the game as an enhancement for gaming experience.
+    - Uses a JavaFX **_IntegerProperty_** to allow for automatic, real-time updates in the GUI.
 
 ## Modified Java Classes
 ### File Refactoring
@@ -54,6 +59,9 @@
     4. Renamed variable **p** to **newOffset** for clarity.
     5. Introduced new methods `offsetMovement()` and `checkConflict()` to reduce duplicate code and handle brick movement and collision checks.
     6. Extracted brick position, movement, and rotation logic into a new `CurrentBrickController()` class to support SRP.
+    7. Added a `GameTimer` field, initialized it in the constructor, and implemented `getTimer()`.
+    8. Integrated the new `countRow` counter, adding to the total count whenever rows are cleared and resetting the counter in `newGame()`.
+    9. Implemented the `holdBrick()` method and updated `createNewBrick()` and `newGame()` to manage the swap state and ensure the held piece is exposed via `getViewData()`.
 
 
 - **MatrixOperations.java**
@@ -74,13 +82,20 @@
     9. Created a new method called `hardDrop()`, to drop the brick instantly.
     10. Calls method from `GameRenderer` class to generate next brick (the brick after the current falling brick) into the next brick panel.
     11. Added a shadow panel code into the FXML.
-    12. The method `handleMovementKeys()` was renamed to `handleBrickControlKeys()` in both KeyInputHandler.java and GuiController.java
+    12. Added FXML field `@FXML private Text timeValue;` to bind to the clock display.
+    13. Added `bindTimer()` to link the time property to the UI.
+    14. Added `setGameTimer()` to receive the `GameTimer` instance and pass it to the `GameFlowManager`.
+    15. Implemented a new `bindLines()` method to connect the lines counter property to the GUI element, using the format specifier `"%03d"` to display a three-digit zero-padded number.
+    16. The method `handleMovementKeys()` was renamed to `handleBrickControlKeys()` in both KeyInputHandler.java and GuiController.java
     for improved clarity regarding its responsibility over all in-game brick actions.
 
 
 - **GameController.java**
     1. Delegate post landing tasks into a new method called `handleBrickLandingTasks()` making the original method,
     `onDownEvent()` clearer and focused only on the move flow.
+    2. Extracted all view initialization and binding calls (`setEventListener`, `setGameTimer`, `initializeGameView`, `bindScore`, `bindTimer`) into a new private method named `setupViewAndBindings()` to keep the constructor focused on state initialization logic (SRP).
+    3. Added logic to call `board.getTimer().stop()` when `handleBrickLandingTasks()` detects a game over condition.
+    4. Implemented the new `onHoldEvent()` method to process the Hold Brick request to the C key.
 
 
 - **Main.java**
@@ -91,6 +106,7 @@
 - **ViewData.java**
     1. Create new getters for shadow position of the brick so that alterations to these getters are independent and does
     not affect the positions for actual brick.
+    2. Updated the class structure to include the shape data for the brick currently in the hold queue.
   
 
 ## Unexpected Problems
