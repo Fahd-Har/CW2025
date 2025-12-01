@@ -32,6 +32,7 @@ public class GuiController implements Initializable {
     @FXML private GridPane shadowPanel;
     @FXML private Text gameTime;
     @FXML private Text countRowsValue;
+    @FXML private GridPane holdBrick;
 
     private InputEventListener eventListener;
     private GameRenderer gameRenderer;
@@ -43,7 +44,7 @@ public class GuiController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         Font.loadFont(getClass().getClassLoader().getResource("digital.ttf").toExternalForm(), 38);
 
-        gameRenderer = new GameRenderer(brickPanel, gamePanel, nextBrick, shadowPanel);
+        gameRenderer = new GameRenderer(brickPanel, gamePanel, nextBrick, shadowPanel, holdBrick);
         gameFlow = new GameFlowManager(gamePanel, gameOverPanel, null);
         notification = new Notifications(groupNotification);
 
@@ -80,6 +81,7 @@ public class GuiController implements Initializable {
         if (gameFlow.isPause().getValue() == Boolean.FALSE) {
             gameRenderer.refreshBrick(brick);
             gameRenderer.generateNextBrickInPreviewPanel(brick.getNextBrickData());
+            gameRenderer.generateHoldBrickInPanel(brick.getHeldBrickData());
         }
     }
 
