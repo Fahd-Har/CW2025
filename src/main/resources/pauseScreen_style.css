@@ -1,0 +1,25 @@
+.pause-pane {
+    -fx-background-color: rgba(0, 0, 0, 0.6);
+    -fx-background-radius: 20;
+    -fx-padding: 40px;
+    -fx-effect: dropshadow(gaussian, rgba(135, 206, 250, 0.4), 15, 0.2, 0, 0);
+}
+
+.neon-text {
+    -fx-fill: #FFFF00;
+    -fx-font-family: "Let's go Digital";
+    -fx-font-size: 100pt;
+    -fx-font-weight: bold;
+
+    -fx-effect:
+        glow(1.0, #FFFF00)
+        dropshadow(gaussian, #FFD700, 10, 0.8, 0, 0);
+}
+
+.instructions-text {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 16pt;
+    -fx-font-family: "Arial";
+
+    -fx-effect: glow(0.5, #ADD8E6);
+}
