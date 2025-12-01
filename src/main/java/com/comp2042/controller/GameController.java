@@ -20,6 +20,7 @@ public class GameController implements InputEventListener {
         board.newGame();
         viewGuiController.setEventListener(this);
         viewGuiController.setGameTimer(board.getGameTime());
+        viewGuiController.bindLevel(board.getLevelUp().levelProperty());
         viewGuiController.initializeGameView(board.getBoardMatrix(), board.getViewData());
         viewGuiController.bindScore(board.getScore().scoreProperty());
         viewGuiController.bindTimer(board.getGameTime().timeStringProperty());
@@ -28,6 +29,7 @@ public class GameController implements InputEventListener {
 
     @Override
     public MovingDownData onDownEvent(MoveEvent event) {
+        int previousLevel = board.getLevelUp().getLevel();
         boolean canMove = board.moveBrickDown();
         ClearFullRow clearFullRow = null;
 
@@ -35,6 +37,12 @@ public class GameController implements InputEventListener {
             // if brick cannot move further down, call the handleBrickCannotMove method to determine if brick placement
             // fills row hence deletion or game over
             clearFullRow = handleBrickLandingTasks();
+
+            // check for level up
+            int currentLevel = board.getLevelUp().getLevel();
+            if (currentLevel > previousLevel) {
+                viewGuiController.updateGameSpeed(currentLevel);
+            }
 
         } else {
             if (event.getEventSource() == EventSource.USER) {
