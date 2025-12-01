@@ -27,7 +27,7 @@
             <Text fx:id="gameTime" styleClass="scoreClass" text="00:00" />
         </VBox>
         <!-- HOLD BRICK PANEL -->
-        <Label styleClass="nextBrickLabel" text="Next brick" />
+        <Label styleClass="nextBrickLabel" text="Hold brick" />
         <BorderPane maxWidth="100" prefHeight="70" prefWidth="100" styleClass="nextBrick">
             <center>
                 <GridPane fx:id="holdBrick" alignment="CENTER" hgap="1" vgap="1" />
