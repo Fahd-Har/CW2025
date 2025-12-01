@@ -15,7 +15,7 @@ public interface Board {
 
     boolean createNewBrick();
 
-    boolean holdBrick();
+    void holdBrick();
 
     int[][] getBoardMatrix();
 

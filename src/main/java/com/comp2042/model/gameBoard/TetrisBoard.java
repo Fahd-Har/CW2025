@@ -53,8 +53,8 @@ public class TetrisBoard implements Board {
     }
 
     @Override
-    public boolean holdBrick() { // ADDED Implementation
-        return brickController.attemptHold();
+    public void holdBrick() { // ADDED Implementation
+        brickController.attemptHold();
     }
 
     @Override
