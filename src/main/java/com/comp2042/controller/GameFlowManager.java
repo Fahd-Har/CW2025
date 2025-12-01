@@ -21,6 +21,8 @@ public class GameFlowManager {
 
     private final BooleanProperty isPause = new SimpleBooleanProperty();
     private final BooleanProperty isGameOver = new SimpleBooleanProperty();
+    private Runnable gameAction;
+    int currentDropRate = 400;
 
     public GameFlowManager(GridPane gamePanel, GameOverPanel gameOverPanel, InputEventListener eventListener) {
         this.gamePanel = gamePanel;
@@ -37,10 +39,41 @@ public class GameFlowManager {
     }
 
     public void createTimeline(Runnable action) {
+        this.gameAction = action;
         timeline = new Timeline(
-                new KeyFrame(Duration.millis(400), e -> action.run())
+                new KeyFrame(Duration.millis(currentDropRate), e -> action.run())
         );
         timeline.setCycleCount(Timeline.INDEFINITE);
+    }
+
+    public void updateSpeed(int newLevel) {
+        if (newLevel <= 0) {
+            newLevel = 1;
+        }
+
+        int newDropRate = 400 - (50 * (newLevel - 1));
+
+        if (newDropRate < 100) {
+            newDropRate = 100;
+        }
+
+        if (newDropRate != currentDropRate) {
+            currentDropRate = newDropRate;
+
+            boolean wasRunning = (timeline != null && timeline.getStatus() == Timeline.Status.RUNNING);
+
+            if (timeline != null) {
+                timeline.stop();
+            }
+
+            if (this.gameAction != null) {
+                createTimeline(this.gameAction);
+            }
+
+            if (wasRunning && timeline != null) {
+                timeline.play();
+            }
+        }
     }
 
     public void start() {
@@ -68,6 +101,8 @@ public class GameFlowManager {
         gameOverPanel.setVisible(false);
         eventListener.createNewGame();
         gamePanel.requestFocus();
+        currentDropRate = 400;
+        updateSpeed(1);
         start();
         isPause.setValue(Boolean.FALSE);
         isGameOver.setValue(Boolean.FALSE);

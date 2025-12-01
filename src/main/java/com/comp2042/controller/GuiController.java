@@ -33,6 +33,7 @@ public class GuiController implements Initializable {
     @FXML private Text gameTime;
     @FXML private Text countRowsValue;
     @FXML private GridPane holdBrick;
+    @FXML private Text levelValue;
 
     private InputEventListener eventListener;
     private GameRenderer gameRenderer;
@@ -111,6 +112,10 @@ public class GuiController implements Initializable {
         gameFlow.setGameTimer(gameTime);
     }
 
+    public void updateGameSpeed(int newLevel) {
+        gameFlow.updateSpeed(newLevel);
+    }
+
     public void bindScore(IntegerProperty integerProperty) {
         scoreValue.textProperty().bind(integerProperty.asString());
     }
@@ -123,6 +128,10 @@ public class GuiController implements Initializable {
     // New method to bind the counted lines properly
     public void bindLines(IntegerProperty integerProperty) {
         countRowsValue.textProperty().bind(integerProperty.asString("%03d"));
+    }
+
+    public void bindLevel(IntegerProperty integerProperty) { // ADDED
+        levelValue.textProperty().bind(integerProperty.asString());
     }
 
     public void gameOver() {
