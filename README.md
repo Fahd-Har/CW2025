@@ -48,6 +48,10 @@
     - Count the number of lines removed throughout the game as an enhancement for gaming experience.
     - Uses a JavaFX **_IntegerProperty_** to allow for automatic, real-time updates in the GUI.
 
+- **LevelUp** Path: src/main/java/com/comp2042/model/logic/LevelUp.java
+    - Manages the game level from level 1.
+    - For every 10 lines removed, the game levels up automatically by calling `checkAndAdvance(int linesRemoved)`.
+
 ## Modified Java Classes
 ### File Refactoring
 
@@ -62,6 +66,8 @@
     7. Added a `GameTimer` field, initialized it in the constructor, and implemented `getTimer()`.
     8. Integrated the new `countRow` counter, adding to the total count whenever rows are cleared and resetting the counter in `newGame()`.
     9. Implemented the `holdBrick()` method and updated `createNewBrick()` and `newGame()` to manage the swap state and ensure the held piece is exposed via `getViewData()`.
+    10. Initialized the LevelUp and modified `clearRows()` to check if next level can be advanced after lines are cleared.
+    11. Implemented `getLevelUp()` and update `newGame()` to reset the level state.
 
 
 - **MatrixOperations.java**
@@ -100,6 +106,8 @@
     4. Implemented the new `onHoldEvent()` method to process the Hold Brick request to the C key.
     5. Update logic by removing board.createNewBrick() and place board.newGame() at the top of the constructor to ensure a consistent,
     full game state initialization on launch.
+    6. Bound the new LevelUp property to the GUI constructor.
+    7. In `onDownEvent()`, after a brick lands and rows are cleared, a check is performed to see if the level increased.
 
 
 - **Main.java**
