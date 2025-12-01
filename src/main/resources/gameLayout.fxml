@@ -42,24 +42,6 @@
         </VBox>
     </VBox>
 
-<!--    &lt;!&ndash; HOLD BRICK PANEL &ndash;&gt;-->
-<!--    <VBox alignment="CENTER" layoutX="320" layoutY="250">-->
-<!--        <Label styleClass="nextBrickLabel" text="Next brick" />-->
-<!--        <BorderPane maxWidth="100" prefHeight="70" prefWidth="100" styleClass="nextBrick">-->
-<!--            <center>-->
-<!--                <GridPane fx:id="holdBrick" alignment="CENTER" hgap="1" vgap="1" />-->
-<!--            </center>-->
-<!--        </BorderPane>-->
-<!--    </VBox>-->
-
-<!--    &lt;!&ndash; LINES PANEL &ndash;&gt;-->
-<!--    <VBox alignment="CENTER" layoutX="320" layoutY="350">-->
-<!--        <VBox alignment="CENTER" prefWidth="150" prefHeight="110" styleClass="rowPanel">-->
-<!--            <Label styleClass="scoreClass" text="Lines:~" />-->
-<!--            <Text fx:id="countRowsValue" styleClass="scoreClass" text="000" />-->
-<!--        </VBox>-->
-<!--    </VBox>-->
-
     <!-- SCORE PANEL -->
     <VBox alignment="CENTER" layoutX="820" layoutY="150">
         <VBox alignment="CENTER" prefWidth="150" prefHeight="110" styleClass="scorePanel">
