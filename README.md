@@ -55,6 +55,12 @@
 ## Modified Java Classes
 ### File Refactoring
 
+- **Board.java**
+    1. Added `getGameTime()` to expose the game's time/clock state.
+    2. Added `getCountRows()` to expose the number of rows removed during that state.
+    3. Added method `holdBrick()` to hold brick logic and functionality.
+    4. Added `getLevelUp()` to expose the game's level state.
+
 - **TetrisBoard.java**
     1. Renamed the class from `SimpleBoard` to `TetrisBoard` for a better description of the class.
     2. In `createNewBrick()`, changed the new offset point coordinate from **(4,10)** to **(4,0)** so new bricks drop from the top of the game board.
