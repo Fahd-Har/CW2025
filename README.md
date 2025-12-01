@@ -85,7 +85,8 @@
     12. Added FXML field `@FXML private Text timeValue;` to bind to the clock display.
     13. Added `bindTimer()` to link the time property to the UI.
     14. Added `setGameTimer()` to receive the `GameTimer` instance and pass it to the `GameFlowManager`.
-    15. Implemented a new `bindLines()` method to connect the lines counter property to the GUI element, using the format specifier `"%03d"` to display a three-digit zero-padded number.
+    15. Implemented a new `bindLines()` method to connect the lines counter property to the GUI element, using the format
+    specifier `"%03d"` to display a three-digit zero-padded number.
     16. The method `handleMovementKeys()` was renamed to `handleBrickControlKeys()` in both KeyInputHandler.java and GuiController.java
     for improved clarity regarding its responsibility over all in-game brick actions.
 
@@ -93,9 +94,12 @@
 - **GameController.java**
     1. Delegate post landing tasks into a new method called `handleBrickLandingTasks()` making the original method,
     `onDownEvent()` clearer and focused only on the move flow.
-    2. Extracted all view initialization and binding calls (`setEventListener`, `setGameTimer`, `initializeGameView`, `bindScore`, `bindTimer`) into a new private method named `setupViewAndBindings()` to keep the constructor focused on state initialization logic (SRP).
+    2. Extracted all view initialization and binding calls (`setEventListener`, `setGameTimer`, `initializeGameView`,
+    `bindScore`, `bindTimer`) into a new private method named `setupViewAndBindings()` to keep the constructor focused on state initialization logic (SRP).
     3. Added logic to call `board.getTimer().stop()` when `handleBrickLandingTasks()` detects a game over condition.
     4. Implemented the new `onHoldEvent()` method to process the Hold Brick request to the C key.
+    5. Update logic by removing board.createNewBrick() and place board.newGame() at the top of the constructor to ensure a consistent,
+    full game state initialization on launch.
 
 
 - **Main.java**
