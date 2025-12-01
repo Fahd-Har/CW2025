@@ -6,6 +6,7 @@ import com.comp2042.model.logic.GameTime;
 import com.comp2042.model.logic.MovingDownData;
 import com.comp2042.view.data.ViewData;
 import com.comp2042.view.scenes.GameOverPanel;
+import com.comp2042.view.scenes.PauseMenu;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
@@ -17,6 +18,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.scene.layout.Pane;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -34,12 +36,14 @@ public class GuiController implements Initializable {
     @FXML private Text countRowsValue;
     @FXML private GridPane holdBrick;
     @FXML private Text levelValue;
+    @FXML private Pane rootPane;
 
     private InputEventListener eventListener;
     private GameRenderer gameRenderer;
     private GameFlowManager gameFlow;
     private Notifications notification;
     private KeyInputHandler keyHandler;
+    private PauseMenu pauseMenu;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -48,6 +52,9 @@ public class GuiController implements Initializable {
         gameRenderer = new GameRenderer(brickPanel, gamePanel, nextBrick, shadowPanel, holdBrick);
         gameFlow = new GameFlowManager(gamePanel, gameOverPanel, null);
         notification = new Notifications(groupNotification);
+        pauseMenu = new PauseMenu(rootPane);
+
+        pauseMenu.loadPauseScreen();
 
         initializeKeyControls();
         gameOverPanel.setVisible(false);
@@ -140,10 +147,14 @@ public class GuiController implements Initializable {
 
     private void newGame(ActionEvent actionEvent) {
         gameFlow.newGame(null);
+        pauseMenu.showPanel(gameFlow);
+        gamePanel.requestFocus();
     }
 
     private void pauseGame(ActionEvent actionEvent) {
         gameFlow.pauseGame(null);
+        pauseMenu.showPanel(gameFlow);
+        gamePanel.requestFocus();
     }
 
     public void hardDrop(MoveEvent event) {

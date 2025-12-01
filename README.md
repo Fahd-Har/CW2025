@@ -52,6 +52,10 @@
     - Manages the game level from level 1.
     - For every 10 lines removed, the game levels up automatically by calling `checkAndAdvance(int linesRemoved)`.
 
+- **PauseMenu** Path: src/main/java/com/comp2042/view/scenes/PauseMenu.java
+    - Handles loading and positioning of the pauseScreen.fxml screen.
+    - Manages the visibility of the pause menu panel by binding it directly to the `isPause()` state from the `GameFlowManager` class.
+
 ## Modified Java Classes
 ### File Refactoring
 
@@ -101,6 +105,8 @@
     specifier `"%03d"` to display a three-digit zero-padded number.
     16. The method `handleMovementKeys()` was renamed to `handleBrickControlKeys()` in both KeyInputHandler.java and GuiController.java
     for improved clarity regarding its responsibility over all in-game brick actions.
+    17. Initialized the `PauseMenu` class and called its `loadPauseScreen()` in `initialize().`
+    18. Update `pauseGame()` and `newGame()` methods to show the panel when the game pauses, and removes it when game continues or a new game happens.
 
 
 - **GameController.java**
