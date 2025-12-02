@@ -1,9 +1,7 @@
 package com.comp2042.model.logic;
 
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Deque;
-import java.util.List;
+import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 
 public class MatrixOperations {
@@ -94,6 +92,40 @@ public class MatrixOperations {
 
     public static List<int[][]> deepCopyList(List<int[][]> list){
         return list.stream().map(MatrixOperations::copy).collect(Collectors.toList());
+    }
+
+    public static int[][] implementRisingRow(final int[][] matrix, int level) {
+        int height = matrix.length;
+        int width = matrix[0].length;
+        int[][] newMatrix = new int[height][width];
+
+        for (int i = 1; i < height; i++) {
+            System.arraycopy(matrix[i], 0, newMatrix[i - 1], 0, width);
+        }
+
+        int[] risingRow = new int[width];
+        int garbageColor = 8;
+        Arrays.fill(risingRow, garbageColor);
+
+        int numHoles = 4 - (level - 2);
+
+        if (numHoles < 1) {
+            numHoles = 1;
+        }
+
+        int holesPlaced = 0;
+        while (holesPlaced < numHoles) {
+            int holeIndex = ThreadLocalRandom.current().nextInt(width);
+
+            if (risingRow[holeIndex] != 0) {
+                risingRow[holeIndex] = 0;
+                holesPlaced++;
+            }
+        }
+
+        newMatrix[height - 1] = risingRow;
+
+        return newMatrix;
     }
 
 }
