@@ -64,6 +64,7 @@
     2. Added `getCountRows()` to expose the number of rows removed during that state.
     3. Added method `holdBrick()` to hold brick logic and functionality.
     4. Added `getLevelUp()` to expose the game's level state.
+    5. Added the method `addRisingRow()` to pass the current game level, allowing the creation of level-dependent holes in the rising row.
 
 - **TetrisBoard.java**
     1. Renamed the class from `SimpleBoard` to `TetrisBoard` for a better description of the class.
@@ -78,11 +79,14 @@
     9. Implemented the `holdBrick()` method and updated `createNewBrick()` and `newGame()` to manage the swap state and ensure the held piece is exposed via `getViewData()`.
     10. Initialized the LevelUp and modified `clearRows()` to check if next level can be advanced after lines are cleared.
     11. Implemented `getLevelUp()` and update `newGame()` to reset the level state.
+    12. Implement the add rising row to show in the Tetris gameboard, and that it moves up by one.
 
 
 - **MatrixOperations.java**
     1. Updated the `intersect()` and `merge()` methods to correctly align i and j with the x and y coordinates when checking
        brick collisions to improve code logic and clarity.
+    2. Created a new method `implementRisingRows()` to initialize the logic for new rows to be pushed from the bottom.
+    3. Implement logic on number of holes in the new row correlates with the current level.
 
 
 - **GuiController.java**
@@ -107,6 +111,8 @@
     for improved clarity regarding its responsibility over all in-game brick actions.
     17. Initialized the `PauseMenu` class and called its `loadPauseScreen()` in `initialize().`
     18. Update `pauseGame()` and `newGame()` methods to show the panel when the game pauses, and removes it when game continues or a new game happens.
+    19. Added the call for the rising row timeline in the `initializeGameView()` method.
+    20. Added a public helper method to call refresh brick method in other classes without calling the actual private method.
 
 
 - **GameController.java**
@@ -120,6 +126,7 @@
     full game state initialization on launch.
     6. Bound the new LevelUp property to the GUI constructor.
     7. In `onDownEvent()`, after a brick lands and rows are cleared, a check is performed to see if the level increased.
+    8. Added `onRisingRowEvent()` to handle the timer tick. This method fetches the current level, and checks for immediate game over, and updates the view.
 
 
 - **Main.java**
