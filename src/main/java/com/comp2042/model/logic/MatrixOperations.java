@@ -107,10 +107,10 @@ public class MatrixOperations {
         int garbageColor = 8;
         Arrays.fill(risingRow, garbageColor);
 
-        int numHoles = 4 - (level - 2);
+        int numHoles = level - 1;
 
-        if (numHoles < 1) {
-            numHoles = 1;
+        if (numHoles > 3) {
+            numHoles = 3;
         }
 
         int holesPlaced = 0;

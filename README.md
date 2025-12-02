@@ -50,7 +50,7 @@
 
 - **LevelUp** Path: src/main/java/com/comp2042/model/logic/LevelUp.java
     - Manages the game level from level 1.
-    - For every 10 lines removed, the game levels up automatically by calling `checkAndAdvance(int linesRemoved)`.
+    - For every 10 lines removed, the game levels up automatically by calling `checkAndAdvance()`.
 
 - **PauseMenu** Path: src/main/java/com/comp2042/view/scenes/PauseMenu.java
     - Handles loading and positioning of the pauseScreen.fxml screen.
@@ -86,7 +86,7 @@
     1. Updated the `intersect()` and `merge()` methods to correctly align i and j with the x and y coordinates when checking
        brick collisions to improve code logic and clarity.
     2. Created a new method `implementRisingRows()` to initialize the logic for new rows to be pushed from the bottom.
-    3. Implement logic on number of holes in the new row correlates with the current level.
+    3. Implement logic on number of holes in the new rising row depends with the current level.
 
 
 - **GuiController.java**
