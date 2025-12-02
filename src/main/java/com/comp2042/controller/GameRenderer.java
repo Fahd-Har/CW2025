@@ -158,6 +158,7 @@ public class GameRenderer {
             case 5 -> Color.RED;
             case 6 -> Color.BEIGE;
             case 7 -> Color.BURLYWOOD;
+            case 8 -> Color.GRAY;
             default -> Color.WHITE;
         };
     }
