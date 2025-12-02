@@ -34,4 +34,6 @@ public interface Board {
     LevelUp getLevelUp();
 
     void newGame();
+
+    void addRisingRow(int level);
 }

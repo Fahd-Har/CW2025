@@ -50,6 +50,10 @@ public class CurrentBrickController {
         return canRotate;
     }
 
+    public void moveUp(int y) {
+        currentOffset.translate(0, -y);
+    }
+
     private boolean offsetMovement(int dx, int dy) {
         // create a new point/offset based on the current brick position
         Point newOffset = new Point(currentOffset);
