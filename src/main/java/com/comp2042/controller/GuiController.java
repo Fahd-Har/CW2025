@@ -82,7 +82,14 @@ public class GuiController implements Initializable {
         gameRenderer.initializeRenderingState(boardMatrix, brick);
         
         gameFlow.createTimeline(() -> moveDown(new MoveEvent(EventType.DOWN, EventSource.THREAD)));
+        gameFlow.createRisingRowTimeline(this::handleRisingRowAddition);
         gameFlow.start();
+    }
+
+    private void handleRisingRowAddition() {
+        if (gameFlow.isPause().getValue() == Boolean.FALSE && gameFlow.isGameOver().getValue() == Boolean.FALSE) {
+            ((GameController) eventListener).onRisingRowEvent();
+        }
     }
 
     private void refreshBrick(ViewData brick) {
@@ -91,6 +98,10 @@ public class GuiController implements Initializable {
             gameRenderer.generateNextBrickInPreviewPanel(brick.getNextBrickData());
             gameRenderer.generateHoldBrickInPanel(brick.getHeldBrickData());
         }
+    }
+
+    public void updateView(ViewData brick) {
+        refreshBrick(brick);
     }
 
     public void refreshGameBackground(int[][] board) {

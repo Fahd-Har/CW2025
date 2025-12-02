@@ -13,7 +13,8 @@ import javafx.util.Duration;
 
 public class GameFlowManager {
 
-    public Timeline timeline; // Now managed directly
+    public Timeline timeline;
+    private Timeline risingRowTimeline;
     private final GridPane gamePanel;
     private final GameOverPanel gameOverPanel;
     private InputEventListener eventListener;
@@ -22,7 +23,9 @@ public class GameFlowManager {
     private final BooleanProperty isPause = new SimpleBooleanProperty();
     private final BooleanProperty isGameOver = new SimpleBooleanProperty();
     private Runnable gameAction;
+    private Runnable risingRowAction;
     int currentDropRate = 400;
+    int currentRisingRowInterval = 15;
 
     public GameFlowManager(GridPane gamePanel, GameOverPanel gameOverPanel, InputEventListener eventListener) {
         this.gamePanel = gamePanel;
@@ -74,10 +77,63 @@ public class GameFlowManager {
                 timeline.play();
             }
         }
+        updateGarbageSpeed(newLevel);
+    }
+
+    public void createRisingRowTimeline(Runnable action) {
+        this.risingRowAction = action;
+        risingRowTimeline = new Timeline(
+                new KeyFrame(Duration.seconds(currentRisingRowInterval), e -> action.run())
+        );
+        risingRowTimeline.setCycleCount(Timeline.INDEFINITE);
+    }
+
+    private void updateGarbageSpeed(int newLevel) {
+
+        int newInterval;
+
+        if (risingRowTimeline == null || risingRowAction == null) {
+            return;
+        }
+
+        if (newLevel < 2) {
+            risingRowTimeline.stop();
+            return;
+        } else if (newLevel == 3) {
+            newInterval = currentRisingRowInterval;
+        } else if (newLevel == 4) {
+            newInterval = 12;
+        } else {
+            newInterval = 10;
+        }
+
+        if (newInterval != currentRisingRowInterval) {
+            currentRisingRowInterval = newInterval;
+
+            boolean wasRunning = (risingRowTimeline.getStatus() == Timeline.Status.RUNNING);
+            risingRowTimeline.stop();
+
+            // Recreate timeline with the new duration
+            risingRowTimeline = new Timeline(
+                    new KeyFrame(Duration.seconds(currentRisingRowInterval), e -> risingRowAction.run())
+            );
+            risingRowTimeline.setCycleCount(Timeline.INDEFINITE);
+
+            if (wasRunning) {
+                risingRowTimeline.play();
+            }
+        }
+
+        if (risingRowTimeline.getStatus() != Timeline.Status.RUNNING && !isPause.get()) {
+            risingRowTimeline.play();
+        }
     }
 
     public void start() {
         timeline.play();
+        if (risingRowTimeline != null && currentRisingRowInterval < 15) {
+            risingRowTimeline.play();
+        }
         if (gameTime != null) {
             gameTime.start();
         }
@@ -85,6 +141,9 @@ public class GameFlowManager {
 
     private void stop() {
         timeline.stop();
+        if (risingRowTimeline != null) {
+            risingRowTimeline.stop();
+        }
         if (gameTime != null) {
             gameTime.stop();
         }
