@@ -8,15 +8,15 @@
 <Pane fx:id="rootPane" fx:controller="com.comp2042.controller.GuiController"
       xmlns:fx="http://javafx.com/fxml">
 
-    <GridPane fx:id="shadowPanel" vgap="1" hgap="1"/>
-    <GridPane fx:id="brickPanel" vgap="1" hgap="1"/>
-
     <!-- GAME BOARD -->
     <BorderPane styleClass="gameBoard" layoutX="525" layoutY="147">
         <center>
             <GridPane fx:id="gamePanel" hgap="1" vgap="1" layoutY="30" layoutX="40"/>
         </center>
     </BorderPane>
+
+    <GridPane fx:id="shadowPanel" vgap="1" hgap="1"/>
+    <GridPane fx:id="brickPanel" vgap="1" hgap="1"/>
 
     <!-- TIME PANEL -->
     <VBox alignment="CENTER" layoutX="320" layoutY="150" prefWidth="150" prefHeight="110" styleClass="timePanel">
@@ -25,9 +25,9 @@
     </VBox>
 
     <!-- HOLD BRICK PANEL -->
-    <VBox alignment="CENTER" layoutX="320" layoutY="280" prefWidth="150" prefHeight="110">
+    <VBox alignment="CENTER" layoutX="320" layoutY="280" prefWidth="150" prefHeight="110" styleClass="previewPanel">
         <Label styleClass="nextBrickLabel" text="Hold brick" />
-        <BorderPane maxWidth="100" prefHeight="70" prefWidth="100" styleClass="nextBrick">
+        <BorderPane maxWidth="100" prefHeight="70" prefWidth="100">
             <center>
                 <GridPane fx:id="holdBrick" alignment="CENTER" hgap="1" vgap="1" />
             </center>
@@ -39,6 +39,26 @@
         <VBox alignment="CENTER" layoutX="820" layoutY="150" prefWidth="150" prefHeight="110" styleClass="rowPanel">
             <Label styleClass="scoreClass" text="Lines:~" />
             <Text fx:id="countRowsValue" styleClass="scoreClass" text="000" />
+        </VBox>
+    </VBox>
+
+    <VBox prefWidth="150" layoutX="100" layoutY="150" spacing="10" styleClass="vbox">
+        <Text styleClass="controlLabel" text=":: CONTROLS ::" underline="true" />
+        <VBox spacing="2">
+            <Text styleClass="helpInfo" text="Movement"/>
+            <Text styleClass="helpInfo" text="Move: A/D or ←/→"/>
+            <Text styleClass="helpInfo" text="Rotate: W or ↑"/>
+        </VBox>
+        <VBox spacing="2">
+            <Text styleClass="helpInfo" text="Drops"/>
+            <Text styleClass="helpInfo" text="Soft Drop: S or ↓"/>
+            <Text styleClass="helpInfo" text="Hard Drop: Space"/>
+        </VBox>
+        <VBox spacing="2">
+            <Text styleClass="helpInfo" text="Game State"/>
+            <Text styleClass="helpInfo" text="Hold: C"/>
+            <Text styleClass="helpInfo" text="New Game: N"/>
+            <Text styleClass="helpInfo" text="Pause: ESC"/>
         </VBox>
     </VBox>
 
@@ -55,9 +75,9 @@
     </VBox>
 
     <!-- NEXT BRICK PANEL -->
-    <VBox alignment="CENTER" layoutX="820" layoutY="400" prefWidth="150" prefHeight="110">
+    <VBox alignment="CENTER" layoutX="820" layoutY="400" prefWidth="150" prefHeight="110" styleClass="previewPanel">
         <Label styleClass="nextBrickLabel" text="Next brick" />
-        <BorderPane maxWidth="100" prefHeight="70" prefWidth="100" styleClass="nextBrick">
+        <BorderPane maxWidth="100" prefHeight="70" prefWidth="100">
             <center>
                 <GridPane fx:id="nextBrick" alignment="CENTER" hgap="1" vgap="1" />
             </center>
