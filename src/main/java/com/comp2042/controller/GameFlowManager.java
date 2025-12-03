@@ -52,13 +52,11 @@ public class GameFlowManager {
     public void updateSpeed(int newLevel) {
         if (newLevel <= 0) {
             newLevel = 1;
+        } else if (newLevel > 5) {
+            newLevel = 5;
         }
 
         int newDropRate = 400 - (50 * (newLevel - 1));
-
-        if (newDropRate < 100) {
-            newDropRate = 100;
-        }
 
         if (newDropRate != currentDropRate) {
             currentDropRate = newDropRate;
@@ -77,7 +75,7 @@ public class GameFlowManager {
                 timeline.play();
             }
         }
-        updateGarbageSpeed(newLevel);
+        updateRisingRowSpeed(newLevel);
     }
 
     public void createRisingRowTimeline(Runnable action) {
@@ -88,7 +86,7 @@ public class GameFlowManager {
         risingRowTimeline.setCycleCount(Timeline.INDEFINITE);
     }
 
-    private void updateGarbageSpeed(int newLevel) {
+    private void updateRisingRowSpeed(int newLevel) {
 
         int newInterval;
 
