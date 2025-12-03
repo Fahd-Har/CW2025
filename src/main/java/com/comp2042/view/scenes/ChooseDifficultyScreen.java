@@ -1,5 +1,7 @@
 package com.comp2042.view.scenes;
 
+import com.comp2042.controller.GameController;
+import com.comp2042.controller.GuiController;
 import javafx.fxml.FXML;
 import javafx.animation.FadeTransition;
 import javafx.util.Duration;
@@ -13,13 +15,13 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class MainMenuScreen {
+public class ChooseDifficultyScreen {
     @FXML
-    private Button startButton;
+    private Button extremeButton;
 
     @FXML
     public void initialize() {
-        startButton.setOnAction(ae -> {
+        extremeButton.setOnAction(ae -> {
             try {
                 startGame();
             } catch (IOException ex) {
@@ -29,18 +31,20 @@ public class MainMenuScreen {
     }
 
     private void startGame() throws IOException {
-        URL location = getClass().getClassLoader().getResource("chooseDifficulty.fxml");
+        URL location = getClass().getClassLoader().getResource("gameLayout.fxml");
         ResourceBundle resources = null;
         FXMLLoader fxmlLoader = new FXMLLoader(location, resources);
         Parent gameRoot = fxmlLoader.load();
+        GuiController c = fxmlLoader.getController();
 
         FadeTransition fadeIn = new FadeTransition(Duration.seconds(1.0), gameRoot);
         fadeIn.setFromValue(0.0);
         fadeIn.setToValue(1.0);
 
-        Stage stage = (Stage) startButton.getScene().getWindow();
+        Stage stage = (Stage) extremeButton.getScene().getWindow();
         stage.setScene(new Scene(gameRoot, 1280, 800));
         stage.setTitle("TetrisJFX");
+        new GameController(c);
         fadeIn.play();
     }
 }

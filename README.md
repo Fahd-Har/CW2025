@@ -35,8 +35,9 @@
     - This helps support Single Responsibility Principle (SRP) by separating responsibilities.
 
 - **MainMenuScreen** Path: src/main/java/com/comp2042/view/scenes/MainMenuScreen.java
-    - Links the game's UI and logic by retrieving the GuiController from the FXML and using it to initialize the GameController before displaying the game scene.
-    - Maintains a clear separation between the welcome screen and the game itself.
+    - An enhancement for player to choose whether they want to see the game rules/what each difficulty does (About),
+    or straight away choose their difficulty game mode.
+    - Maintains a clear separation between the welcome screen, variance of game difficulty and the game itself.
 
 - **GameTime** Path: src/main/java/com/comp2042/model/logic/GameTime.java
     - Initialize game clock as an enhancement for gaming experience using JavaFX's `Timeline()`.
@@ -55,6 +56,10 @@
 - **PauseMenu** Path: src/main/java/com/comp2042/view/scenes/PauseMenu.java
     - Handles loading and positioning of the pauseScreen.fxml screen.
     - Manages the visibility of the pause menu panel by binding it directly to the `isPause()` state from the `GameFlowManager` class.
+
+- **ChooseDifficultyScreen** Path: src/main/java/com/comp2042/view/scenes/ChooseDifficultyScreen.java
+    - Links the game's UI and logic by retrieving the GuiController from the FXML and using it to initialize the GameController before displaying the game scene.
+    - Separates game logic between each game difficulties.
 
 ## Modified Java Classes
 ### File Refactoring
