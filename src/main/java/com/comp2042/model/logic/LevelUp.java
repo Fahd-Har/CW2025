@@ -19,6 +19,10 @@ public final class LevelUp {
     }
 
     public void checkAndAdvance(int linesRemoved) {
+        if (getLevel() >= 5) {
+            return;
+        }
+
         linesToNextLevel -= linesRemoved;
         if (linesToNextLevel <= 0) {
             level.set(level.get() + 1);
