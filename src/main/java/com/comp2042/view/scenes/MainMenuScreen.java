@@ -41,6 +41,7 @@ public class MainMenuScreen {
         Stage stage = (Stage) startButton.getScene().getWindow();
         stage.setScene(new Scene(gameRoot, 1280, 800));
         stage.setTitle("TetrisJFX");
+        stage.setResizable(false);
         fadeIn.play();
     }
 }

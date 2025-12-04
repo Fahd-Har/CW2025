@@ -85,6 +85,7 @@ public class ChooseDifficultyScreen {
         Stage stage = (Stage) startButton.getScene().getWindow();
         stage.setScene(new Scene(gameRoot, 1280, 800));
         stage.setTitle("TetrisJFX");
+        stage.setResizable(false);
         new GameController(c, selectedMode);
         fadeIn.play();
     }
