@@ -77,6 +77,18 @@
 .bonusStyle {
     -fx-font-size: 40px;
     -fx-font-weight: bold;
+    -fx-fill: white;
+    -fx-text-fill: white;
+    -fx-effect: dropshadow(gaussian, rgba(255, 255, 255, 0.6), 10, 0.5, 0, 0);
+}
+
+.levelUpStyle {
+    -fx-font-family: "Let's go Digital";
+    -fx-font-size: 50px;
+    -fx-font-weight: bold;
+    -fx-fill: #00FFFF;
+    -fx-text-fill: #00FFFF;
+    -fx-effect: dropshadow(gaussian, rgba(0, 255, 255, 0.8), 30, 0.7, 0, 0);
 }
 
 .gameOverStyle {

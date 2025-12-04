@@ -29,6 +29,7 @@ public class GuiController implements Initializable {
 
     @FXML private GridPane gamePanel;
     @FXML private Group groupNotification;
+    @FXML private Group levelUpNotification;
     @FXML private GridPane brickPanel;
     @FXML private GameOverPanel gameOverPanel;
     @FXML private Text scoreValue;
@@ -56,7 +57,7 @@ public class GuiController implements Initializable {
 
         gameRenderer = new GameRenderer(brickPanel, gamePanel, nextBrick, shadowPanel, holdBrick);
         gameFlow = new GameFlowManager(gamePanel, null);
-        notification = new Notifications(groupNotification);
+        notification = new Notifications(groupNotification, levelUpNotification);
         pauseMenu = new PauseMenu(rootPane);
         gameOverPanel = new GameOverPanel(rootPane);
 
@@ -217,5 +218,9 @@ public class GuiController implements Initializable {
             refreshBrick(movingDownData.getViewData());
         }
         gamePanel.requestFocus();
+    }
+
+    public void showLevelUpNotification(int level) {
+        notification.showLevelUp(level);
     }
 }

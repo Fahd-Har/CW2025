@@ -67,6 +67,7 @@ public class GameController implements InputEventListener {
             int currentLevel = board.getLevelUp().getLevel();
             if (currentLevel > previousLevel) {
                 viewGuiController.updateGameSpeed(currentLevel);
+                viewGuiController.showLevelUpNotification(currentLevel);
             }
 
         } else {

@@ -83,6 +83,9 @@
         </BorderPane>
     </VBox>
 
+    <Group fx:id="groupNotification" layoutX="535" layoutY="350"/>
+    <Group fx:id="levelUpNotification" layoutX="533" layoutY="150"/>
+
     <stylesheets>
         <URL value="@window_style.css"/>
     </stylesheets>

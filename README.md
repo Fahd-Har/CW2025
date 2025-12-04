@@ -64,7 +64,7 @@
 - **GameMode** Path: src/main/java/com/comp2042/view/logic/GameMode.java
     - New enumeration to defines the three difficulty modes and holds two core boolean properties to control difficulty scaling in the game loop.
 
-- **GameMode** Path: src/main/java/com/comp2042/view/soundBoard/Sound.java
+- **Sound** Path: src/main/java/com/comp2042/view/soundBoard/Sound.java
     - Handles and imports all sound related logic to enhance game play.
 
 ## Modified Java Classes
@@ -126,6 +126,7 @@
     20. Added a public helper method to call refresh brick method in other classes without calling the actual private method.
     21. Added a setter to pass mode to GameFlowManager.
     22. Call specific sounds from the Sound class for specified actions.
+    23. Added new public method `showLevelUpNotification()` for the GameController to read from instead of reading from notification class which may violate SRP.
 
 
 - **GameController.java**
@@ -141,6 +142,7 @@
     7. In `onDownEvent()`, after a brick lands and rows are cleared, a check is performed to see if the level increased.
     8. Added `onRisingRowEvent()` to handle the timer tick. This method fetches the current level, and checks for immediate game over, and updates the view.
     9. The `onRisingRowEvent()` now only runs if game mode is hard or extreme. Does not run on normal mode.
+    10. Now checks in the `onDownEvent()` method if player reaches the number of removed lines, level up pop up occurs.
 
 
 - **Main.java**
@@ -156,5 +158,16 @@
 
 - **GameOverPanel.java**
     1. Alter the code to put in my own Game Over Scene.
+
+
+- **NotificationPanel.java**
+    1. Code was updated so that the created notification panel for score and level up can have two distinct styles rather than the same style.
+    2. Remove the hardcoded color and glow and put them in the css file to differentiate tasks easily.
+
+
+- **Notifications.java**
+    1. Added a new method to show the pop up for every time the player level's up.
+    2. Separate groupNotification call into scoreNotification and levelUpNotification for easier change in their layouts.
+    Also helps so that change in one does not affect the other.
 
 ## Unexpected Problems
