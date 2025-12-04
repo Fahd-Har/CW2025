@@ -152,6 +152,9 @@
     1. Create new getters for shadow position of the brick so that alterations to these getters are independent and does
     not affect the positions for actual brick.
     2. Updated the class structure to include the shape data for the brick currently in the hold queue.
-  
+
+
+- **GameOverPanel.java**
+    1. Alter the code to put in my own Game Over Scene.
 
 ## Unexpected Problems

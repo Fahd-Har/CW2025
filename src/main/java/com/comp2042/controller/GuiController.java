@@ -58,11 +58,12 @@ public class GuiController implements Initializable {
         gameFlow = new GameFlowManager(gamePanel, null);
         notification = new Notifications(groupNotification);
         pauseMenu = new PauseMenu(rootPane);
+        gameOverPanel = new GameOverPanel(rootPane);
 
         pauseMenu.loadPauseScreen();
 
         initializeKeyControls();
-        gameOverPanel.setVisible(false);
+        gameOverPanel.loadGameOverPanel();
 
         bgm.bgMusic();
 
@@ -171,7 +172,7 @@ public class GuiController implements Initializable {
 
     public void gameOver() {
         gameFlow.gameOver();
-        gameOverPanel.setVisible(true);
+        gameOverPanel.showPanel(gameFlow);
         bgm.stop();
         sfx.soundEffects(3);
     }
@@ -179,7 +180,7 @@ public class GuiController implements Initializable {
     private void newGame(ActionEvent actionEvent) {
         gameFlow.newGame(null);
         pauseMenu.showPanel(gameFlow);
-        gameOverPanel.setVisible(false);
+        gameOverPanel.showPanel(gameFlow);
         gamePanel.requestFocus();
         bgm.bgMusic();
     }

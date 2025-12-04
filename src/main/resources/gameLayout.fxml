@@ -1,4 +1,3 @@
-<?import com.comp2042.view.scenes.GameOverPanel?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.Group?>
 <?import javafx.scene.layout.*?>
@@ -83,13 +82,6 @@
             </center>
         </BorderPane>
     </VBox>
-
-    <!-- GAME OVER PANEL -->
-    <Group fx:id="groupNotification" layoutX="539" layoutY="350">
-        <VBox alignment="CENTER">
-            <GameOverPanel fx:id="gameOverPanel"/>
-        </VBox>
-    </Group>
 
     <stylesheets>
         <URL value="@window_style.css"/>
