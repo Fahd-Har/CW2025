@@ -2,6 +2,7 @@ package com.comp2042.controller;
 
 import com.comp2042.controller.keyInput.KeyInputHandler;
 import com.comp2042.events.*;
+import com.comp2042.model.logic.GameMode;
 import com.comp2042.model.logic.GameTime;
 import com.comp2042.model.logic.MovingDownData;
 import com.comp2042.view.data.ViewData;
@@ -132,6 +133,12 @@ public class GuiController implements Initializable {
 
     public void updateGameSpeed(int newLevel) {
         gameFlow.updateSpeed(newLevel);
+    }
+
+    public void setGameMode(GameMode gameMode) { // ADDED: Setter to pass mode to GameFlowManager
+        if (gameFlow != null) {
+            gameFlow.setGameMode(gameMode);
+        }
     }
 
     public void bindScore(IntegerProperty integerProperty) {

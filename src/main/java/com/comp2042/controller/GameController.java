@@ -6,6 +6,7 @@ import com.comp2042.events.MoveEvent;
 import com.comp2042.model.gameBoard.Board;
 import com.comp2042.model.gameBoard.TetrisBoard;
 import com.comp2042.model.logic.ClearFullRow;
+import com.comp2042.model.logic.GameMode;
 import com.comp2042.model.logic.MatrixOperations;
 import com.comp2042.model.logic.MovingDownData;
 import com.comp2042.view.data.ViewData;
@@ -15,9 +16,12 @@ public class GameController implements InputEventListener {
     private Board board = new TetrisBoard(10, 25);
 
     private final GuiController viewGuiController;
+    private final GameMode gameMode;
 
-    public GameController(GuiController c) {
+    public GameController(GuiController c, GameMode mode) {
         viewGuiController = c;
+        gameMode = mode;
+        viewGuiController.setGameMode(gameMode);
         board.newGame();
         viewGuiController.setEventListener(this);
         viewGuiController.setGameTimer(board.getGameTime());
@@ -30,23 +34,24 @@ public class GameController implements InputEventListener {
 
     public void onRisingRowEvent() {
 
-        int currentLevel = board.getLevelUp().getLevel();
+        if (gameMode.affectsRisingRows()) {
+            int currentLevel = board.getLevelUp().getLevel();
 
-        board.addRisingRow(currentLevel);
-        if (MatrixOperations.intersect(
-                board.getBoardMatrix(),
-                board.getViewData().getBrickData(),
-                board.getViewData().getxPosition(),
-                board.getViewData().getyPosition()
-        )) {
-            board.getGameTime().stop();
-            viewGuiController.gameOver();
-            return;
+            board.addRisingRow(currentLevel);
+            if (MatrixOperations.intersect(
+                    board.getBoardMatrix(),
+                    board.getViewData().getBrickData(),
+                    board.getViewData().getxPosition(),
+                    board.getViewData().getyPosition()
+            )) {
+                board.getGameTime().stop();
+                viewGuiController.gameOver();
+                return;
+            }
+            viewGuiController.refreshGameBackground(board.getBoardMatrix());
+            viewGuiController.updateView(board.getViewData());
         }
-        viewGuiController.refreshGameBackground(board.getBoardMatrix());
-        viewGuiController.updateView(board.getViewData());
     }
-
     @Override
     public MovingDownData onDownEvent(MoveEvent event) {
         int previousLevel = board.getLevelUp().getLevel();

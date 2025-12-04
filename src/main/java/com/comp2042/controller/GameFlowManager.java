@@ -1,6 +1,7 @@
 package com.comp2042.controller;
 
 import com.comp2042.events.InputEventListener;
+import com.comp2042.model.logic.GameMode;
 import com.comp2042.model.logic.GameTime;
 import com.comp2042.view.scenes.GameOverPanel;
 import javafx.animation.KeyFrame;
@@ -19,6 +20,7 @@ public class GameFlowManager {
     private final GameOverPanel gameOverPanel;
     private InputEventListener eventListener;
     private GameTime gameTime;
+    private GameMode gameMode;
 
     private final BooleanProperty isPause = new SimpleBooleanProperty();
     private final BooleanProperty isGameOver = new SimpleBooleanProperty();
@@ -31,6 +33,10 @@ public class GameFlowManager {
         this.gamePanel = gamePanel;
         this.gameOverPanel = gameOverPanel;
         this.eventListener = eventListener;
+    }
+
+    public void setGameMode(GameMode gameMode) {
+        this.gameMode = gameMode;
     }
 
     public void setGameTimer(GameTime gameTime) {
@@ -50,29 +56,51 @@ public class GameFlowManager {
     }
 
     public void updateSpeed(int newLevel) {
-        if (newLevel <= 0) {
-            newLevel = 1;
-        } else if (newLevel > 5) {
-            newLevel = 5;
-        }
-
-        int newDropRate = 400 - (50 * (newLevel - 1));
-
-        if (newDropRate != currentDropRate) {
-            currentDropRate = newDropRate;
-
-            boolean wasRunning = (timeline != null && timeline.getStatus() == Timeline.Status.RUNNING);
-
-            if (timeline != null) {
-                timeline.stop();
+        if (gameMode.affectsFallingSpeed()) {
+            if (newLevel <= 0) {
+                newLevel = 1;
+            } else if (newLevel > 5) {
+                newLevel = 5;
             }
 
-            if (this.gameAction != null) {
-                createTimeline(this.gameAction);
-            }
+            int newDropRate = 400 - (50 * (newLevel - 1));
 
-            if (wasRunning && timeline != null) {
-                timeline.play();
+            if (newDropRate != currentDropRate) {
+                currentDropRate = newDropRate;
+
+                boolean wasRunning = (timeline != null && timeline.getStatus() == Timeline.Status.RUNNING);
+
+                if (timeline != null) {
+                    timeline.stop();
+                }
+
+                if (this.gameAction != null) {
+                    createTimeline(this.gameAction);
+                }
+
+                if (wasRunning && timeline != null) {
+                    timeline.play();
+                }
+            }
+        } else {
+            // For Hard mode that does not require falling brick speed
+            if (currentDropRate != 400) {
+                currentDropRate = 400;
+
+                boolean wasRunning = (timeline.getStatus() == Timeline.Status.RUNNING);
+
+                if (timeline != null) {
+                    timeline.stop();
+                }
+
+                if (this.gameAction != null) {
+                    createTimeline(this.gameAction);
+                }
+
+                if (wasRunning && timeline != null) {
+                    timeline.play();
+                }
+
             }
         }
         updateRisingRowSpeed(newLevel);

@@ -2,6 +2,7 @@ package com.comp2042.view.scenes;
 
 import com.comp2042.controller.GameController;
 import com.comp2042.controller.GuiController;
+import com.comp2042.model.logic.GameMode;
 import javafx.fxml.FXML;
 import javafx.animation.FadeTransition;
 import javafx.util.Duration;
@@ -16,18 +17,58 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class ChooseDifficultyScreen {
-    @FXML
-    private Button extremeButton;
+
+    @FXML private Button normalButton;
+    @FXML private Button hardButton;
+    @FXML private Button extremeButton;
+    @FXML private Button startButton;
+
+    // ADDED: Field to track the selected mode, default to Normal
+    private GameMode selectedMode = GameMode.NORMAL_MODE;
 
     @FXML
     public void initialize() {
-        extremeButton.setOnAction(ae -> {
+
+        updateButtonStyles(normalButton);
+        normalButton.setOnAction(event -> selectNormalMode());
+        hardButton.setOnAction(event -> selectHardMode());
+        extremeButton.setOnAction(event -> selectExtremeMode());
+
+        startButton.setOnAction(event -> {
             try {
                 startGame();
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
         });
+    }
+
+    @FXML
+    private void selectNormalMode() {
+        selectedMode = GameMode.NORMAL_MODE;
+        updateButtonStyles(normalButton);
+    }
+
+    @FXML
+    private void selectHardMode() {
+        selectedMode = GameMode.HARD_MODE;
+        updateButtonStyles(hardButton);
+    }
+
+    @FXML
+    private void selectExtremeMode() {
+        selectedMode = GameMode.EXTREME_MODE;
+        updateButtonStyles(extremeButton);
+    }
+
+    private void updateButtonStyles(Button selectedButton) {
+        // Remove the 'selected' style class from ALL difficulty buttons
+        normalButton.getStyleClass().remove("selected");
+        hardButton.getStyleClass().remove("selected");
+        extremeButton.getStyleClass().remove("selected");
+
+        // Add the 'selected' style class to the currently chosen button
+        selectedButton.getStyleClass().add("selected");
     }
 
     private void startGame() throws IOException {
@@ -41,10 +82,10 @@ public class ChooseDifficultyScreen {
         fadeIn.setFromValue(0.0);
         fadeIn.setToValue(1.0);
 
-        Stage stage = (Stage) extremeButton.getScene().getWindow();
+        Stage stage = (Stage) startButton.getScene().getWindow();
         stage.setScene(new Scene(gameRoot, 1280, 800));
         stage.setTitle("TetrisJFX");
-        new GameController(c);
+        new GameController(c, selectedMode);
         fadeIn.play();
     }
 }
