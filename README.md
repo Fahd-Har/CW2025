@@ -61,6 +61,9 @@
     - Links the game's UI and logic by retrieving the GuiController from the FXML and using it to initialize the GameController before displaying the game scene.
     - Separates game logic between each game difficulties.
 
+- **GameMode** Path: src/main/java/com/comp2042/view/logic/GameMode.java
+    - New enumeration to defines the three difficulty modes and holds two core boolean properties to control difficulty scaling in the game loop:
+
 ## Modified Java Classes
 ### File Refactoring
 
@@ -118,6 +121,7 @@
     18. Update `pauseGame()` and `newGame()` methods to show the panel when the game pauses, and removes it when game continues or a new game happens.
     19. Added the call for the rising row timeline in the `initializeGameView()` method.
     20. Added a public helper method to call refresh brick method in other classes without calling the actual private method.
+    21. Added a setter to pass mode to GameFlowManager
 
 
 - **GameController.java**
@@ -132,6 +136,7 @@
     6. Bound the new LevelUp property to the GUI constructor.
     7. In `onDownEvent()`, after a brick lands and rows are cleared, a check is performed to see if the level increased.
     8. Added `onRisingRowEvent()` to handle the timer tick. This method fetches the current level, and checks for immediate game over, and updates the view.
+    9. The `onRisingRowEvent()` now only runs if game mode is hard or extreme. Does not run on normal mode.
 
 
 - **Main.java**
