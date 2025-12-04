@@ -17,7 +17,6 @@ public class GameFlowManager {
     public Timeline timeline;
     private Timeline risingRowTimeline;
     private final GridPane gamePanel;
-    private final GameOverPanel gameOverPanel;
     private InputEventListener eventListener;
     private GameTime gameTime;
     private GameMode gameMode;
@@ -29,9 +28,8 @@ public class GameFlowManager {
     int currentDropRate = 400;
     int currentRisingRowInterval = 15;
 
-    public GameFlowManager(GridPane gamePanel, GameOverPanel gameOverPanel, InputEventListener eventListener) {
+    public GameFlowManager(GridPane gamePanel, InputEventListener eventListener) {
         this.gamePanel = gamePanel;
-        this.gameOverPanel = gameOverPanel;
         this.eventListener = eventListener;
     }
 
@@ -177,13 +175,11 @@ public class GameFlowManager {
 
     public void gameOver() {
         stop();
-        gameOverPanel.setVisible(true);
         isGameOver.setValue(Boolean.TRUE);
     }
 
     public void newGame(ActionEvent actionEvent) {
         stop();
-        gameOverPanel.setVisible(false);
         eventListener.createNewGame();
         gamePanel.requestFocus();
         currentDropRate = 400;

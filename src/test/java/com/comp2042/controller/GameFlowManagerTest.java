@@ -23,7 +23,6 @@ class GameFlowManagerTest {
 
     private GameFlowManager createManager() {
         GridPane panel = new GridPane();
-        GameOverPanel over = new GameOverPanel();
 
         InputEventListener listener = new InputEventListener() {
             @Override
@@ -51,7 +50,7 @@ class GameFlowManagerTest {
             }
         };
 
-        return new GameFlowManager(panel, over, listener);
+        return new GameFlowManager(panel, listener);
     }
 
     private GameFlowManager startManager() {

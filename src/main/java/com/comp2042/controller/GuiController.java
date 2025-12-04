@@ -55,7 +55,7 @@ public class GuiController implements Initializable {
         Font.loadFont(getClass().getClassLoader().getResource("digital.ttf").toExternalForm(), 38);
 
         gameRenderer = new GameRenderer(brickPanel, gamePanel, nextBrick, shadowPanel, holdBrick);
-        gameFlow = new GameFlowManager(gamePanel, gameOverPanel, null);
+        gameFlow = new GameFlowManager(gamePanel, null);
         notification = new Notifications(groupNotification);
         pauseMenu = new PauseMenu(rootPane);
 
@@ -171,6 +171,7 @@ public class GuiController implements Initializable {
 
     public void gameOver() {
         gameFlow.gameOver();
+        gameOverPanel.setVisible(true);
         bgm.stop();
         sfx.soundEffects(3);
     }
@@ -178,6 +179,7 @@ public class GuiController implements Initializable {
     private void newGame(ActionEvent actionEvent) {
         gameFlow.newGame(null);
         pauseMenu.showPanel(gameFlow);
+        gameOverPanel.setVisible(false);
         gamePanel.requestFocus();
         bgm.bgMusic();
     }
