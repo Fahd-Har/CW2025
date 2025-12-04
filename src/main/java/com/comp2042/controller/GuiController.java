@@ -8,6 +8,7 @@ import com.comp2042.model.logic.MovingDownData;
 import com.comp2042.view.data.ViewData;
 import com.comp2042.view.scenes.GameOverPanel;
 import com.comp2042.view.scenes.PauseMenu;
+import com.comp2042.view.soundBoard.Sound;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
@@ -46,6 +47,9 @@ public class GuiController implements Initializable {
     private KeyInputHandler keyHandler;
     private PauseMenu pauseMenu;
 
+    private final Sound bgm = new Sound();
+    private final Sound sfx = new Sound();
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         Font.loadFont(getClass().getClassLoader().getResource("digital.ttf").toExternalForm(), 38);
@@ -59,6 +63,8 @@ public class GuiController implements Initializable {
 
         initializeKeyControls();
         gameOverPanel.setVisible(false);
+
+        bgm.bgMusic();
 
         final Reflection reflection = new Reflection();
         reflection.setFraction(0.8);
@@ -74,6 +80,9 @@ public class GuiController implements Initializable {
 
     private void handleAllKeys(KeyEvent keyEvent) {
         if (gameFlow.isPause().getValue() == Boolean.FALSE && gameFlow.isGameOver().getValue() == Boolean.FALSE) {
+            switch (keyEvent.getCode()) {
+                case UP, W -> sfx.soundEffects(1);
+            }
             keyHandler.handleBrickControlKeys(keyEvent, this::moveDown, this::refreshBrick, this::hardDrop);
         }
         keyHandler.handleGlobalKeys(keyEvent);
@@ -113,6 +122,7 @@ public class GuiController implements Initializable {
         if (gameFlow.isPause().getValue() == Boolean.FALSE) {
             MovingDownData movingDownData = eventListener.onDownEvent(event);
             if (movingDownData.getClearRow() != null && movingDownData.getClearRow().getLinesRemoved() > 0) {
+                sfx.soundEffects(2);
                 notification.showScore(movingDownData.getClearRow().getScoreBonus());
             }
             refreshBrick(movingDownData.getViewData());
@@ -161,16 +171,26 @@ public class GuiController implements Initializable {
 
     public void gameOver() {
         gameFlow.gameOver();
+        bgm.stop();
+        sfx.soundEffects(3);
     }
 
     private void newGame(ActionEvent actionEvent) {
         gameFlow.newGame(null);
         pauseMenu.showPanel(gameFlow);
         gamePanel.requestFocus();
+        bgm.bgMusic();
     }
 
     private void pauseGame(ActionEvent actionEvent) {
         gameFlow.pauseGame(null);
+
+        if (gameFlow.isPause().getValue()) {
+            bgm.stop();
+        } else {
+            bgm.resume();
+        }
+
         pauseMenu.showPanel(gameFlow);
         gamePanel.requestFocus();
     }
@@ -188,6 +208,7 @@ public class GuiController implements Initializable {
             } while (previousState == null || currentState.getyPosition() > previousState.getyPosition());
 
             if (movingDownData.getClearRow() != null && movingDownData.getClearRow().getLinesRemoved() > 0) {
+                sfx.soundEffects(2);
                 notification.showScore(movingDownData.getClearRow().getScoreBonus());
             }
             refreshBrick(movingDownData.getViewData());

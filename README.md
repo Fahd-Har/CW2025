@@ -62,7 +62,10 @@
     - Separates game logic between each game difficulties.
 
 - **GameMode** Path: src/main/java/com/comp2042/view/logic/GameMode.java
-    - New enumeration to defines the three difficulty modes and holds two core boolean properties to control difficulty scaling in the game loop:
+    - New enumeration to defines the three difficulty modes and holds two core boolean properties to control difficulty scaling in the game loop.
+
+- **GameMode** Path: src/main/java/com/comp2042/view/soundBoard/Sound.java
+    - Handles and imports all sound related logic to enhance game play.
 
 ## Modified Java Classes
 ### File Refactoring
@@ -121,7 +124,8 @@
     18. Update `pauseGame()` and `newGame()` methods to show the panel when the game pauses, and removes it when game continues or a new game happens.
     19. Added the call for the rising row timeline in the `initializeGameView()` method.
     20. Added a public helper method to call refresh brick method in other classes without calling the actual private method.
-    21. Added a setter to pass mode to GameFlowManager
+    21. Added a setter to pass mode to GameFlowManager.
+    22. Call specific sounds from the Sound class for specified actions.
 
 
 - **GameController.java**
