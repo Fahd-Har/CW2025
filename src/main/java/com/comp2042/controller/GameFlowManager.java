@@ -61,7 +61,7 @@ public class GameFlowManager {
                 newLevel = 5;
             }
 
-            int newDropRate = 400 - (50 * (newLevel - 1));
+            int newDropRate = 400 - (70 * (newLevel - 1));
 
             if (newDropRate != currentDropRate) {
                 currentDropRate = newDropRate;
