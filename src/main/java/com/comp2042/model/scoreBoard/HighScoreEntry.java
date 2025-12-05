@@ -1,4 +1,6 @@
 package com.comp2042.model.scoreBoard;
+import com.comp2042.model.logic.GameMode;
+
 import java.io.Serial;
 import java.io.Serializable;
 
@@ -9,12 +11,14 @@ public class HighScoreEntry implements Serializable, Comparable<HighScoreEntry> 
     private final int level;
     private final int lines;
     private final String time;
+    private final GameMode gameMode;
 
-    public HighScoreEntry(int score, int level, int lines, String time) {
+    public HighScoreEntry(int score, int level, int lines, String time, GameMode gameMode) {
         this.score = score;
         this.level = level;
         this.lines = lines;
         this.time = time;
+        this.gameMode = gameMode;
     }
 
     public int getScore() {
@@ -31,6 +35,10 @@ public class HighScoreEntry implements Serializable, Comparable<HighScoreEntry> 
 
     public String getTime() {
         return time;
+    }
+
+    public GameMode getGameMode() {
+        return gameMode;
     }
 
     @Override

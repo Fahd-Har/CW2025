@@ -103,7 +103,7 @@ public class GameController implements InputEventListener {
         int finalLines = board.getCountRows().countRowsProperty().get();
         String finalTime = board.getGameTime().timeStringProperty().get();
 
-        return new HighScoreEntry(finalScore, finalLevel, finalLines, finalTime);
+        return new HighScoreEntry(finalScore, finalLevel, finalLines, finalTime, gameMode);
     }
 
     @Override

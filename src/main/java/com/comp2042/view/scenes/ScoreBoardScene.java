@@ -1,5 +1,6 @@
 package com.comp2042.view.scenes;
 
+import com.comp2042.model.logic.GameMode;
 import com.comp2042.model.scoreBoard.HighScoreEntry;
 import com.comp2042.model.scoreBoard.ScoreboardManager;
 import javafx.animation.FadeTransition;
@@ -21,15 +22,54 @@ public class ScoreBoardScene {
 
     @FXML private GridPane scoreList;
     @FXML private Button homeButton;
+    @FXML private Button normalButton, hardButton, extremeButton;
     private final ScoreboardManager scoreboardManager = new ScoreboardManager();
+    private GameMode selectedMode = GameMode.NORMAL_MODE;
 
     @FXML
     public void initialize() {
-        loadHighScores();
+        updateButtonStyles(normalButton);
+        loadHighScores(selectedMode);
     }
 
-    private void loadHighScores() {
-        List<HighScoreEntry> highScores = scoreboardManager.loadScores();
+    // Mode selection handlers
+    @FXML
+    private void selectNormalMode() {
+        selectedMode = GameMode.NORMAL_MODE;
+        updateButtonStyles(normalButton);
+        loadHighScores(selectedMode);
+    }
+
+    @FXML
+    private void selectHardMode() {
+        selectedMode = GameMode.HARD_MODE;
+        updateButtonStyles(hardButton);
+        loadHighScores(selectedMode);
+    }
+
+    @FXML
+    private void selectExtremeMode() {
+        selectedMode = GameMode.EXTREME_MODE;
+        updateButtonStyles(extremeButton);
+        loadHighScores(selectedMode);
+    }
+
+    private void updateButtonStyles(Button selectedButton) {
+        normalButton.getStyleClass().remove("selected");
+        hardButton.getStyleClass().remove("selected");
+        extremeButton.getStyleClass().remove("selected");
+
+        selectedButton.getStyleClass().add("selected");
+    }
+
+    private void loadHighScores(GameMode gameMode) {
+        List<HighScoreEntry> highScores = scoreboardManager.loadScores(gameMode);
+
+        // Removes gridPane children from row 2 and above, so to retain the style for the header
+        scoreList.getChildren().removeIf(node -> {
+            Integer rowIndex = GridPane.getRowIndex(node);
+            return rowIndex != null && rowIndex >= 2;
+        });
 
         if (highScores.isEmpty()) {
             Label noScores = new Label("No scores saved yet!");

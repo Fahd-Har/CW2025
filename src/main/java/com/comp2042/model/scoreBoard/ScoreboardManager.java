@@ -1,9 +1,9 @@
 package com.comp2042.model.scoreBoard;
 
+import com.comp2042.model.logic.GameMode;
+
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -14,43 +14,55 @@ public class ScoreboardManager {
     private static final Logger LOGGER = Logger.getLogger(ScoreboardManager.class.getName());
 
     public void saveScore(HighScoreEntry newEntry) {
-        List<HighScoreEntry> highScores = loadScores();
-        highScores.add(newEntry);
+        // Load all scores, grouped by mode
+        Map<GameMode, List<HighScoreEntry>> allScores = loadAllScores();
+
+        // Get the list for the current mode, or create a new one if there isn't any
+        GameMode mode = newEntry.getGameMode();
+        List<HighScoreEntry> highScoresForMode = allScores.getOrDefault(mode, new ArrayList<>());
+
+        highScoresForMode.add(newEntry);
 
         // Sort in descending order by score
-        Collections.sort(highScores);
+        Collections.sort(highScoresForMode);
 
         // Keep only the top 5 high scores
-        if (highScores.size() > SHOW_MAX_HIGH_SCORES) {
-            highScores = highScores.subList(0, SHOW_MAX_HIGH_SCORES);
+        if (highScoresForMode.size() > SHOW_MAX_HIGH_SCORES) {
+            highScoresForMode = highScoresForMode.subList(0, SHOW_MAX_HIGH_SCORES);
         }
 
+        allScores.put(mode, highScoresForMode);
+
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(HIGH_SCORE_FILE))) {
-            oos.writeObject(highScores);
+            oos.writeObject(allScores);
         } catch (IOException ex) {
             LOGGER.log(Level.WARNING, "Could not save highScores.", ex);
         }
     }
 
     @SuppressWarnings("unchecked")
-    public List<HighScoreEntry> loadScores() {
+    private Map<GameMode, List<HighScoreEntry>> loadAllScores() {
         File file = new File(HIGH_SCORE_FILE);
         if (!file.exists() || file.length() == 0) {
-            return new ArrayList<>();
+            return new HashMap<>();
         }
 
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
             Object obj = ois.readObject();
-            if (obj instanceof List<?> rawList) {
-                if (!rawList.isEmpty() && rawList.get(0) instanceof HighScoreEntry) {
-                    return (List<HighScoreEntry>) obj;
-                }
+            if (obj instanceof Map) {
+                return (Map<GameMode, List<HighScoreEntry>>) obj;
             }
         } catch (FileNotFoundException e) {
             LOGGER.log(Level.INFO, "HighScores file not found: " + HIGH_SCORE_FILE);
         } catch (IOException | ClassNotFoundException e) {
             LOGGER.log(Level.SEVERE, "Error loading highScores. Returning empty list.", e);
         }
-        return new ArrayList<>();
+        return new HashMap<>();
+    }
+
+    // Public method to load scores for a specific game mode.
+    public List<HighScoreEntry> loadScores(GameMode mode) {
+        Map<GameMode, List<HighScoreEntry>> allScores = loadAllScores();
+        return allScores.getOrDefault(mode, new ArrayList<>());
     }
 }
