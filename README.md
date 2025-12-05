@@ -79,6 +79,8 @@
   - Handles the scoreboard scene that shows the player.
   - Implements logic to switch the displayed scoreboard via buttons for Normal, Hard, and Extreme modes.
 
+- **ScoreBoardScene** Path: src/main/java/com/comp2042/model/scenes/AboutScene.java
+    - Handles the about panel to show the player the Gameplay Info and Difficulty Modes.
 
 ## Modified Java Classes
 ### File Refactoring

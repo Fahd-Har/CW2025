@@ -16,6 +16,7 @@ import java.util.ResourceBundle;
 public class MainMenuScreen {
     @FXML private Button startButton;
     @FXML private Button scoreBoardButton;
+    @FXML private Button aboutButton;
 
     @FXML
     public void initialize() {
@@ -34,6 +35,16 @@ public class MainMenuScreen {
                 throw new RuntimeException(ex);
             }
         });
+
+        if (aboutButton != null) {
+            aboutButton.setOnAction(ae -> {
+                try {
+                    showAbout();
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+            });
+        }
     }
 
     private void showHighScores() throws IOException {
@@ -65,6 +76,23 @@ public class MainMenuScreen {
         Stage stage = (Stage) startButton.getScene().getWindow();
         stage.setScene(new Scene(gameRoot, 1280, 800));
         stage.setTitle("TetrisJFX");
+        stage.setResizable(false);
+        fadeIn.play();
+    }
+
+    private void showAbout() throws IOException {
+        URL location = getClass().getClassLoader().getResource("scenes_FXML/aboutScreen.fxml");
+        ResourceBundle resources = null;
+        FXMLLoader fxmlLoader = new FXMLLoader(location, resources);
+        Parent rulesRoot = fxmlLoader.load();
+
+        FadeTransition fadeIn = new FadeTransition(Duration.seconds(1.0), rulesRoot);
+        fadeIn.setFromValue(0.0);
+        fadeIn.setToValue(1.0);
+
+        Stage stage = (Stage) aboutButton.getScene().getWindow();
+        stage.setScene(new Scene(rulesRoot, 1280, 800));
+        stage.setTitle("TetrisJFX - About");
         stage.setResizable(false);
         fadeIn.play();
     }
