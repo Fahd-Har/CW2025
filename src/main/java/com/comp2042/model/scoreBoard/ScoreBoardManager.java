@@ -7,11 +7,11 @@ import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class ScoreboardManager {
+public class ScoreBoardManager {
 
     private static final String HIGH_SCORE_FILE = "highScores.dat";
     private static final int SHOW_MAX_HIGH_SCORES = 5;
-    private static final Logger LOGGER = Logger.getLogger(ScoreboardManager.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(ScoreBoardManager.class.getName());
 
     public void saveScore(HighScoreEntry newEntry) {
         // Load all scores, grouped by mode

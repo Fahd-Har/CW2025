@@ -2,7 +2,7 @@ package com.comp2042.view.scenes;
 
 import com.comp2042.model.logic.GameMode;
 import com.comp2042.model.scoreBoard.HighScoreEntry;
-import com.comp2042.model.scoreBoard.ScoreboardManager;
+import com.comp2042.model.scoreBoard.ScoreBoardManager;
 import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,7 +23,7 @@ public class ScoreBoardScene {
     @FXML private GridPane scoreList;
     @FXML private Button homeButton;
     @FXML private Button normalButton, hardButton, extremeButton;
-    private final ScoreboardManager scoreboardManager = new ScoreboardManager();
+    private final ScoreBoardManager scoreboardManager = new ScoreBoardManager();
     private GameMode selectedMode = GameMode.NORMAL_MODE;
 
     @FXML

@@ -70,7 +70,7 @@
 - **HighscoreEntry** Path: src/main/java/com/comp2042/model/scoreBoard/HighscoreEntry.java
   - Uses serializable to store the player's final score, level, lines, time, and the GameMode to ensure scores are tracked separately for each difficulty mode.
 
-- **ScoreboardManager** Path: src/main/java/com/comp2042/model/scoreBoard/ScoreboardManager.java
+- **ScoreBoardManager** Path: src/main/java/com/comp2042/model/scoreBoard/ScoreBoardManager.java
   - Stores the player's records in the file, **_highScores.dat_**
   - Manages a map to keep the scoreboard for each mode different.
   - Includes logic for loading, sorting, and maintaining only the top 5 scores for each mode.

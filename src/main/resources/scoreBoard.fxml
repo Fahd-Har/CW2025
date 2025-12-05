@@ -52,6 +52,6 @@
         </Button>
     </children>
     <stylesheets>
-        <URL value="@scoreboard_style.css" />
+        <URL value="@scoreBoard_style.css" />
     </stylesheets>
 </AnchorPane>
