@@ -30,6 +30,15 @@
     -fx-font-weight: bold;
 }
 
+.backButtonShape {
+    -fx-text-fill: black;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-font-family: "Arial Narrow";
+    -fx-font-size: 36px;
+    -fx-font-weight: bold;
+}
+
 .selected {
     -fx-background-color: #4CAF50;
     -fx-text-fill: white;
