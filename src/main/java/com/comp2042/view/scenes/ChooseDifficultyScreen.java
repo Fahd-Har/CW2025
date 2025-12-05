@@ -72,7 +72,7 @@ public class ChooseDifficultyScreen {
     }
 
     private void startGame() throws IOException {
-        URL location = getClass().getClassLoader().getResource("gameLayout.fxml");
+        URL location = getClass().getClassLoader().getResource("scenes_FXML/gameLayout.fxml");
         ResourceBundle resources = null;
         FXMLLoader fxmlLoader = new FXMLLoader(location, resources);
         Parent gameRoot = fxmlLoader.load();

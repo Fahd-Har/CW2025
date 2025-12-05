@@ -37,7 +37,7 @@ public class MainMenuScreen {
     }
 
     private void showHighScores() throws IOException {
-        URL location = getClass().getClassLoader().getResource("scoreBoard.fxml");
+        URL location = getClass().getClassLoader().getResource("scenes_FXML/scoreBoard.fxml");
         FXMLLoader fxmlLoader = new FXMLLoader(location);
         Parent scoreboardRoot = fxmlLoader.load();
 
@@ -53,7 +53,7 @@ public class MainMenuScreen {
     }
 
     private void startGame() throws IOException {
-        URL location = getClass().getClassLoader().getResource("chooseDifficulty.fxml");
+        URL location = getClass().getClassLoader().getResource("scenes_FXML/chooseDifficulty.fxml");
         ResourceBundle resources = null;
         FXMLLoader fxmlLoader = new FXMLLoader(location, resources);
         Parent gameRoot = fxmlLoader.load();

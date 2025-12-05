@@ -21,6 +21,6 @@
     </children>
 
     <stylesheets>
-        <URL value="@pauseScreen_style.css" />
+        <URL value="@../CSS/pauseScreen_style.css" />
     </stylesheets>
 </AnchorPane>

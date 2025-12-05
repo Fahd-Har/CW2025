@@ -18,7 +18,7 @@ public class PauseMenu {
 
     public void loadPauseScreen() {
         try {
-            URL pauseLocation = getClass().getClassLoader().getResource("pauseScreen.fxml");
+            URL pauseLocation = getClass().getClassLoader().getResource("scenes_FXML/pauseScreen.fxml");
             if (pauseLocation != null) {
                 FXMLLoader pauseLoader = new FXMLLoader(pauseLocation);
                 pauseMenu = pauseLoader.load();

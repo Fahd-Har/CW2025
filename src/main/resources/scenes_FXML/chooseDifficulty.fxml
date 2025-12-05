@@ -57,6 +57,6 @@
     </children>
 
     <stylesheets>
-        <URL value="@chooseDifficulty_style.css" />
+        <URL value="@../CSS/chooseDifficulty_style.css" />
     </stylesheets>
 </AnchorPane>

@@ -18,7 +18,7 @@ public class GameOverPanel {
 
     public void loadGameOverPanel() {
         try {
-            URL pauseLocation = getClass().getClassLoader().getResource("gameOverPanel.fxml");
+            URL pauseLocation = getClass().getClassLoader().getResource("scenes_FXML/gameOverPanel.fxml");
             if (pauseLocation != null) {
                 FXMLLoader gameOverLoader = new FXMLLoader(pauseLocation);
                 gameOverPanel = gameOverLoader.load();

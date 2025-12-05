@@ -87,7 +87,7 @@
     <Group fx:id="levelUpNotification" layoutX="533" layoutY="150"/>
 
     <stylesheets>
-        <URL value="@window_style.css"/>
+        <URL value="@../CSS/window_style.css"/>
     </stylesheets>
 
 </Pane>

@@ -1,5 +1,5 @@
 .root {
-    -fx-background-image: url("mainMenu_Background.jpg");
+    -fx-background-image: url("/images/mainMenu_Background.jpg");
     -fx-background-size: 100% 100%;
     -fx-focus-color: #FF0000;
 }
