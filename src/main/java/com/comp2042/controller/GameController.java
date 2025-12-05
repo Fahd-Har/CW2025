@@ -9,6 +9,7 @@ import com.comp2042.model.logic.ClearFullRow;
 import com.comp2042.model.logic.GameMode;
 import com.comp2042.model.logic.MatrixOperations;
 import com.comp2042.model.logic.MovingDownData;
+import com.comp2042.model.scoreBoard.HighScoreEntry;
 import com.comp2042.view.data.ViewData;
 
 public class GameController implements InputEventListener {
@@ -93,6 +94,16 @@ public class GameController implements InputEventListener {
 
         viewGuiController.refreshGameBackground(board.getBoardMatrix());
         return clearFullRow;
+    }
+
+    // Method to retrieve final game statistics for the scoreboard
+    public HighScoreEntry getFinalGameStats() {
+        int finalScore = board.getScore().scoreProperty().get();
+        int finalLevel = board.getLevelUp().getLevel();
+        int finalLines = board.getCountRows().countRowsProperty().get();
+        String finalTime = board.getGameTime().timeStringProperty().get();
+
+        return new HighScoreEntry(finalScore, finalLevel, finalLines, finalTime);
     }
 
     @Override

@@ -5,6 +5,8 @@ import com.comp2042.events.*;
 import com.comp2042.model.logic.GameMode;
 import com.comp2042.model.logic.GameTime;
 import com.comp2042.model.logic.MovingDownData;
+import com.comp2042.model.scoreBoard.HighScoreEntry;
+import com.comp2042.model.scoreBoard.ScoreboardManager;
 import com.comp2042.view.data.ViewData;
 import com.comp2042.view.scenes.GameOverPanel;
 import com.comp2042.view.scenes.PauseMenu;
@@ -47,6 +49,7 @@ public class GuiController implements Initializable {
     private Notifications notification;
     private KeyInputHandler keyHandler;
     private PauseMenu pauseMenu;
+    private final ScoreboardManager scoreboardManager = new ScoreboardManager();
 
     private final Sound bgm = new Sound();
     private final Sound sfx = new Sound();
@@ -173,6 +176,12 @@ public class GuiController implements Initializable {
 
     public void gameOver() {
         gameFlow.gameOver();
+
+        if (eventListener instanceof GameController gameController) {
+            HighScoreEntry finalStats = gameController.getFinalGameStats();
+            scoreboardManager.saveScore(finalStats);
+        }
+
         gameOverPanel.showPanel(gameFlow);
         bgm.stop();
         sfx.soundEffects(3);
