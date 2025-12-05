@@ -196,6 +196,11 @@ public class GuiController implements Initializable {
     }
 
     private void pauseGame(ActionEvent actionEvent) {
+        // Does not apply the pause game method when game over is true
+        if (gameFlow.isGameOver().getValue() == Boolean.TRUE) {
+            return;
+        }
+
         gameFlow.pauseGame(null);
 
         if (gameFlow.isPause().getValue()) {
