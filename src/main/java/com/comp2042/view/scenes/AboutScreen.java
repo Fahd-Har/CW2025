@@ -12,7 +12,7 @@ import javafx.util.Duration;
 import java.io.IOException;
 import java.net.URL;
 
-public class AboutScene {
+public class AboutScreen {
     @FXML private Button backButton;
 
     @FXML
