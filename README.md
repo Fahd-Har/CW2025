@@ -67,6 +67,19 @@
 - **Sound** Path: src/main/java/com/comp2042/view/soundBoard/Sound.java
     - Handles and imports all sound related logic to enhance game play.
 
+- **HighscoreEntry** Path: src/main/java/com/comp2042/model/scoreBoard/HighscoreEntry.java
+  - Uses serializable to store the player's final score, level, lines, time, and the GameMode to ensure scores are tracked separately for each difficulty mode.
+
+- **ScoreboardManager** Path: src/main/java/com/comp2042/model/scoreBoard/ScoreboardManager.java
+  - Stores the player's records in the file, **_highScores.dat_**
+  - Manages a map to keep the scoreboard for each mode different.
+  - Includes logic for loading, sorting, and maintaining only the top 5 scores for each mode.
+
+- **ScoreBoardScene** Path: src/main/java/com/comp2042/model/scoreBoard/ScoreBoardScene.java
+  - Handles the scoreboard scene that shows the player.
+  - Implements logic to switch the displayed scoreboard via buttons for Normal, Hard, and Extreme modes.
+
+
 ## Modified Java Classes
 ### File Refactoring
 
@@ -127,6 +140,8 @@
     21. Added a setter to pass mode to GameFlowManager.
     22. Call specific sounds from the Sound class for specified actions.
     23. Added new public method `showLevelUpNotification()` for the GameController to read from instead of reading from notification class which may violate SRP.
+    24. Modified the `gameOver()` method to automatically save the scores using data provided by the GameController's new `getFinalGameStats()` method,
+    ensuring the score is saved with the correct difficulty mode.
 
 
 - **GameController.java**
@@ -143,6 +158,7 @@
     8. Added `onRisingRowEvent()` to handle the timer tick. This method fetches the current level, and checks for immediate game over, and updates the view.
     9. The `onRisingRowEvent()` now only runs if game mode is hard or extreme. Does not run on normal mode.
     10. Now checks in the `onDownEvent()` method if player reaches the number of removed lines, level up pop up occurs.
+    11. Added the method `getFinalGameStats()` to package the game's final score, level, lines, time, and the active GameMode into a new HighscoreEntry object upon game over.
 
 
 - **Main.java**
