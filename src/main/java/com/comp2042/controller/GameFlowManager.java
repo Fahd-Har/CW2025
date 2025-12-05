@@ -3,7 +3,6 @@ package com.comp2042.controller;
 import com.comp2042.events.InputEventListener;
 import com.comp2042.model.logic.GameMode;
 import com.comp2042.model.logic.GameTime;
-import com.comp2042.view.scenes.GameOverPanel;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.property.BooleanProperty;
@@ -26,7 +25,7 @@ public class GameFlowManager {
     private Runnable gameAction;
     private Runnable risingRowAction;
     int currentDropRate = 400;
-    int currentRisingRowInterval = 15;
+    int currentRisingRowInterval = 20;
 
     public GameFlowManager(GridPane gamePanel, InputEventListener eventListener) {
         this.gamePanel = gamePanel;
@@ -120,11 +119,15 @@ public class GameFlowManager {
             return;
         }
 
-        if (newLevel < 2) {
+        if (newLevel < 1) {
             risingRowTimeline.stop();
             return;
-        } else if (newLevel == 3) {
+        } else if (newLevel == 1) {
             newInterval = currentRisingRowInterval;
+        } else if (newLevel == 2) {
+            newInterval = 18;
+        } else if (newLevel == 3) {
+            newInterval = 15;
         } else if (newLevel == 4) {
             newInterval = 12;
         } else {

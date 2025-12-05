@@ -107,7 +107,7 @@ public class MatrixOperations {
         int garbageColor = 8;
         Arrays.fill(risingRow, garbageColor);
 
-        int numHoles = level - 1;
+        int numHoles = level;
 
         if (numHoles > 3) {
             numHoles = 3;
