@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.Region?>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" styleClass="root" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.comp2042.view.scenes.ScoreBoardScene">
+    <children>
+        <Text layoutY="120.0" styleClass="title" text="SCOREBOARD" textAlignment="CENTER" wrappingWidth="1280.0">
+            <font>
+                <Font size="16.0" />
+            </font>
+        </Text>
+        <GridPane fx:id="scoreList" alignment="TOP_CENTER" layoutY="180.0" prefHeight="500.0" prefWidth="1280.0" hgap="20" vgap="10">
+
+            <columnConstraints>
+                <ColumnConstraints hgrow="NEVER" halignment="CENTER" prefWidth="80.0"/>
+                <ColumnConstraints hgrow="ALWAYS" halignment="RIGHT" minWidth="120.0"/>
+                <ColumnConstraints hgrow="ALWAYS" halignment="RIGHT" minWidth="100.0"/>
+                <ColumnConstraints hgrow="ALWAYS" halignment="RIGHT" minWidth="100.0"/>
+                <ColumnConstraints hgrow="ALWAYS" halignment="CENTER" minWidth="150.0"/>
+            </columnConstraints>
+
+            <Label text="Rank" GridPane.columnIndex="0" GridPane.rowIndex="0" styleClass="scoreboard-header"/>
+            <Label text="SCORE" GridPane.columnIndex="1" GridPane.rowIndex="0" styleClass="scoreboard-header"/>
+            <Label text="LEVEL" GridPane.columnIndex="2" GridPane.rowIndex="0" styleClass="scoreboard-header"/>
+            <Label text="LINES" GridPane.columnIndex="3" GridPane.rowIndex="0" styleClass="scoreboard-header"/>
+            <Label text="TIME" GridPane.columnIndex="4" GridPane.rowIndex="0" styleClass="scoreboard-header"/>
+
+            <Region styleClass="scoreboard-separator-region" prefHeight="2.0"
+                    GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.columnSpan="5"/>
+
+        </GridPane>
+        <Button fx:id="homeButton" layoutX="565.0" layoutY="700.0" prefHeight="50.0" prefWidth="150.0" text="Home" onAction="#handleHome" styleClass="buttonShape">
+            <font>
+                <Font size="24.0" />
+            </font>
+        </Button>
+    </children>
+    <stylesheets>
+        <URL value="@scoreboard_style.css" />
+    </stylesheets>
+</AnchorPane>
