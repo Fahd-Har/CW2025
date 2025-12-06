@@ -22,6 +22,7 @@ public class ChooseDifficultyScreen {
     @FXML private Button hardButton;
     @FXML private Button extremeButton;
     @FXML private Button startButton;
+    @FXML private Button backButton;
 
     // ADDED: Field to track the selected mode, default to Normal
     private GameMode selectedMode = GameMode.NORMAL_MODE;
@@ -37,6 +38,14 @@ public class ChooseDifficultyScreen {
         startButton.setOnAction(event -> {
             try {
                 startGame();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
+
+        backButton.setOnAction(event -> {
+            try {
+                loadBack();
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
@@ -69,6 +78,22 @@ public class ChooseDifficultyScreen {
 
         // Add the 'selected' style class to the currently chosen button
         selectedButton.getStyleClass().add("selected");
+    }
+
+    private void loadBack() throws IOException {
+        URL location = getClass().getClassLoader().getResource("scenes_FXML/mainMenuScreen.fxml");
+        FXMLLoader fxmlLoader = new FXMLLoader(location);
+        Parent menuRoot = fxmlLoader.load();
+
+        FadeTransition fadeIn = new FadeTransition(Duration.seconds(1.0), menuRoot);
+        fadeIn.setFromValue(0.0);
+        fadeIn.setToValue(1.0);
+
+        Stage stage = (Stage) backButton.getScene().getWindow();
+        Scene currentScene = stage.getScene();
+        currentScene.setRoot(menuRoot);
+        stage.setTitle("TetrisJFX");
+        fadeIn.play();
     }
 
     private void startGame() throws IOException {

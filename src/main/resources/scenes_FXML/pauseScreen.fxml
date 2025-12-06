@@ -16,9 +16,7 @@
       </Text>
       <Label alignment="CENTER" layoutX="129.0" layoutY="180.0" prefHeight="17.0" prefWidth="395.0" snapToPixel="false" styleClass="instructions-text" text="- Press ESCAPE to Resume" />
       <Label alignment="CENTER" layoutX="129.0" layoutY="206.0" prefHeight="17.0" prefWidth="395.0" snapToPixel="false" styleClass="instructions-text" text="- Press N for New Game" />
-      <Button layoutX="120.0" layoutY="280.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="90.0" text="Back" />
-      <Button layoutX="430.0" layoutY="280.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="90.0" text="Home" />
-      <Button layoutX="275.0" layoutY="280.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="90.0" text="Rules" />
+      <Button layoutX="275.0" layoutY="280.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="90.0" text="Home" />
    </children>
 
     <stylesheets>
