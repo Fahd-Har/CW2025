@@ -20,14 +20,14 @@ public class AboutScreen {
         backButton.setOnAction(event -> {
             try {
                 // Navigate back to the MainMenuScreen
-                loadBack();
+                loadHome();
             } catch (IOException ex) {
                 throw new RuntimeException("Failed to load main menu.", ex);
             }
         });
     }
 
-    private void loadBack() throws IOException {
+    private void loadHome() throws IOException {
         URL location = getClass().getClassLoader().getResource("scenes_FXML/mainMenuScreen.fxml");
         FXMLLoader fxmlLoader = new FXMLLoader(location);
         Parent menuRoot = fxmlLoader.load();

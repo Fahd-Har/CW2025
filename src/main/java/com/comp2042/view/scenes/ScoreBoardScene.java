@@ -105,7 +105,7 @@ public class ScoreBoardScene {
     }
 
     @FXML
-    private void handleHome() throws IOException {
+    private void loadHome() throws IOException {
         URL location = getClass().getClassLoader().getResource("scenes_FXML/mainMenuScreen.fxml");
         FXMLLoader fxmlLoader = new FXMLLoader(location);
         Parent menuRoot = fxmlLoader.load();
