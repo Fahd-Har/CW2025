@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.comp2042.view.scenes.AboutScreen">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.comp2042.view.scenes.AboutScene">
    <children>
       <Button fx:id="backButton" layoutX="565.0" layoutY="640.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" text="Back" textAlignment="CENTER" />
       <Text layoutX="290.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="GAMEPLAY INFO" textAlignment="CENTER" wrappingWidth="700.0" />

@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class MainMenuScreen {
+public class MainMenuScene {
     @FXML private Button startButton;
     @FXML private Button scoreBoardButton;
     @FXML private Button aboutButton;

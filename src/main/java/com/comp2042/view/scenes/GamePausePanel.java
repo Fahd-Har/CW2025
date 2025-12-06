@@ -1,24 +1,20 @@
 package com.comp2042.view.scenes;
 import com.comp2042.controller.GameFlowManager;
-import javafx.animation.FadeTransition;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
-import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
 
-public class PauseMenu {
+public class GamePausePanel {
 
     private final Pane rootPane;
     private Parent pauseMenu;
     private Button homeButton;
 
-    public PauseMenu(Pane rootPane) {
+    public GamePausePanel(Pane rootPane) {
         this.rootPane = rootPane;
     }
 

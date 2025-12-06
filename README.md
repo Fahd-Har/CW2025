@@ -16,7 +16,7 @@
     - Added core Hold Brick logic to manage the heldBrick state and swap the current piece, including a check to prevent multiple swaps per turn.
     - This helps support Single Responsibility Principle (SRP) by separating responsibilities.
 
-- **GameFlowManager** Path: src/main/java/com/comp2042/controller/GameTimeline.java
+- **GameFlowManager** Path: src/main/java/com/comp2042/controller/GameFlowManager.java
     - Takes up the game timeline logic from GuiController
     - This helps support Single Responsibility Principle (SRP) by separating responsibilities.
 
@@ -34,7 +34,7 @@
     - Takes up the logic for key inputs and their respective actions from GuiController using consumer.
     - This helps support Single Responsibility Principle (SRP) by separating responsibilities.
 
-- **MainMenuScreen** Path: src/main/java/com/comp2042/view/scenes/MainMenuScreen.java
+- **MainMenuScene** Path: src/main/java/com/comp2042/view/scenes/MainMenuScene.java
     - An enhancement for player to choose whether they want to see the game rules/what each difficulty does (About),
     or straight away choose their difficulty game mode.
     - Maintains a clear separation between the welcome screen, variance of game difficulty and the game itself.
@@ -53,11 +53,11 @@
     - Manages the game level from level 1.
     - For every 10 lines removed, the game levels up automatically by calling `checkAndAdvance()`.
 
-- **PauseMenu** Path: src/main/java/com/comp2042/view/scenes/PauseMenu.java
+- **GamePausePanel** Path: src/main/java/com/comp2042/view/scenes/GamePausePanel.java
     - Handles loading and positioning of the pauseScreen.fxml screen.
     - Manages the visibility of the pause menu panel by binding it directly to the `isPause()` state from the `GameFlowManager` class.
 
-- **ChooseDifficultyScreen** Path: src/main/java/com/comp2042/view/scenes/ChooseDifficultyScreen.java
+- **ChooseDifficultyScene** Path: src/main/java/com/comp2042/view/scenes/ChooseDifficultyScene.java
     - Links the game's UI and logic by retrieving the GuiController from the FXML and using it to initialize the GameController before displaying the game scene.
     - Separates game logic between each game difficulties.
 
@@ -79,7 +79,7 @@
   - Handles the scoreboard scene that shows the player.
   - Implements logic to switch the displayed scoreboard via buttons for Normal, Hard, and Extreme modes.
 
-- **ScoreBoardScene** Path: src/main/java/com/comp2042/view/scenes/AboutScene.java
+- **AboutScene** Path: src/main/java/com/comp2042/view/scenes/AboutScene.java
     - Handles the about panel to show the player the Gameplay Info and Difficulty Modes.
 
 - **SceneSwitch** Path: src/main/java/com/comp2042/view/scenes/SceneSwitch.java

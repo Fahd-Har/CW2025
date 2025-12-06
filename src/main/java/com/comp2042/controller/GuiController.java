@@ -9,7 +9,7 @@ import com.comp2042.model.scoreBoard.HighScoreEntry;
 import com.comp2042.model.scoreBoard.ScoreBoardManager;
 import com.comp2042.view.data.ViewData;
 import com.comp2042.view.scenes.GameOverPanel;
-import com.comp2042.view.scenes.PauseMenu;
+import com.comp2042.view.scenes.GamePausePanel;
 import com.comp2042.view.soundBoard.Sound;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.StringProperty;
@@ -48,7 +48,7 @@ public class GuiController implements Initializable {
     private GameFlowManager gameFlow;
     private Notifications notification;
     private KeyInputHandler keyHandler;
-    private PauseMenu pauseMenu;
+    private GamePausePanel gamePausePanel;
     private final ScoreBoardManager scoreBoardManager = new ScoreBoardManager();
 
     private final Sound bgm = new Sound();
@@ -61,10 +61,10 @@ public class GuiController implements Initializable {
         gameRenderer = new GameRenderer(brickPanel, gamePanel, nextBrick, shadowPanel, holdBrick);
         gameFlow = new GameFlowManager(gamePanel, null);
         notification = new Notifications(groupNotification, levelUpNotification);
-        pauseMenu = new PauseMenu(rootPane);
+        gamePausePanel = new GamePausePanel(rootPane);
         gameOverPanel = new GameOverPanel(rootPane);
 
-        pauseMenu.loadPauseScreen();
+        gamePausePanel.loadPauseScreen();
 
         initializeKeyControls();
         gameOverPanel.loadGameOverPanel();
@@ -191,7 +191,7 @@ public class GuiController implements Initializable {
 
     private void newGame(ActionEvent actionEvent) {
         gameFlow.newGame(null);
-        pauseMenu.showPanel(gameFlow);
+        gamePausePanel.showPanel(gameFlow);
         gameOverPanel.showPanel(gameFlow);
         gamePanel.requestFocus();
         bgm.bgMusic();
@@ -211,7 +211,7 @@ public class GuiController implements Initializable {
             bgm.resume();
         }
 
-        pauseMenu.showPanel(gameFlow);
+        gamePausePanel.showPanel(gameFlow);
         gamePanel.requestFocus();
     }
 

@@ -5,7 +5,7 @@ import javafx.scene.control.Button;
 
 import java.io.IOException;
 
-public class AboutScreen {
+public class AboutScene {
     @FXML private Button backButton;
 
     @FXML
