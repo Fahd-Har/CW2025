@@ -123,7 +123,7 @@ public class GameFlowManager {
             risingRowTimeline.stop();
             return;
         } else if (newLevel == 1) {
-            newInterval = currentRisingRowInterval;
+            newInterval = 20;
         } else if (newLevel == 2) {
             newInterval = 18;
         } else if (newLevel == 3) {
@@ -186,6 +186,13 @@ public class GameFlowManager {
         eventListener.createNewGame();
         gamePanel.requestFocus();
         currentDropRate = 400;
+
+        // recreates the falling brick timeline for every new game
+        if (this.gameAction != null) {
+            createTimeline(this.gameAction);
+        }
+
+        currentRisingRowInterval = 20;
         updateSpeed(1);
         start();
         isPause.setValue(Boolean.FALSE);

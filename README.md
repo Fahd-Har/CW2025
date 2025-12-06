@@ -189,3 +189,15 @@
     Also helps so that change in one does not affect the other.
 
 ## Unexpected Problems
+
+**Problem 1**
+<br> Pause game logic still activates when game over is logic is activated.
+
+**Solution**
+<br> In the GuiController class, call an if statement to not call the pause game logic if game over logic is true.
+
+**Problem 2**
+<br> Falling bricks speed does not reset if new game by pressing the N key occurs.
+
+**Solution**
+<br> In the new game logic method, recreate the game action timeline to ensure speed of bricks falling is always reset.
