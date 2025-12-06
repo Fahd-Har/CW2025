@@ -5,8 +5,6 @@ import com.comp2042.events.*;
 import com.comp2042.model.logic.GameMode;
 import com.comp2042.model.logic.GameTime;
 import com.comp2042.model.logic.MovingDownData;
-import com.comp2042.model.scoreBoard.HighScoreEntry;
-import com.comp2042.model.scoreBoard.ScoreBoardManager;
 import com.comp2042.view.data.ViewData;
 import com.comp2042.view.scenes.GameOverPanel;
 import com.comp2042.view.scenes.GamePausePanel;
@@ -25,6 +23,7 @@ import javafx.scene.text.Text;
 import javafx.scene.layout.Pane;
 
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class GuiController implements Initializable {
@@ -49,14 +48,13 @@ public class GuiController implements Initializable {
     private Notifications notification;
     private KeyInputHandler keyHandler;
     private GamePausePanel gamePausePanel;
-    private final ScoreBoardManager scoreBoardManager = new ScoreBoardManager();
 
     private final Sound bgm = new Sound();
     private final Sound sfx = new Sound();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        Font.loadFont(getClass().getClassLoader().getResource("digital.ttf").toExternalForm(), 38);
+        Font.loadFont(Objects.requireNonNull(getClass().getClassLoader().getResource("digital.ttf")).toExternalForm(), 38);
 
         gameRenderer = new GameRenderer(brickPanel, gamePanel, nextBrick, shadowPanel, holdBrick);
         gameFlow = new GameFlowManager(gamePanel, null);
@@ -189,7 +187,7 @@ public class GuiController implements Initializable {
     }
 
     private void newGame(ActionEvent actionEvent) {
-        gameFlow.newGame(null);
+        gameFlow.newGame();
         gamePausePanel.showPanel(gameFlow);
         gameOverPanel.showPanel(gameFlow);
         gamePanel.requestFocus();
@@ -202,7 +200,7 @@ public class GuiController implements Initializable {
             return;
         }
 
-        gameFlow.pauseGame(null);
+        gameFlow.pauseGame();
 
         if (gameFlow.isPause().getValue()) {
             bgm.stop();
