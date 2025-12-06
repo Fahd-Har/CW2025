@@ -22,12 +22,12 @@ public class GameController implements InputEventListener {
     private final GameMode gameMode;
     private final HighScoreSaver scoreSaver;
 
-    public GameController(GuiController c, GameMode mode, HighScoreSaver scoreSaver) {
-        viewGui = c;
+    public GameController(GuiController viewGui, GameMode mode, HighScoreSaver scoreSaver) {
+        this.viewGui = viewGui;
         gameMode = mode;
         this.scoreSaver = scoreSaver;
         board.newGame();
-        setupViewsAndBindings(c);
+        setupViewsAndBindings(viewGui);
     }
 
     private void setupViewsAndBindings(GuiController viewGui) {
