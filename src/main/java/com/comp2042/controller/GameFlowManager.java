@@ -7,7 +7,6 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.event.ActionEvent;
 import javafx.scene.layout.GridPane;
 import javafx.util.Duration;
 
@@ -181,7 +180,7 @@ public class GameFlowManager {
         isGameOver.setValue(Boolean.TRUE);
     }
 
-    public void newGame(ActionEvent actionEvent) {
+    public void newGame() {
         stop();
         eventListener.createNewGame();
         gamePanel.requestFocus();
@@ -199,7 +198,7 @@ public class GameFlowManager {
         isGameOver.setValue(Boolean.FALSE);
     }
 
-    public void pauseGame(ActionEvent actionEvent) {
+    public void pauseGame() {
         if(isPause.get()) {
             start();
         } else {
