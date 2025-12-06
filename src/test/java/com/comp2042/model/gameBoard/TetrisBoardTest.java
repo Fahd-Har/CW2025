@@ -1,8 +1,9 @@
-package com.comp2042.gameBoard;
+package com.comp2042.model.gameBoard;
 
-import com.comp2042.model.gameBoard.TetrisBoard;
 import com.comp2042.model.logic.ClearFullRow;
 import com.comp2042.view.data.ViewData;
+import javafx.application.Platform;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -13,11 +14,20 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class TetrisBoardTest {
 
+    // Initialize the JavaFX platform once before all tests to prevent NullPointerException with GameTime/Timeline
+    @BeforeAll
+    static void startJavaFx() {
+        try {
+            Platform.startup(() -> {});
+        } catch (IllegalStateException ignored) {
+        }
+    }
+
     private TetrisBoard board;
 
     @BeforeEach
     void setUp() {
-        board = new TetrisBoard(10,20);
+        board = new TetrisBoard(10,25);
         board.createNewBrick();
     }
 
@@ -44,7 +54,6 @@ class TetrisBoardTest {
         int newX = afterMove.getxPosition();
         int newY = afterMove.getyPosition();
 
-        // Assert
         // Ensure brick falls within the blue box
         assertTrue(moved, "Brick is not moving down successfully");
         // Ensure X position is always constant
@@ -85,7 +94,6 @@ class TetrisBoardTest {
         int newX = afterMove.getxPosition();
         int newY = afterMove.getyPosition();
 
-        // Assert
         // Ensure brick falls within the blue box
         assertTrue(moved, "Brick is not moving down successfully");
         // Ensure X position is always constant
@@ -204,10 +212,10 @@ class TetrisBoardTest {
     @Test
     void testCreateNewBrickShouldCollide() {
         int[][] matrix = board.getBoardMatrix();
-        for (int i = 0; i < 20; i++) {
-            matrix[i][2] = 1;
-            matrix[i][3] = 1;
+        for (int i = 0; i < 25; i++) {
             matrix[i][4] = 1;
+            matrix[i][5] = 1;
+            matrix[i][6] = 1;
         }
         boolean collided = board.createNewBrick();
         assertTrue(collided, "New brick should collide when there is another brick at spawn position");
@@ -284,4 +292,93 @@ class TetrisBoardTest {
         assertEquals(0, board.getScore().scoreProperty().get(), "Score should reset when a new game happens");
     }
 
+    @Test
+    void testHardDrop_MovesBrickToShadowPositionAndLands() {
+        // Arrange: Clear the board to ensure max drop distance for predictable landing
+        clearBoard();
+        board.createNewBrick(); // Spawn a piece at (4, 1)
+
+        // Get the expected landing position (shadow position)
+        int expectedY = board.getViewData().getShadowYPosition();
+
+        // Act: Simulate Hard Drop logic (repeated move down until collision)
+        // This simulates the behavior found in GameController.onSlamEvent()
+        int hardDropMoves = 0;
+        while (board.moveBrickDown()) {
+            hardDropMoves++;
+        }
+
+        // Act: Merge the brick after it lands
+        board.mergeBrickToBackground();
+
+        // The piece moved a substantial distance
+        assertTrue(hardDropMoves > 0, "Hard drop should have resulted in multiple moves down.");
+
+        // The bottom row of the board matrix must contain blocks,
+        // confirming the piece landed at the maximum depth on an empty board.
+        int[][] boardMatrix = board.getBoardMatrix();
+        boolean blocksFoundAtBottom = false;
+        // Check the row where the piece should have landed based on its shadow position
+        // We only check rows from the shadowY position downwards to avoid checking rows that are above the piece
+        for(int row = expectedY; row < boardMatrix.length; row++) {
+            for (int col = 0; col < boardMatrix[0].length; col++) {
+                if (boardMatrix[row][col] != 0) {
+                    blocksFoundAtBottom = true;
+                    break;
+                }
+            }
+            if (blocksFoundAtBottom) break;
+        }
+
+        assertTrue(blocksFoundAtBottom, "Piece should have landed and merged at the correct depth on the empty board.");
+
+        // The action automatically triggers creation of a new brick
+        ViewData finalState = board.getViewData();
+        assertNotNull(finalState.getBrickData(), "A new brick should be ready after the previous one lands and merges.");
+    }
+
+    @Test
+    void testRisingRow_ImplementationByLevel() {
+        // Arrange
+        clearBoard();
+        int initialY = board.getViewData().getyPosition(); // Current brick Y position should be 1
+        int boardHeight = board.getBoardMatrix().length;
+
+        // Level 1 (Expected 1 hole)
+        board.getLevelUp().checkAndAdvance(0); // Ensure level 1
+        board.addRisingRow(board.getLevelUp().getLevel());
+
+        // Board shifted up (Row 0 should now be Row 1)
+        assertEquals(initialY - 1, board.getViewData().getyPosition(), "Brick Y position should move up by 1.");
+
+        // Check new bottom row for content
+        int holeCountLevel1 = (int) Arrays.stream(board.getBoardMatrix()[boardHeight - 1]).filter(cell -> cell == 0).count();
+        int garbageCountLevel1 = (int) Arrays.stream(board.getBoardMatrix()[boardHeight - 1]).filter(cell -> cell == 8).count();
+        assertEquals(1, holeCountLevel1, "Level 1 rising row must have exactly 1 hole.");
+        assertEquals(10 - 1, garbageCountLevel1, "Level 1 rising row must have 9 garbage blocks.");
+
+        // Level 2 (Expected 2 holes)
+        board.getLevelUp().checkAndAdvance(10); // Advance to Level 2
+        board.addRisingRow(board.getLevelUp().getLevel());
+
+        // Board shifted up again
+        assertEquals(initialY - 2, board.getViewData().getyPosition(), "Brick Y position should move up by 1 again.");
+
+        // Check new bottom row (row 19) for content (should be color 8 garbage blocks with 2 holes)
+        int holeCountLevel2 = (int) Arrays.stream(board.getBoardMatrix()[boardHeight - 1]).filter(cell -> cell == 0).count();
+        assertEquals(2, holeCountLevel2, "Level 2 rising row must have exactly 2 holes.");
+
+        // Level 5 (Maximum expected 3 holes)
+        board.getLevelUp().checkAndAdvance(30); // Advance to Level 5
+        assertEquals(3, board.getLevelUp().getLevel(), "Must be at Level 5 before adding row.");
+        board.addRisingRow(board.getLevelUp().getLevel());
+
+        // Board shifted up again
+        assertEquals(initialY - 3, board.getViewData().getyPosition(), "Brick Y position should move up by 1 again.");
+
+        // Check new bottom row (row 19) for content (should be color 8 garbage blocks with 3 holes)
+        int holeCountLevel5 = (int) Arrays.stream(board.getBoardMatrix()[boardHeight - 1]).filter(cell -> cell == 0).count();
+        // The implementation caps the number of holes to 3 for levels > 3
+        assertEquals(3, holeCountLevel5, "Level 5 rising row must have the capped maximum of 3 holes.");
+    }
 }
