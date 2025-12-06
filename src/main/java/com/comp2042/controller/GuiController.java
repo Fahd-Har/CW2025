@@ -127,7 +127,9 @@ public class GuiController implements Initializable {
         if (gameFlow.isPause().getValue() == Boolean.FALSE) {
             MovingDownData movingDownData = eventListener.onDownEvent(event);
             if (movingDownData.getClearRow() != null && movingDownData.getClearRow().getLinesRemoved() > 0) {
-                sfx.soundEffects(2);
+                for (int i = 0; i < movingDownData.getClearRow().getLinesRemoved(); i++) {
+                    sfx.soundEffects(2);
+                }
                 notification.showScore(movingDownData.getClearRow().getScoreBonus());
             }
             refreshBrick(movingDownData.getViewData());

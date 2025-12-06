@@ -201,3 +201,9 @@
 
 **Solution**
 <br> In the new game logic method, recreate the game action timeline to ensure speed of bricks falling is always reset.
+
+**Problem 3**
+<br> If a row was instantly remove after another row was removed, sound effect was not played.
+
+**Solution**
+<br> Added a for loop to make the sound effect play every time a line has been removed. Whether back to back there is gap in between.
