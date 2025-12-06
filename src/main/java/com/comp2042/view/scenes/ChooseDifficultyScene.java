@@ -3,6 +3,7 @@ package com.comp2042.view.scenes;
 import com.comp2042.controller.GameController;
 import com.comp2042.controller.GuiController;
 import com.comp2042.model.logic.GameMode;
+import com.comp2042.model.scoreBoard.ScoreBoardManager;
 import javafx.fxml.FXML;
 import javafx.animation.FadeTransition;
 import javafx.util.Duration;
@@ -26,6 +27,8 @@ public class ChooseDifficultyScene {
 
     // ADDED: Field to track the selected mode, default to Normal
     private GameMode selectedMode = GameMode.NORMAL_MODE;
+    
+    private final ScoreBoardManager scoreBoardManager = new ScoreBoardManager();
 
     @FXML
     public void initialize() {
@@ -95,7 +98,7 @@ public class ChooseDifficultyScene {
         stage.setScene(new Scene(gameRoot, 1280, 800));
         stage.setTitle("TetrisJFX");
         stage.setResizable(false);
-        new GameController(c, selectedMode);
+        new GameController(c, selectedMode, scoreBoardManager);
         fadeIn.play();
     }
 

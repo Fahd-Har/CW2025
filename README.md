@@ -14,25 +14,25 @@
 - **CurrentBrickController** Path: src/main/java/com/comp2042/model/gameBoard/CurrentBrickController.java
     - Takes up brick position, movement, and rotation logic from TetrisBoard.
     - Added core Hold Brick logic to manage the heldBrick state and swap the current piece, including a check to prevent multiple swaps per turn.
-    - This helps support Single Responsibility Principle (SRP) by separating responsibilities.
+    - This helps support Single Responsibility Principle (SRP), a part of the SOLID Design Pattern by separating responsibilities.
 
 - **GameFlowManager** Path: src/main/java/com/comp2042/controller/GameFlowManager.java
     - Takes up the game timeline logic from GuiController
-    - This helps support Single Responsibility Principle (SRP) by separating responsibilities.
+    - This helps support SRP by separating responsibilities.
 
 - **GameRenderer** Path: src/main/java/com/comp2042/controller/GameRenderer.java
     - Takes up initialization of game board and bricks logics from GuiController.
     - Generates all related panels for the game layout fxml file.
     - Ensure bricks fall in the middle by adding constants of the LayoutX and LayoutY of gamePanel.
-    - This helps support Single Responsibility Principle (SRP) by separating responsibilities.
+    - This helps support SRP by separating responsibilities.
 
 - **Notifications** Path: src/main/java/com/comp2042/events/Notifications.java
     - Takes up the logic for all pop-up notifications (+scores, future level ups) from GuiController.
-    - This helps support Single Responsibility Principle (SRP) by separating responsibilities.
+    - This helps support SRP by separating responsibilities.
 
 - **KeyInputHandler** Path: src/main/java/com/comp2042/controller/keyInput/KeyInputHandler.java
     - Takes up the logic for key inputs and their respective actions from GuiController using consumer.
-    - This helps support Single Responsibility Principle (SRP) by separating responsibilities.
+    - This helps support SRP by separating responsibilities.
 
 - **MainMenuScene** Path: src/main/java/com/comp2042/view/scenes/MainMenuScene.java
     - An enhancement for player to choose whether they want to see the game rules/what each difficulty does (About),
@@ -43,7 +43,7 @@
     - Initialize game clock as an enhancement for gaming experience using JavaFX's `Timeline()`.
     - Exposes the elapsed time as a bindable `StringProperty` (MM:SS).
     - Implements pause/resume logic by tracking `pauseDuration` to prevent the timer from including time spent while paused, ensuring accurate time keeping.
-    - This helps support Single Responsibility Principle (SRP) by dedicating a class purely to time tracking.
+    - This helps support SRP by dedicating a class purely to time tracking.
 
 - **CountClearedRows** Path: src/main/java/com/comp2042/model/logic/CountClearedRows.java
     - Count the number of lines removed throughout the game as an enhancement for gaming experience.
@@ -86,6 +86,11 @@
     - Handles the common method of switching from current scene to Main Menu Scene.
     - If required to change, we can just change in this class rather than going to each individual class with this method and changing it.
 
+
+- **HighScoreSaver** Path: src/main/java/com/comp2042/view/scoreBoard/HighScoreSaver.java
+  - Defines the abstraction for saving high scores.
+
+
 ## Modified Java Classes
 ### File Refactoring
 
@@ -116,7 +121,7 @@
     1. Updated the `intersect()` and `merge()` methods to correctly align i and j with the x and y coordinates when checking
        brick collisions to improve code logic and clarity.
     2. Created a new method `implementRisingRows()` to initialize the logic for new rows to be pushed from the bottom.
-    3. Implement logic on number of holes in the new rising row depends with the current level.
+    3. Implement logic on number of holes in the new rising row depends on the current level.
 
 
 - **GuiController.java**
@@ -146,8 +151,7 @@
     21. Added a setter to pass mode to GameFlowManager.
     22. Call specific sounds from the Sound class for specified actions.
     23. Added new public method `showLevelUpNotification()` for the GameController to read from instead of reading from notification class which may violate SRP.
-    24. Modified the `gameOver()` method to automatically save the scores using data provided by the GameController's new `getFinalGameStats()` method,
-    ensuring the score is saved with the correct difficulty mode.
+    24. Simplified the `gameOver()` method by delegating the entire score packaging and saving process to the GameController class.
 
 
 - **GameController.java**
@@ -164,8 +168,8 @@
     8. Added `onRisingRowEvent()` to handle the timer tick. This method fetches the current level, and checks for immediate game over, and updates the view.
     9. The `onRisingRowEvent()` now only runs if game mode is hard or extreme. Does not run on normal mode.
     10. Now checks in the `onDownEvent()` method if player reaches the number of removed lines, level up pop up occurs.
-    11. Added the method `getFinalGameStats()` to package the game's final score, level, lines, time, and the active GameMode into a new HighscoreEntry object upon game over.
-
+    11. Added the method `getFinalGameStats()` to encapsulate the final game score, level, lines, time, and GameMode into a HighScoreEntry and delegate the saving process to the injected HighScoreSaver dependency.
+    This supports the Dependency Inversion Principle (DIP) in the SOLID design pattern.
 
 - **Main.java**
     1. Class now loads a different scene, a main menu screen. This scene does not involve any Gui or game control logic,

@@ -180,8 +180,7 @@ public class GuiController implements Initializable {
         gameFlow.gameOver();
 
         if (eventListener instanceof GameController gameController) {
-            HighScoreEntry finalStats = gameController.getFinalGameStats();
-            scoreBoardManager.saveScore(finalStats);
+            gameController.getFinalGameStats();
         }
 
         gameOverPanel.showPanel(gameFlow);

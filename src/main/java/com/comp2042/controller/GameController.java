@@ -11,6 +11,7 @@ import com.comp2042.model.logic.GameMode;
 import com.comp2042.model.logic.MatrixOperations;
 import com.comp2042.model.logic.MovingDownData;
 import com.comp2042.model.scoreBoard.HighScoreEntry;
+import com.comp2042.model.scoreBoard.HighScoreSaver;
 import com.comp2042.view.data.ViewData;
 
 public class GameController implements InputEventListener {
@@ -19,10 +20,13 @@ public class GameController implements InputEventListener {
 
     private final GuiController viewGuiController;
     private final GameMode gameMode;
+    private final HighScoreSaver scoreSaver;
 
-    public GameController(GuiController c, GameMode mode) {
+    public GameController(GuiController c, GameMode mode, HighScoreSaver scoreSaver) {
         viewGuiController = c;
         gameMode = mode;
+        this.scoreSaver = scoreSaver;
+
         viewGuiController.setGameMode(gameMode);
         board.newGame();
         viewGuiController.setEventListener(this);
@@ -98,13 +102,14 @@ public class GameController implements InputEventListener {
     }
 
     // Method to retrieve final game statistics for the scoreboard
-    public HighScoreEntry getFinalGameStats() {
+    public void getFinalGameStats() {
         int finalScore = board.getScore().scoreProperty().get();
         int finalLevel = board.getLevelUp().getLevel();
         int finalLines = board.getCountRows().countRowsProperty().get();
         String finalTime = board.getGameTime().timeStringProperty().get();
 
-        return new HighScoreEntry(finalScore, finalLevel, finalLines, finalTime, gameMode);
+        HighScoreEntry entry = new HighScoreEntry(finalScore, finalLevel, finalLines, finalTime, gameMode);
+        scoreSaver.saveScore(entry);
     }
 
     @Override
