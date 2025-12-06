@@ -144,6 +144,13 @@ public class TetrisBoard implements Board {
 
     @Override
     public void newGame() {
+        resetStats();
+        gameTime.start();
+        // Create and spawn a new brick to start the game
+        createNewBrick();
+    }
+
+    private void resetStats() {
         // Reset the game board by creating a new empty matrix
         currentGameMatrix = new int[height][width];
         // Reset the player's score
@@ -153,8 +160,5 @@ public class TetrisBoard implements Board {
         levelUp.reset();
         brickController.setSwapped();
         brickController.resetHold();
-        gameTime.start();
-        // Create and spawn a new brick to start the game
-        createNewBrick();
     }
 }
