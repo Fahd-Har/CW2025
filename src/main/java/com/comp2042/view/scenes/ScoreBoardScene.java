@@ -3,16 +3,10 @@ package com.comp2042.view.scenes;
 import com.comp2042.model.logic.GameMode;
 import com.comp2042.model.scoreBoard.HighScoreEntry;
 import com.comp2042.model.scoreBoard.ScoreBoardManager;
-import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
-import javafx.stage.Stage;
-import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
@@ -106,18 +100,6 @@ public class ScoreBoardScene {
 
     @FXML
     private void loadHome() throws IOException {
-        URL location = getClass().getClassLoader().getResource("scenes_FXML/mainMenuScreen.fxml");
-        FXMLLoader fxmlLoader = new FXMLLoader(location);
-        Parent menuRoot = fxmlLoader.load();
-
-        FadeTransition fadeIn = new FadeTransition(Duration.seconds(1.0), menuRoot);
-        fadeIn.setFromValue(0.0);
-        fadeIn.setToValue(1.0);
-
-        Stage stage = (Stage) homeButton.getScene().getWindow();
-        Scene currentScene = stage.getScene();
-        currentScene.setRoot(menuRoot);
-        stage.setTitle("TetrisJFX");
-        fadeIn.play();
+        SceneSwitch.loadMainMenu(homeButton);
     }
 }

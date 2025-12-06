@@ -79,8 +79,12 @@
   - Handles the scoreboard scene that shows the player.
   - Implements logic to switch the displayed scoreboard via buttons for Normal, Hard, and Extreme modes.
 
-- **ScoreBoardScene** Path: src/main/java/com/comp2042/model/scenes/AboutScene.java
+- **ScoreBoardScene** Path: src/main/java/com/comp2042/view/scenes/AboutScene.java
     - Handles the about panel to show the player the Gameplay Info and Difficulty Modes.
+
+- **SceneSwitch** Path: src/main/java/com/comp2042/view/scenes/SceneSwitch.java
+    - Handles the common method of switching from current scene to Main Menu Scene.
+    - If required to change, we can just change in this class rather than going to each individual class with this method and changing it.
 
 ## Modified Java Classes
 ### File Refactoring

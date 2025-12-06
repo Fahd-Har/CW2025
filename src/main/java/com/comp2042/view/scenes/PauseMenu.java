@@ -16,6 +16,7 @@ public class PauseMenu {
 
     private final Pane rootPane;
     private Parent pauseMenu;
+    private Button homeButton;
 
     public PauseMenu(Pane rootPane) {
         this.rootPane = rootPane;
@@ -38,7 +39,7 @@ public class PauseMenu {
                 }
             }
 
-            Button homeButton = (Button) pauseMenu.lookup("#homeButton");
+            homeButton = (Button) pauseMenu.lookup("#homeButton");
             if (homeButton != null) {
                 homeButton.setOnAction(event -> {
                     try {
@@ -61,19 +62,6 @@ public class PauseMenu {
     }
 
     private void handleHome() throws IOException {
-        URL location = getClass().getClassLoader().getResource("scenes_FXML/mainMenuScreen.fxml");
-        FXMLLoader fxmlLoader = new FXMLLoader(location);
-        Parent menuRoot = fxmlLoader.load();
-
-        FadeTransition fadeIn = new FadeTransition(Duration.seconds(1.0), menuRoot);
-        fadeIn.setFromValue(0.0);
-        fadeIn.setToValue(1.0);
-
-        // Get the current stage from the root pane's scene
-        Stage stage = (Stage) rootPane.getScene().getWindow();
-        Scene currentScene = stage.getScene();
-        currentScene.setRoot(menuRoot);
-        stage.setTitle("TetrisJFX");
-        fadeIn.play();
+        SceneSwitch.loadMainMenu(homeButton);
     }
 }
