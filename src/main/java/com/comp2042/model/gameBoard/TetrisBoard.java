@@ -49,8 +49,12 @@ public class TetrisBoard implements Board {
 
     @Override
     public void addRisingRow(int level) {
+        int numHoles = level;
+        if (numHoles > 3) {
+            numHoles = 3;
+        }
         // 1. Add the row to the bottom of the matrix, shifting all rows up.
-        currentGameMatrix = MatrixOperations.implementRisingRow(currentGameMatrix, level);
+        currentGameMatrix = MatrixOperations.implementRisingRow(currentGameMatrix, numHoles);
 
         // 2. Move the current falling brick up by 1 position.
         brickController.moveUp(1);

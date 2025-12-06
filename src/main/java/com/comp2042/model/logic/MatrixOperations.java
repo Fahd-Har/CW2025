@@ -94,7 +94,7 @@ public class MatrixOperations {
         return list.stream().map(MatrixOperations::copy).collect(Collectors.toList());
     }
 
-    public static int[][] implementRisingRow(final int[][] matrix, int level) {
+    public static int[][] implementRisingRow(final int[][] matrix, int numHoles) {
         int height = matrix.length;
         int width = matrix[0].length;
         int[][] newMatrix = new int[height][width];
@@ -106,12 +106,6 @@ public class MatrixOperations {
         int[] risingRow = new int[width];
         int garbageColor = 8;
         Arrays.fill(risingRow, garbageColor);
-
-        int numHoles = level;
-
-        if (numHoles > 3) {
-            numHoles = 3;
-        }
 
         int holesPlaced = 0;
         while (holesPlaced < numHoles) {
