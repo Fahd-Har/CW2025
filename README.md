@@ -90,16 +90,24 @@
 - **HighScoreSaver** Path: src/main/java/com/comp2042/view/scoreBoard/HighScoreSaver.java
   - Defines the abstraction for saving high scores.
 
+- **BrickMovement** Path: src/main/java/com/comp2042/model/gameBoard/BrickMovement.java
+    - Contains methods for controlling the current falling brick (move down, left, right, rotate, hold).
+    - Implements the Interface Segregation Principle (ISP) by dedicating an interface solely to brick control actions.
+
+- **Gameplay** Path: src/main/java/com/comp2042/model/gameBoard/Gameplay.java
+    - Contains methods for core game logic actions that modify the gameplay (merge brick, clear rows, add rising row, createNewBrick, newGame).
+    - Implements the ISP by dedicating an interface solely to gameplay.
+
+- **GameStatsProvider** Path: src/main/java/com/comp2042/model/gameBoard/GameStatsProvider.java
+    - Provides read-only access to all important game state and statistics (board matrix, view data, score, time, lines, level).
+    - Implements the ISP, allowing the GUI binding to depend only on retrieval methods.
 
 ## Modified Java Classes
 ### File Refactoring
 
 - **Board.java**
-    1. Added `getGameTime()` to expose the game's time/clock state.
-    2. Added `getCountRows()` to expose the number of rows removed during that state.
-    3. Added method `holdBrick()` to hold brick logic and functionality.
-    4. Added `getLevelUp()` to expose the game's level state.
-    5. Added the method `addRisingRow()` to pass the current game level, allowing the creation of level-dependent holes in the rising row.
+    1. The interface was split into three segregated interfaces.
+    2. The new `Board` interface now acts as a **composite interface**, simply extending all three smaller interfaces to maintain backward compatibility.
 
 - **TetrisBoard.java**
     1. Renamed the class from `SimpleBoard` to `TetrisBoard` for a better description of the class.
