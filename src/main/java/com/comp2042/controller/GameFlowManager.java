@@ -158,7 +158,7 @@ public class GameFlowManager {
 
     public void start() {
         timeline.play();
-        if (risingRowTimeline != null && currentRisingRowInterval < 15) {
+        if (risingRowTimeline != null) {
             risingRowTimeline.play();
         }
         if (gameTime != null) {
