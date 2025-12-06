@@ -11,7 +11,6 @@ import javafx.scene.Parent;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ResourceBundle;
 
 public class MainMenuScene {
     @FXML private Button startButton;
@@ -65,8 +64,7 @@ public class MainMenuScene {
 
     private void startGame() throws IOException {
         URL location = getClass().getClassLoader().getResource("scenes_FXML/chooseDifficulty.fxml");
-        ResourceBundle resources = null;
-        FXMLLoader fxmlLoader = new FXMLLoader(location, resources);
+        FXMLLoader fxmlLoader = new FXMLLoader(location);
         Parent gameRoot = fxmlLoader.load();
 
         FadeTransition fadeIn = new FadeTransition(Duration.seconds(1.0), gameRoot);
@@ -82,8 +80,7 @@ public class MainMenuScene {
 
     private void showAbout() throws IOException {
         URL location = getClass().getClassLoader().getResource("scenes_FXML/aboutScreen.fxml");
-        ResourceBundle resources = null;
-        FXMLLoader fxmlLoader = new FXMLLoader(location, resources);
+        FXMLLoader fxmlLoader = new FXMLLoader(location);
         Parent rulesRoot = fxmlLoader.load();
 
         FadeTransition fadeIn = new FadeTransition(Duration.seconds(1.0), rulesRoot);

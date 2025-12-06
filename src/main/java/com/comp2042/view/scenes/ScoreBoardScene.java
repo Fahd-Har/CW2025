@@ -9,7 +9,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.List;
 
 public class ScoreBoardScene {

@@ -15,7 +15,6 @@ import javafx.scene.Parent;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ResourceBundle;
 
 public class ChooseDifficultyScene {
 
@@ -85,8 +84,7 @@ public class ChooseDifficultyScene {
 
     private void startGame() throws IOException {
         URL location = getClass().getClassLoader().getResource("scenes_FXML/gameLayout.fxml");
-        ResourceBundle resources = null;
-        FXMLLoader fxmlLoader = new FXMLLoader(location, resources);
+        FXMLLoader fxmlLoader = new FXMLLoader(location);
         Parent gameRoot = fxmlLoader.load();
         GuiController controller = fxmlLoader.getController();
 
