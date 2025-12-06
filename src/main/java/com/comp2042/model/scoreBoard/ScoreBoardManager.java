@@ -7,12 +7,13 @@ import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class ScoreBoardManager {
+public class ScoreBoardManager implements HighScoreSaver{
 
     private static final String HIGH_SCORE_FILE = "highScores.dat";
     private static final int SHOW_MAX_HIGH_SCORES = 5;
     private static final Logger LOGGER = Logger.getLogger(ScoreBoardManager.class.getName());
 
+    @Override
     public void saveScore(HighScoreEntry newEntry) {
         // Load all scores, grouped by mode
         Map<GameMode, List<HighScoreEntry>> allScores = loadAllScores();
