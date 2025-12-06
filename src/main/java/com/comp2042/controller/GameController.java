@@ -18,24 +18,27 @@ public class GameController implements InputEventListener {
 
     private Board board = new TetrisBoard(10, 25);
 
-    private final GuiController viewGuiController;
+    private final GuiController viewGui;
     private final GameMode gameMode;
     private final HighScoreSaver scoreSaver;
 
     public GameController(GuiController c, GameMode mode, HighScoreSaver scoreSaver) {
-        viewGuiController = c;
+        viewGui = c;
         gameMode = mode;
         this.scoreSaver = scoreSaver;
-
-        viewGuiController.setGameMode(gameMode);
         board.newGame();
-        viewGuiController.setEventListener(this);
-        viewGuiController.setGameTimer(board.getGameTime());
-        viewGuiController.bindLevel(board.getLevelUp().levelProperty());
-        viewGuiController.initializeGameView(board.getBoardMatrix(), board.getViewData());
-        viewGuiController.bindScore(board.getScore().scoreProperty());
-        viewGuiController.bindTimer(board.getGameTime().timeStringProperty());
-        viewGuiController.bindLines(board.getCountRows().countRowsProperty());
+        setupViewsAndBindings(c);
+    }
+
+    private void setupViewsAndBindings(GuiController viewGui) {
+        this.viewGui.setGameMode(gameMode);
+        this.viewGui.setEventListener(this);
+        this.viewGui.setGameTimer(board.getGameTime());
+        this.viewGui.bindLevel(board.getLevelUp().levelProperty());
+        this.viewGui.initializeGameView(board.getBoardMatrix(), board.getViewData());
+        this.viewGui.bindScore(board.getScore().scoreProperty());
+        this.viewGui.bindTimer(board.getGameTime().timeStringProperty());
+        this.viewGui.bindLines(board.getCountRows().countRowsProperty());
     }
 
     public void onRisingRowEvent() {
@@ -51,11 +54,11 @@ public class GameController implements InputEventListener {
                     board.getViewData().getyPosition()
             )) {
                 board.getGameTime().stop();
-                viewGuiController.gameOver();
+                viewGui.gameOver();
                 return;
             }
-            viewGuiController.refreshGameBackground(board.getBoardMatrix());
-            viewGuiController.updateView(board.getViewData());
+            viewGui.refreshGameBackground(board.getBoardMatrix());
+            viewGui.updateView(board.getViewData());
         }
     }
     @Override
@@ -72,8 +75,8 @@ public class GameController implements InputEventListener {
             // check for level up
             int currentLevel = board.getLevelUp().getLevel();
             if (currentLevel > previousLevel) {
-                viewGuiController.updateGameSpeed(currentLevel);
-                viewGuiController.showLevelUpNotification(currentLevel);
+                viewGui.updateGameSpeed(currentLevel);
+                viewGui.showLevelUpNotification(currentLevel);
             }
 
         } else {
@@ -94,10 +97,10 @@ public class GameController implements InputEventListener {
         // if there exists a clash with initial spawn of brick, implement game over
         if (board.createNewBrick()) {
             board.getGameTime().stop();
-            viewGuiController.gameOver();
+            viewGui.gameOver();
         }
 
-        viewGuiController.refreshGameBackground(board.getBoardMatrix());
+        viewGui.refreshGameBackground(board.getBoardMatrix());
         return clearFullRow;
     }
 
@@ -154,6 +157,6 @@ public class GameController implements InputEventListener {
     @Override
     public void createNewGame() {
         board.newGame();
-        viewGuiController.refreshGameBackground(board.getBoardMatrix());
+        viewGui.refreshGameBackground(board.getBoardMatrix());
     }
 }
