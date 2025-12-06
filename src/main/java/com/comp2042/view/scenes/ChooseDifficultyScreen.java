@@ -45,7 +45,7 @@ public class ChooseDifficultyScreen {
 
         backButton.setOnAction(event -> {
             try {
-                loadBack();
+                loadHome();
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
@@ -80,7 +80,7 @@ public class ChooseDifficultyScreen {
         selectedButton.getStyleClass().add("selected");
     }
 
-    private void loadBack() throws IOException {
+    private void loadHome() throws IOException {
         URL location = getClass().getClassLoader().getResource("scenes_FXML/mainMenuScreen.fxml");
         FXMLLoader fxmlLoader = new FXMLLoader(location);
         Parent menuRoot = fxmlLoader.load();
