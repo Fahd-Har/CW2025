@@ -192,6 +192,11 @@
     2. Separate groupNotification call into scoreNotification and levelUpNotification for easier change in their layouts.
     Also helps so that change in one does not affect the other.
 
+
+- **InputEventListener.java**
+    1. Added `onHoldEvent()` to support the Hold feature, allowing the user to store a brick for later use.
+    2. Added `onSlamEvent()` To support the Slam (or instant drop) feature, instantly moving the current brick to the lowest available position.
+
 ## Unexpected Problems
 
 **Problem 1**

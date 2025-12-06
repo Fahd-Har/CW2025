@@ -1,6 +1,7 @@
 package com.comp2042.controller;
 
 import com.comp2042.events.EventSource;
+import com.comp2042.events.EventType;
 import com.comp2042.events.InputEventListener;
 import com.comp2042.events.MoveEvent;
 import com.comp2042.model.gameBoard.Board;
@@ -125,9 +126,24 @@ public class GameController implements InputEventListener {
     }
 
     @Override
-    public ViewData onHoldEvent(MoveEvent event) { // ADDED Implementation
+    public ViewData onHoldEvent(MoveEvent event) {
         board.holdBrick();
         return board.getViewData();
+    }
+
+    @Override
+    public MovingDownData onSlamEvent(MoveEvent event) {
+        MovingDownData movingDownData;
+        ViewData previousState;
+        ViewData currentState = null;
+
+        do {
+            previousState = currentState;
+            movingDownData = onDownEvent(new MoveEvent(EventType.SLAM, EventSource.USER));
+            currentState = movingDownData.getViewData();
+        } while (previousState == null || currentState.getyPosition() > previousState.getyPosition());
+
+        return movingDownData;
     }
 
     @Override

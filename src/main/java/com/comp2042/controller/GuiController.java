@@ -217,15 +217,8 @@ public class GuiController implements Initializable {
 
     public void hardDrop(MoveEvent event) {
         if (gameFlow.isPause().getValue() == Boolean.FALSE) {
-            MovingDownData movingDownData;
-            ViewData previousState;
-            ViewData currentState = null;
 
-            do {
-                previousState = currentState;
-                movingDownData = eventListener.onDownEvent(event);
-                currentState = movingDownData.getViewData();
-            } while (previousState == null || currentState.getyPosition() > previousState.getyPosition());
+            MovingDownData movingDownData = eventListener.onSlamEvent(event);
 
             if (movingDownData.getClearRow() != null && movingDownData.getClearRow().getLinesRemoved() > 0) {
                 sfx.soundEffects(2);
