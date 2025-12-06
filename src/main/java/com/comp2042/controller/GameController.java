@@ -16,7 +16,7 @@ import com.comp2042.view.data.ViewData;
 
 public class GameController implements InputEventListener {
 
-    private Board board = new TetrisBoard(10, 25);
+    private final Board board = new TetrisBoard(10, 25);
 
     private final GuiController viewGui;
     private final GameMode gameMode;
@@ -27,10 +27,10 @@ public class GameController implements InputEventListener {
         gameMode = mode;
         this.scoreSaver = scoreSaver;
         board.newGame();
-        setupViewsAndBindings(viewGui);
+        setupViewsAndBindings();
     }
 
-    private void setupViewsAndBindings(GuiController viewGui) {
+    private void setupViewsAndBindings() {
         this.viewGui.setGameMode(gameMode);
         this.viewGui.setEventListener(this);
         this.viewGui.setGameTimer(board.getGameTime());
