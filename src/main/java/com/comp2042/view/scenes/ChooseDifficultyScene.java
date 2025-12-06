@@ -88,7 +88,7 @@ public class ChooseDifficultyScene {
         ResourceBundle resources = null;
         FXMLLoader fxmlLoader = new FXMLLoader(location, resources);
         Parent gameRoot = fxmlLoader.load();
-        GuiController c = fxmlLoader.getController();
+        GuiController controller = fxmlLoader.getController();
 
         FadeTransition fadeIn = new FadeTransition(Duration.seconds(1.0), gameRoot);
         fadeIn.setFromValue(0.0);
@@ -98,7 +98,7 @@ public class ChooseDifficultyScene {
         stage.setScene(new Scene(gameRoot, 1280, 800));
         stage.setTitle("TetrisJFX");
         stage.setResizable(false);
-        new GameController(c, selectedMode, scoreBoardManager);
+        new GameController(controller, selectedMode, scoreBoardManager);
         fadeIn.play();
     }
 
