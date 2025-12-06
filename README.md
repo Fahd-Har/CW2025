@@ -207,3 +207,9 @@
 
 **Solution**
 <br> Added a for loop to make the sound effect play every time a line has been removed. Whether back to back there is gap in between.
+
+**Problem 4**
+<br> Hold brick panel still shows brick held from previous game.
+
+**Solution**
+<br> Create a method in `CurrentBrickController` class and call it in `TetrisBoard`to reset the empty panel when new game occurs.

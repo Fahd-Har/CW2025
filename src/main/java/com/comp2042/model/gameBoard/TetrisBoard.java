@@ -71,7 +71,7 @@ public class TetrisBoard implements Board {
         // randomly generate one of the 7 brick shapes
         Brick currentBrick = brickGenerator.getBrick();
         //Reset hold-swap state for the new brick/turn
-        brickController.setHasSwapped(false);
+        brickController.setSwapped();
         // set the newly generated brick as the active brick for rotation and movement
         brickRotator.setBrick(currentBrick);
         // manually set the starting position of the new brick
@@ -151,7 +151,8 @@ public class TetrisBoard implements Board {
         gameTime.reset();
         countRows.reset();
         levelUp.reset();
-        brickController.setHasSwapped(false);
+        brickController.setSwapped();
+        brickController.resetHold();
         gameTime.start();
         // Create and spawn a new brick to start the game
         createNewBrick();

@@ -145,8 +145,13 @@ public class CurrentBrickController {
     }
 
     // ADDED: Setter for hasSwapped (used by TetrisBoard when a new brick is spawned)
-    public void setHasSwapped(boolean hasSwapped) {
-        this.hasSwapped = hasSwapped;
+    public void setSwapped() {
+        this.hasSwapped = false;
+    }
+
+    // ADDED: New method to reset the hold brick panel.
+    public void resetHold() {
+        this.heldBrick = null;
     }
 
 }
