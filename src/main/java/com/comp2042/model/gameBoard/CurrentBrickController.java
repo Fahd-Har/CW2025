@@ -99,9 +99,9 @@ public class CurrentBrickController {
         return shadowOffset;
     }
 
-    public boolean attemptHold() {
+    public void attemptHold() {
         if (hasSwapped || brickRotator.getBrick() == null) {
-            return false;
+            return;
         }
 
         Brick currentBrick = brickRotator.getBrick();
@@ -120,7 +120,7 @@ public class CurrentBrickController {
 
         // 3. Check for collision at spawn point (4, 1) with the piece to spawn
         Point spawnOffset = new Point(4, 1);
-        int[][] initialShape = brickToSpawn.getShapeMatrix().get(0);
+        int[][] initialShape = brickToSpawn.getShapeMatrix().getFirst();
         if (!checkConflict(initialShape, spawnOffset)) {
             // Cannot spawn the piece without conflict. Cancel the hold/swap.
             if (heldBrick != currentBrick) {
@@ -128,7 +128,7 @@ public class CurrentBrickController {
                 heldBrick = brickToSpawn;
             }
             // If it was the first hold, the generator advanced, but we just fail the operation.
-            return false;
+            return;
         }
 
         // 4. Perform the actual swap/spawn
@@ -136,12 +136,11 @@ public class CurrentBrickController {
         setInitialPosition(spawnOffset.x, spawnOffset.y);
         this.hasSwapped = true;
 
-        return true;
     }
 
     // ADDED: Getter for held brick
     public int[][] getHeldBrickShape() {
-        return heldBrick != null ? heldBrick.getShapeMatrix().get(0) : null;
+        return heldBrick != null ? heldBrick.getShapeMatrix().getFirst() : null;
     }
 
     // ADDED: Setter for hasSwapped (used by TetrisBoard when a new brick is spawned)
