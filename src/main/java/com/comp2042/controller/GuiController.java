@@ -28,16 +28,16 @@ import java.util.ResourceBundle;
 public class GuiController implements Initializable {
 
     @FXML private GridPane gamePanel;
-    @FXML private Group groupNotification;
-    @FXML private Group levelUpNotification;
     @FXML private GridPane brickPanel;
-    @FXML private GameOverPanel gameOverPanel;
-    @FXML private Text scoreValue;
     @FXML private GridPane nextBrick;
     @FXML private GridPane shadowPanel;
+    @FXML private GridPane holdBrick;
+    @FXML private Group groupNotification;
+    @FXML private Group levelUpNotification;
+    @FXML private GameOverPanel gameOverPanel;
+    @FXML private Text scoreValue;
     @FXML private Text gameTime;
     @FXML private Text countRowsValue;
-    @FXML private GridPane holdBrick;
     @FXML private Text levelValue;
     @FXML private Pane rootPane;
 
