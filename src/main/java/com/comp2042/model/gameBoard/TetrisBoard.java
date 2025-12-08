@@ -48,19 +48,6 @@ public class TetrisBoard implements Board {
     }
 
     @Override
-    public void addRisingRow(int level) {
-        int numHoles = level;
-        if (numHoles > 3) {
-            numHoles = 3;
-        }
-        // 1. Add the row to the bottom of the matrix, shifting all rows up.
-        currentGameMatrix = MatrixOperations.implementRisingRow(currentGameMatrix, numHoles);
-
-        // 2. Move the current falling brick up by 1 position.
-        brickController.moveUp(1);
-    }
-
-    @Override
     public boolean rotateBrickLeft() {
         return brickController.rotateLeft();
     }
@@ -86,25 +73,16 @@ public class TetrisBoard implements Board {
     }
 
     @Override
-    public int[][] getBoardMatrix() {
-        // Return the current state of the game board matrix
-        return currentGameMatrix;
-    }
+    public void addRisingRow(int level) {
+        int numHoles = level;
+        if (numHoles > 3) {
+            numHoles = 3;
+        }
+        // 1. Add the row to the bottom of the matrix, shifting all rows up.
+        currentGameMatrix = MatrixOperations.implementRisingRow(currentGameMatrix, numHoles);
 
-    @Override
-    public ViewData getViewData() {
-        // create and return view-related data including:
-        // current brick shape
-        // current brick X position
-        // current brick Y position
-        // next brick preview shape
-        return new ViewData(brickController.getCurrentShape(),
-                brickController.getX(),
-                brickController.getY(),
-                brickGenerator.getNextBrick().getShapeMatrix().getFirst(),
-                brickController.getShadowPosition().x,
-                brickController.getShadowPosition().y,
-                brickController.getHeldBrickShape());
+        // 2. Move the current falling brick up by 1 position.
+        brickController.moveUp(1);
     }
 
     @Override
@@ -126,27 +104,6 @@ public class TetrisBoard implements Board {
     }
 
     @Override
-    public Score getScore() {
-        // Return the current score object
-        return score;
-    }
-
-    @Override
-    public GameTime getGameTime() {
-        return gameTime;
-    }
-
-    @Override
-    public CountClearedRows getCountRows() {
-        return countRows;
-    }
-
-    @Override
-    public LevelUp getLevelUp() {
-        return levelUp;
-    }
-
-    @Override
     public void newGame() {
         resetStats();
         gameTime.start();
@@ -164,5 +121,47 @@ public class TetrisBoard implements Board {
         levelUp.reset();
         brickController.setSwapped();
         brickController.resetHold();
+    }
+
+    @Override
+    public ViewData getViewData() {
+        // create and return view-related data including:
+        // current brick shape
+        // current brick X position
+        // current brick Y position
+        // next brick preview shape
+        return new ViewData(brickController.getCurrentShape(),
+                brickController.getX(),
+                brickController.getY(),
+                brickGenerator.getNextBrick().getShapeMatrix().getFirst(),
+                brickController.getShadowPosition().x,
+                brickController.getShadowPosition().y,
+                brickController.getHeldBrickShape());
+    }
+
+    @Override
+    public int[][] getBoardMatrix() {
+        // Return the current state of the game board matrix
+        return currentGameMatrix;
+    }
+
+    @Override
+    public Score getScore() {
+        return score;
+    }
+
+    @Override
+    public GameTime getGameTime() {
+        return gameTime;
+    }
+
+    @Override
+    public CountClearedRows getCountRows() {
+        return countRows;
+    }
+
+    @Override
+    public LevelUp getLevelUp() {
+        return levelUp;
     }
 }
