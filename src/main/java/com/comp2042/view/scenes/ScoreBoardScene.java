@@ -11,6 +11,17 @@ import javafx.scene.layout.GridPane;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * Controller for the Scoreboard scene ({@code scoreBoard.fxml}).
+ * Manages the display of high scores, allowing the user to toggle between scores for
+ * Normal, Hard, and Extreme modes.
+ *
+ * <p>Design Pattern Used:</p>
+ * <ul>
+ * <li>**View Controller (MVC)**: Handles mode selection events and dynamically updates the
+ * {@code GridPane} content based on data retrieved from the {@code ScoreBoardManager}.</li>
+ * </ul>
+ */
 public class ScoreBoardScene {
 
     @FXML private GridPane scoreList;
@@ -19,6 +30,10 @@ public class ScoreBoardScene {
     private final ScoreBoardManager scoreboardManager = new ScoreBoardManager();
     private GameMode selectedMode = GameMode.NORMAL_MODE;
 
+    /**
+     * Initializes the controller, setting the initial display mode to Normal and loading
+     * the corresponding high scores.
+     */
     @FXML
     public void initialize() {
         updateButtonStyles(normalButton);
@@ -26,6 +41,10 @@ public class ScoreBoardScene {
     }
 
     // Mode selection handlers
+
+    /**
+     * Switches the scoreboard to display high scores for Normal Mode.
+     */
     @FXML
     private void selectNormalMode() {
         selectedMode = GameMode.NORMAL_MODE;
@@ -33,6 +52,9 @@ public class ScoreBoardScene {
         loadHighScores(selectedMode);
     }
 
+    /**
+     * Switches the scoreboard to display high scores for Hard Mode.
+     */
     @FXML
     private void selectHardMode() {
         selectedMode = GameMode.HARD_MODE;
@@ -40,6 +62,9 @@ public class ScoreBoardScene {
         loadHighScores(selectedMode);
     }
 
+    /**
+     * Switches the scoreboard to display high scores for Extreme Mode.
+     */
     @FXML
     private void selectExtremeMode() {
         selectedMode = GameMode.EXTREME_MODE;
@@ -47,6 +72,12 @@ public class ScoreBoardScene {
         loadHighScores(selectedMode);
     }
 
+    /**
+     * Manages the visual state of the mode selection buttons, applying the 'selected'
+     * CSS style only to the currently chosen button.
+     *
+     * @param selectedButton The button corresponding to the currently selected mode.
+     */
     private void updateButtonStyles(Button selectedButton) {
         normalButton.getStyleClass().remove("selected");
         hardButton.getStyleClass().remove("selected");
@@ -55,6 +86,12 @@ public class ScoreBoardScene {
         selectedButton.getStyleClass().add("selected");
     }
 
+    /**
+     * Fetches high scores for the specified mode from {@code ScoreBoardManager} and
+     * dynamically populates the {@code scoreList} {@code GridPane}.
+     *
+     * @param gameMode The mode whose top scores should be displayed.
+     */
     private void loadHighScores(GameMode gameMode) {
         List<HighScoreEntry> highScores = scoreboardManager.loadScores(gameMode);
 
@@ -97,6 +134,11 @@ public class ScoreBoardScene {
         }
     }
 
+    /**
+     * Handles the action to return to the Main Menu scene.
+     *
+     * @throws IOException If the FXML for the main menu cannot be loaded.
+     */
     @FXML
     private void loadHome() throws IOException {
         SceneSwitch.loadMainMenu(homeButton);

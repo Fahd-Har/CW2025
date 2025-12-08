@@ -6,6 +6,15 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 
+/**
+ * Handles the low-level rendering and display of all game elements (board, falling brick,
+ * ghost piece, and preview panels) onto their respective JavaFX {@code GridPane}s.
+ *
+ * <p>It abstracts the visual implementation details away from the {@code GuiController}
+ * and game logic, supporting the **Single Responsibility Principle (SRP)** by focusing
+ * purely on the presentation aspect. This makes it the dedicated
+ * **Renderer** component within the larger MVC structure.</p>
+ */
 public class GameRenderer {
 
     private static final int BRICK_SIZE = 20;
@@ -19,6 +28,15 @@ public class GameRenderer {
 
     private final GridPane brickPanel, gamePanel, nextBrick, shadowPanel, holdBrick;
 
+    /**
+     * Constructs the GameRenderer by accepting references to all necessary GUI panels.
+     *
+     * @param brickPanel The panel for the current falling brick.
+     * @param gamePanel The main game board panel where fixed blocks are rendered.
+     * @param nextBrick The preview panel for the next brick.
+     * @param shadowPanel The panel for the ghost piece.
+     * @param holdBrick The panel for the held brick.
+     */
     public GameRenderer(GridPane brickPanel, GridPane gamePanel, GridPane nextBrick, GridPane shadowPanel, GridPane holdBrick) {
         this.brickPanel = brickPanel;
         this.gamePanel = gamePanel;
@@ -27,6 +45,13 @@ public class GameRenderer {
         this.holdBrick = holdBrick;
     }
 
+    /**
+     * Initializes the entire rendering state at the start of a new game or view initialization.
+     * This includes building all game board rectangles and initial brick shapes.
+     *
+     * @param boardMatrix The initial state of the game board matrix.
+     * @param brick The initial view data of the first falling brick.
+     */
     public void initializeRenderingState(int[][] boardMatrix, ViewData brick) {
         initializeGameBoard(boardMatrix);
         initializeBrick(brick);
@@ -37,6 +62,13 @@ public class GameRenderer {
         generateHoldBrickInPanel(brick.getHeldBrickData());
     }
 
+    /**
+     * Initializes the main game board display grid.
+     * Creates transparent {@code Rectangle} objects for each cell and adds them to the {@code gamePanel}.
+     * Rendering starts from row 2 (`i=2`) to hide the top two rows of the board logic.
+     *
+     * @param boardMatrix The full matrix of the game board, including the hidden rows.
+     */
     private void initializeGameBoard(int[][] boardMatrix) {
         displayMatrix = new Rectangle[boardMatrix.length][boardMatrix[0].length];
         for (int i = 2; i < boardMatrix.length; i++) {
@@ -49,6 +81,12 @@ public class GameRenderer {
         }
     }
 
+    /**
+     * Initializes the visual representation of the current falling brick.
+     * Creates {@code Rectangle} objects based on the brick's shape data and adds them to the {@code brickPanel}.
+     *
+     * @param brick The {@code ViewData} for the current brick.
+     */
     private void initializeBrick(ViewData brick) {
         rectangles = new Rectangle[brick.getBrickData().length][brick.getBrickData()[0].length];
         for (int i = 0; i < brick.getBrickData().length; i++) {
@@ -61,6 +99,12 @@ public class GameRenderer {
         }
     }
 
+    /**
+     * Initializes the visual representation of the ghost piece (shadow brick).
+     * Creates semi-transparent, gray {@code Rectangle} objects and adds them to the {@code shadowPanel}.
+     *
+     * @param brick The {@code ViewData} for the current brick.
+     */
     private void initializeShadowBrick(ViewData brick) {
         shadowRectangles = new Rectangle[brick.getBrickData().length][brick.getBrickData()[0].length];
         for (int i = 0; i < brick.getBrickData().length; i++) {
@@ -75,6 +119,12 @@ public class GameRenderer {
         }
     }
 
+    /**
+     * Refreshes the visual state of the currently falling brick and its ghost piece.
+     * This method is called repeatedly during movement and rotation.
+     *
+     * @param brick The latest {@code ViewData} containing position and shape updates.
+     */
     public void refreshBrick(ViewData brick) {
         updateBrickPosition(brick);
         updateShadowBrickPosition(brick);
@@ -86,6 +136,12 @@ public class GameRenderer {
         }
     }
 
+    /**
+     * Refreshes the display of the main game board background, typically after a block lands
+     * and is merged or when rows are cleared.
+     *
+     * @param board The updated game board matrix.
+     */
     public void refreshGameBackground(int[][] board) {
         for (int i = 2; i < board.length; i++) {
             for (int j = 0; j < board[i].length; j++) {
@@ -94,16 +150,33 @@ public class GameRenderer {
         }
     }
 
+    /**
+     * Updates the screen position (LayoutX and LayoutY) of the current falling brick panel
+     * based on its logical X and Y position, applying constants to center it on the screen.
+     *
+     * @param brick The {@code ViewData} containing the current brick position.
+     */
     private void updateBrickPosition(ViewData brick) {
         brickPanel.setLayoutX(gamePanel.getLayoutX() + SET_GAMEPANEL_LAYOUT_X + brick.getxPosition() * brickPanel.getVgap() + brick.getxPosition() * BRICK_SIZE);
         brickPanel.setLayoutY(MAGIC_NUM + gamePanel.getLayoutY() + SET_GAMEPANEL_LAYOUT_Y + brick.getyPosition() * brickPanel.getHgap() + brick.getyPosition() * BRICK_SIZE);
     }
 
+    /**
+     * Updates the screen position (LayoutX and LayoutY) of the shadow brick panel
+     * based on its logical shadow X and Y position, applying constants to center it on the screen.
+     *
+     * @param brick The {@code ViewData} containing the shadow brick position.
+     */
     private void updateShadowBrickPosition(ViewData brick) {
         shadowPanel.setLayoutX(gamePanel.getLayoutX() + SET_GAMEPANEL_LAYOUT_X + brick.getShadowXPosition() * shadowPanel.getVgap() + brick.getShadowXPosition() * BRICK_SIZE);
         shadowPanel.setLayoutY(MAGIC_NUM + gamePanel.getLayoutY() + SET_GAMEPANEL_LAYOUT_Y + brick.getShadowYPosition() * shadowPanel.getHgap() + brick.getShadowYPosition() * BRICK_SIZE);
     }
 
+    /**
+     * Updates the content of the "Next Brick" preview panel.
+     *
+     * @param nextBrickData The matrix representation of the next falling brick.
+     */
     public void generateNextBrickInPreviewPanel(int[][] nextBrickData) {
         nextBrick.getChildren().clear();
         for (int i = 0; i < nextBrickData.length; i++) {
@@ -117,6 +190,11 @@ public class GameRenderer {
         }
     }
 
+    /**
+     * Updates the content of the "Hold Brick" panel. If no brick is held, the panel is cleared.
+     *
+     * @param heldBrickData The matrix representation of the held brick, or null.
+     */
     public void generateHoldBrickInPanel(int[][] heldBrickData) {
         holdBrick.getChildren().clear();
         if (heldBrickData == null) {
@@ -135,12 +213,24 @@ public class GameRenderer {
         }
     }
 
+    /**
+     * Sets the fill color and styling (arc height/width) for a visible, solid brick block.
+     *
+     * @param color The integer code representing the brick color.
+     * @param rectangle The {@code Rectangle} object to modify.
+     */
     private void setRectangleData(int color, Rectangle rectangle) {
         rectangle.setFill(getFillColor(color));
         rectangle.setArcHeight(9);
         rectangle.setArcWidth(9);
     }
 
+    /**
+     * Sets the fill color, styling, and opacity for a shadow brick (ghost piece) block.
+     *
+     * @param colorIndex The integer code representing the brick color (used for shadow color determination).
+     * @param rectangle The {@code Rectangle} object to modify.
+     */
     private void setShadowRectangleData(int colorIndex, Rectangle rectangle) {
         rectangle.setFill(getShadowColor(colorIndex));
         rectangle.setArcHeight(9);
@@ -148,6 +238,12 @@ public class GameRenderer {
         rectangle.setOpacity(0.4);
     }
 
+    /**
+     * Maps an integer color code to a JavaFX {@code Paint} object for the solid brick fill.
+     *
+     * @param i The color index (0 for transparent, 1-8 for specific colors).
+     * @return The corresponding JavaFX {@code Paint} color.
+     */
     private Paint getFillColor(int i) {
         return switch (i) {
             case 0 -> Color.TRANSPARENT;
@@ -163,6 +259,13 @@ public class GameRenderer {
         };
     }
 
+    /**
+     * Maps an integer color code to a standardized gray shade for the ghost piece.
+     * Empty cells (0) remain transparent.
+     *
+     * @param i The color index.
+     * @return The JavaFX {@code Paint} object for the shadow.
+     */
     private Paint getShadowColor(int i) {
         // Case 0 (Empty cell) should still be transparent
         if (i == 0) {

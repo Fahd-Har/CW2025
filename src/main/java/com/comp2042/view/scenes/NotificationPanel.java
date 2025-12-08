@@ -11,8 +11,21 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.util.Duration;
 
+/**
+ * A custom JavaFX component extending {@code BorderPane} used to display transient,
+ * animated notifications for score bonuses or level ups.
+ *
+ * <p>The panel animates by floating upwards while fading out, automatically removing itself
+ * from its parent container upon completion.</p>
+ */
 public class NotificationPanel extends BorderPane {
 
+    /**
+     * Constructs a NotificationPanel with specified text and a CSS style class.
+     *
+     * @param text The text content (e.g., "+50" or "LEVEL 2!").
+     * @param classStyle The CSS style class to apply for styling the text.
+     */
     public NotificationPanel(String text, String classStyle) {
         setMinHeight(200);
         setMinWidth(220);
@@ -22,6 +35,13 @@ public class NotificationPanel extends BorderPane {
 
     }
 
+    /**
+     * Executes the combined fade and translate animation for the notification.
+     * The panel is automatically removed from the parent list upon the animation's completion.
+     *
+     * @param list The {@code ObservableList} of nodes (children of the parent {@code Group})
+     * from which this panel should be removed.
+     */
     public void showScore(ObservableList<Node> list) {
         FadeTransition ft = new FadeTransition(Duration.millis(2000), this);
         TranslateTransition tt = new TranslateTransition(Duration.millis(2500), this);
