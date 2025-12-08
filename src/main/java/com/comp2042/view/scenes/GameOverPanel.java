@@ -8,16 +8,28 @@ import javafx.scene.layout.Pane;
 import java.io.IOException;
 import java.net.URL;
 
+/**
+ * Manages the loading, positioning, and display of the Game Over panel ({@code gameOverPanel.fxml}).
+ */
 public class GameOverPanel {
 
     private final Pane rootPane;
     private Parent gameOverPanel;
     private Button homeButton;
 
+    /**
+     * Constructs the panel manager, requiring the root container pane of the game scene.
+     *
+     * @param rootPane The parent pane where the Game Over menu overlay will be added.
+     */
     public GameOverPanel(Pane rootPane) {
         this.rootPane = rootPane;
     }
 
+    /**
+     * Loads the Game Over FXML, centers it on the screen, and adds it as a hidden
+     * child to the root pane.
+     */
     public void loadGameOverPanel() {
         try {
             URL gameOverLocation = getClass().getClassLoader().getResource("scenes_FXML/gameOverPanel.fxml");
@@ -50,14 +62,24 @@ public class GameOverPanel {
         }
     }
 
+    /**
+     * Controls the visibility of the Game Over panel, typically bound to the game's
+     * {@code isGameOver} state.
+     *
+     * @param gameFlow The {@code GameFlowManager} used to check the {@code isGameOver} state.
+     */
     public void showPanel(GameFlowManager gameFlow) {
         if (gameOverPanel != null) {
             gameOverPanel.setVisible(gameFlow.isGameOver().get());
         }
     }
 
+    /**
+     * Handles the action to return to the Main Menu scene.
+     *
+     * @throws IOException If the FXML for the main menu cannot be loaded.
+     */
     private void handleHome() throws IOException {
         SceneSwitch.loadMainMenu(homeButton);
     }
-
 }

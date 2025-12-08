@@ -7,12 +7,31 @@ import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Manages the persistence of high scores by handling file I/O, sorting, and score filtering.
+ * It stores high scores separately for each {@code GameMode}.
+ *
+ * <p>Design Patterns Implemented:</p>
+ * <ul>
+ * <li>**Singleton Pattern (Implied)**: This class manages a singular, application-wide resource (the high score file), making it function as a resource manager.</li>
+ * </ul>
+ */
 public class ScoreBoardManager implements HighScoreSaver{
 
     private static final String HIGH_SCORE_FILE = "highScores.dat";
     private static final int SHOW_MAX_HIGH_SCORES = 5;
     private static final Logger LOGGER = Logger.getLogger(ScoreBoardManager.class.getName());
 
+    /**
+     * Saves a new high score to the persistence file (`highScores.dat`).
+     *
+     * <p>The process involves: loading all existing scores, adding the new score to the
+     * list for its specific game mode, sorting the list in descending order, trimming
+     * the list to the top 5 scores, and writing the entire score map back to the file.</p>
+     *
+     * @param newEntry The {@code HighScoreEntry} to save.
+     * @see HighScoreSaver#saveScore(HighScoreEntry)
+     */
     @Override
     public void saveScore(HighScoreEntry newEntry) {
         // Load all scores, grouped by mode
@@ -41,6 +60,16 @@ public class ScoreBoardManager implements HighScoreSaver{
         }
     }
 
+    /**
+     * Attempts to deserialize the map of all high scores (grouped by {@code GameMode})
+     * from the persistence file.
+     *
+     * <p>Handles cases where the file does not exist, is empty, or encounters I/O errors
+     * during deserialization.</p>
+     *
+     * @return A map containing all high score lists, keyed by {@code GameMode}. Returns an
+     * empty map on failure or if the file is empty.
+     */
     @SuppressWarnings("unchecked")
     private Map<GameMode, List<HighScoreEntry>> loadAllScores() {
         File file = new File(HIGH_SCORE_FILE);
@@ -61,7 +90,12 @@ public class ScoreBoardManager implements HighScoreSaver{
         return new HashMap<>();
     }
 
-    // Public method to load scores for a specific game mode.
+    /**
+     * Loads and returns the filtered list of high scores specifically for the given game mode.
+     *
+     * @param mode The {@code GameMode} to retrieve scores for.
+     * @return A {@code List} of the top 5 {@code HighScoreEntry} objects for that mode, or an empty list if none exist.
+     */
     public List<HighScoreEntry> loadScores(GameMode mode) {
         Map<GameMode, List<HighScoreEntry>> allScores = loadAllScores();
         return allScores.getOrDefault(mode, new ArrayList<>());

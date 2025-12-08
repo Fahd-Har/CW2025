@@ -11,8 +11,20 @@ import javafx.util.Duration;
 import java.io.IOException;
 import java.net.URL;
 
+/**
+ * A utility class providing common, reusable methods for navigating back to the Main Menu
+ * with a standard transition effect.
+ */
 public final class SceneSwitch {
 
+    /**
+     * Loads the Main Menu scene ({@code mainMenuScreen.fxml}) and replaces the current scene
+     * on the stage with a 1.0 second fade-in transition.
+     *
+     * @param controlNode A node from the current scene (e.g., a Button) used to reference
+     * the current {@code Scene} and {@code Stage}.
+     * @throws IOException If the FXML file for the main menu cannot be loaded.
+     */
     public static void loadMainMenu(Node controlNode) throws IOException {
         URL location = com.comp2042.view.scenes.SceneSwitch.class.getClassLoader().getResource("scenes_FXML/mainMenuScreen.fxml");
         FXMLLoader fxmlLoader = new FXMLLoader(location);

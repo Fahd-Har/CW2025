@@ -8,16 +8,28 @@ import javafx.scene.layout.Pane;
 import java.io.IOException;
 import java.net.URL;
 
+/**
+ * Manages the loading, positioning, and display of the pause menu panel ({@code pauseScreen.fxml})
+ */
 public class GamePausePanel {
 
     private final Pane rootPane;
     private Parent pauseMenu;
     private Button homeButton;
 
+    /**
+     * Constructs the panel manager, requiring the root container pane of the game scene.
+     *
+     * @param rootPane The parent pane where the pause menu overlay will be added.
+     */
     public GamePausePanel(Pane rootPane) {
         this.rootPane = rootPane;
     }
 
+    /**
+     * Loads the pause menu FXML, centers it on the screen, and adds it as a hidden
+     * child to the root pane.
+     */
     public void loadPauseScreen() {
         try {
             URL pauseLocation = getClass().getClassLoader().getResource("scenes_FXML/pauseScreen.fxml");
@@ -51,12 +63,22 @@ public class GamePausePanel {
         }
     }
 
+    /**
+     * Controls the visibility of the pause panel, typically bound to the game's pause state.
+     *
+     * @param gameFlow The {@code GameFlowManager} used to check the {@code isPause} state.
+     */
     public void showPanel(GameFlowManager gameFlow) {
         if (pauseMenu != null) {
             pauseMenu.setVisible(gameFlow.isPause().get());
         }
     }
 
+    /**
+     * Handles the action to return to the Main Menu scene.
+     *
+     * @throws IOException If the FXML for the main menu cannot be loaded.
+     */
     private void handleHome() throws IOException {
         SceneSwitch.loadMainMenu(homeButton);
     }
